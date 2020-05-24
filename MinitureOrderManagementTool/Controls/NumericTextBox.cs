@@ -26,7 +26,11 @@ namespace MinitureOrderManagementTool.Controls
                   (Key.NumPad0 <= e.Key && e.Key <= Key.NumPad9) ||
                   Key.Back == e.Key ||
                   Key.Delete == e.Key ||
-                  Key.Tab == e.Key) ||
+                  Key.Tab == e.Key ||
+                  Key.Left == e.Key ||
+                  Key.Right == e.Key ||
+                  Key.Up == e.Key ||
+                  Key.Down == e.Key) ||
                 (Keyboard.Modifiers & ModifierKeys.Shift) > 0)
             {
                 e.Handled = true;
