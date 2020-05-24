@@ -32,6 +32,8 @@ namespace MinitureOrderManagementTool.Views
                 this.OneWayBind(this.ViewModel, vm => vm.Orders, view => view.ordersListView.ItemsSource).DisposeWith(d);
                 this.Bind(this.ViewModel, vm => vm.SelectedOrder, view => view.ordersListView.SelectedItem).DisposeWith(d);
 
+                this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.IsFinished, view => view.isFinishedTextBlock.Text, OrderListViewModel.GetIsFinishedString).DisposeWith(d);
+                this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.TimeSpent, view => view.timeSpantTextBlock.Text, OrderListViewModel.GetTimeSpentString).DisposeWith(d);
                 this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.Name, view => view.orderNameTextBlock.Text).DisposeWith(d);
                 this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.Customer, view => view.customerTextBlock.Text).DisposeWith(d);
                 this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.Price, view => view.priceTextBlock.Text).DisposeWith(d);

@@ -61,6 +61,23 @@ namespace MinitureOrderManagementTool.ViewModels
             this.DeleteOrderCommand = ReactiveCommand.Create(this.DeleteOrder);
         }
 
+        public static string GetIsFinishedString(bool isFinished)
+        {
+            return isFinished ? "Š®—¹" : "–¢Š®—¹";
+        }
+
+        public static string GetTimeSpentString(decimal timeSpent)
+        {
+            if (0 <= timeSpent)
+            {
+                return timeSpent + "•ª";
+            }
+            else
+            {
+                return "–¢Ý’è";
+            }
+        }
+
         public void AddOrder(Order order)
         {
             using (var db = new LiteDatabase(databasePath))
