@@ -30,7 +30,7 @@
             <TextBlock VerticalAlignment="Center" Margin="0,0,0,1" Text="納品済: " />
             <CheckBox x:Name="isFinishedCheckBox" Grid.Column="1" VerticalAlignment="Center" />
             <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="所要時間: " />
-            <ctrls:NumericTextBox Grid.Column="3" VerticalAlignment="Center" />
+            <ctrls:NumericTextBox x:Name="timeSpentNumericTextBox" Grid.Column="3" VerticalAlignment="Center" />
             <TextBlock Grid.Column="4" Margin="1,0,0,0" VerticalAlignment="Center" Text="時間" />
         </Grid>
         <views:CommonOrderEditorView x:Name="commonOrderEditorView" Grid.Row="1" Margin="0,5,0,0" />

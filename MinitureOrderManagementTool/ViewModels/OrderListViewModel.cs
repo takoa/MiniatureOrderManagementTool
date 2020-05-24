@@ -70,7 +70,7 @@ namespace MinitureOrderManagementTool.ViewModels
         {
             if (0 <= timeSpent)
             {
-                return timeSpent + "•ª";
+                return timeSpent + "ŽžŠÔ";
             }
             else
             {
