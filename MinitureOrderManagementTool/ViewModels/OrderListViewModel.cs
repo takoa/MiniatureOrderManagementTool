@@ -78,6 +78,11 @@ namespace MinitureOrderManagementTool.ViewModels
             }
         }
 
+        public static string GetDeadlineString(DateTime deadline)
+        {
+            return deadline.ToString("yyyy”NMMŒŽdd“ú");
+        }
+
         public void AddOrder(Order order)
         {
             using (var db = new LiteDatabase(databasePath))
