@@ -39,6 +39,9 @@
                             <DataTrigger Binding="{Binding Deadline, Converter={StaticResource DateCheckerConverter}, ConverterParameter=0}" Value="false">
                                 <Setter Property="Background" Value="LightCoral" />
                             </DataTrigger>
+                            <DataTrigger Binding="{Binding IsFinished}" Value="true">
+                                <Setter Property="Background" Value="#FFCCFFCC" />
+                            </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </ListView.ItemContainerStyle>
