@@ -1,0 +1,23 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace MinitureOrderManagementTool.Helpers
+{
+    public static class Int32Converter
+    {
+        public static int FromString(string str)
+        {
+            int i;
+
+            if (Int32.TryParse(str, out i))
+            {
+                return i;
+            }
+            else
+            {
+                return Int32.MaxValue;
+            }
+        }
+    }
+}
