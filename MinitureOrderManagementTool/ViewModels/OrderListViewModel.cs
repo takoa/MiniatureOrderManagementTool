@@ -104,6 +104,8 @@ namespace MinitureOrderManagementTool.ViewModels
                 orders.Update(order);
                 this.OrdersCache.AddOrUpdate(order);
             }
+
+            this.SelectedOrder = order;
         }
 
         private void CreateNewOrderWindow()
