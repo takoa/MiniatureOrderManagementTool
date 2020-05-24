@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Blend for Visual Studio Version 16
+# Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinitureOrderManagementTool", "MinitureOrderManagementTool\MinitureOrderManagementTool.csproj", "{580AF56D-4F8D-4591-8B4D-481BA8BB7A22}"

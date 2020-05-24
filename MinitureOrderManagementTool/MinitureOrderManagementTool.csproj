@@ -6,7 +6,7 @@
     <UseWPF>true</UseWPF>
     <Platforms>AnyCPU;x64</Platforms>
     <Authors>Takao Kaburaki</Authors>
-    <Version>0.0.1</Version>
+    <Version>0.0.2</Version>
     <Product>MinitureOrderManagementTool</Product>
     <PackageId>MinitureOrderManagementTool</PackageId>
     <AssemblyName>ミニチュア注文管理ツール</AssemblyName>
@@ -19,10 +19,6 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="Helpers\DateCheckerConverter.cs~RFd0044be.TMP" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="LiteDB" Version="5.0.8" />
