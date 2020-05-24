@@ -14,9 +14,13 @@ namespace MinitureOrderManagementTool.Helpers
             {
                 return i;
             }
+            else if (str == "" || i < 0)
+            {
+                return 0;
+            }
             else
             {
-                return Int32.MaxValue;
+                return int.MaxValue;
             }
         }
     }
