@@ -111,6 +111,24 @@ namespace MinitureOrderManagementTool.ViewModels
             this.RemovePartCommand = ReactiveCommand.Create(this.RemovePart);
         }
 
+        public static int GetPartAmountInt(string str)
+        {
+            int i;
+
+            if (Int32.TryParse(str, out i))
+            {
+                return i;
+            }
+            else if (str == "" || i < 0)
+            {
+                return 0;
+            }
+            else
+            {
+                return int.MaxValue;
+            }
+        }
+
         private void AddPart()
         {
             if (this.PartName == "" || this.PartAmount == 0)

@@ -25,7 +25,7 @@ namespace MinitureOrderManagementTool.Views
                 this.Bind(this.ViewModel, vm => vm.OrderDescription, v => v.descriptionTextBox.Text).DisposeWith(d);
                 this.Bind(this.ViewModel, vm => vm.SelectedPart, v => v.partsDataGrid.SelectedItem).DisposeWith(d);
                 this.Bind(this.ViewModel, vm => vm.PartName, v => v.partNameTextBox.Text).DisposeWith(d);
-                this.Bind(this.ViewModel, vm => vm.PartAmount, v => v.partAmountNumericTextBox.Text, x => x.ToString(), Int32Converter.FromString).DisposeWith(d);
+                this.Bind(this.ViewModel, vm => vm.PartAmount, v => v.partAmountNumericTextBox.Text, x => x.ToString(), CommonOrderEditorViewModel.GetPartAmountInt).DisposeWith(d);
 
                 this.OneWayBind(this.ViewModel, vm => vm.Parts, v => v.partsDataGrid.ItemsSource).DisposeWith(d);
 
