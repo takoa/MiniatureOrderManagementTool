@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Threading;
 
 namespace MinitureOrderManagementTool.Controls
 {
@@ -21,7 +18,7 @@ namespace MinitureOrderManagementTool.Controls
                 return;
             }
 
-            this.ItemContainerGenerator.StatusChanged += StatusChangedHandler;
+            this.ItemContainerGenerator.StatusChanged += this.StatusChangedHandler;
             this.isArrowKeysDisabled = true;
         }
 
@@ -50,7 +47,7 @@ namespace MinitureOrderManagementTool.Controls
         {
             if (this.ItemContainerGenerator.Status == System.Windows.Controls.Primitives.GeneratorStatus.ContainersGenerated)
             {
-                this.ItemContainerGenerator.StatusChanged -= StatusChangedHandler;
+                this.ItemContainerGenerator.StatusChanged -= this.StatusChangedHandler;
                 this.isArrowKeysDisabled = false;
 
                 if (this.SelectedItem != null)

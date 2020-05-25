@@ -95,7 +95,7 @@ namespace MinitureOrderManagementTool.ViewModels
 
         private void InitializeOrders()
         {
-            using var db = new LiteDatabase(databasePath);
+            using var db = new LiteDatabase(this.databasePath);
             var collection = db.GetCollection<Order>("orders");
 
             this.OrdersCache = new SourceCache<Order, int>(i => i.ID);
