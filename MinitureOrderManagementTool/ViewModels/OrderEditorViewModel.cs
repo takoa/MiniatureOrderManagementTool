@@ -3,10 +3,8 @@ using MinitureOrderManagementTool.Helpers;
 using MinitureOrderManagementTool.Models;
 using ReactiveUI;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
-using System.Text;
 
 namespace MinitureOrderManagementTool.ViewModels
 {
@@ -67,7 +65,7 @@ namespace MinitureOrderManagementTool.ViewModels
                 CreatedAt = DateTime.Now,
                 Deadline = this.CommonOrderEditorViewModel.OrderDeadline,
                 Parts = this.CommonOrderEditorViewModel.Parts.ToArray(),
-                TimeSpent = this.OrderTimeSpent
+                TimeSpent = OrderTimeSpent
             };
 
             this.OrderListViewModel.UpdateOrder(order);

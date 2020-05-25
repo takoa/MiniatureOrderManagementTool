@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MinitureOrderManagementTool.Models
+﻿namespace MinitureOrderManagementTool.Models
 {
     public class Part
     {

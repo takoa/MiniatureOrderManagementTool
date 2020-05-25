@@ -1,8 +1,5 @@
 ﻿using ReactiveUI;
 using Splat;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MinitureOrderManagementTool.Helpers
 {

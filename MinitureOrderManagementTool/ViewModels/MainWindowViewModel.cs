@@ -1,11 +1,4 @@
-﻿using LiteDB;
-using MinitureOrderManagementTool.Models;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
-
-namespace MinitureOrderManagementTool.ViewModels
+﻿namespace MinitureOrderManagementTool.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {

@@ -1,14 +1,10 @@
-﻿using DynamicData;
-using MinitureOrderManagementTool.Helpers;
+﻿using MinitureOrderManagementTool.Helpers;
 using MinitureOrderManagementTool.Models;
 using ReactiveUI;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
-using System.Text;
 
 namespace MinitureOrderManagementTool.ViewModels
 {

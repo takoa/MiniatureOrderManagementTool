@@ -3,15 +3,10 @@ using LiteDB;
 using MinitureOrderManagementTool.Helpers;
 using MinitureOrderManagementTool.Models;
 using ReactiveUI;
-using Splat;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
-using System.Text;
-using System.Windows;
 
 namespace MinitureOrderManagementTool.ViewModels
 {
@@ -44,7 +39,8 @@ namespace MinitureOrderManagementTool.ViewModels
         {
             this.databasePath = databasePath;
 
-            using (var db = new LiteDatabase(databasePath)) {
+            using (var db = new LiteDatabase(databasePath))
+            {
                 var collection = db.GetCollection<Order>("orders");
 
                 this.OrdersCache = new SourceCache<Order, int>(i => i.ID);
@@ -85,7 +81,7 @@ namespace MinitureOrderManagementTool.ViewModels
 
         public void AddOrder(Order order)
         {
-            using (var db = new LiteDatabase(databasePath))
+            using (var db = new LiteDatabase(this.databasePath))
             {
                 var orders = db.GetCollection<Order>("orders");
 
@@ -97,7 +93,7 @@ namespace MinitureOrderManagementTool.ViewModels
 
         public void UpdateOrder(Order order)
         {
-            using (var db = new LiteDatabase(databasePath))
+            using (var db = new LiteDatabase(this.databasePath))
             {
                 var orders = db.GetCollection<Order>("orders");
 
@@ -134,7 +130,7 @@ namespace MinitureOrderManagementTool.ViewModels
                 return;
             }
 
-            using (var db = new LiteDatabase(databasePath))
+            using (var db = new LiteDatabase(this.databasePath))
             {
                 var orders = db.GetCollection<Order>("orders");
 
