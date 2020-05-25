@@ -5,6 +5,7 @@ using MinitureOrderManagementTool.Models;
 using ReactiveUI;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 
@@ -38,19 +39,7 @@ namespace MinitureOrderManagementTool.ViewModels
         public OrderListViewModel(string databasePath)
         {
             this.databasePath = databasePath;
-
-            using (var db = new LiteDatabase(databasePath))
-            {
-                var collection = db.GetCollection<Order>("orders");
-
-                this.OrdersCache = new SourceCache<Order, int>(i => i.ID);
-                this.OrdersCache.Connect()
-                                .ObserveOn(RxApp.MainThreadScheduler)
-                                .Sort(new OrderDeadlineComparer())
-                                .Bind(out this.orders)
-                                .Subscribe();
-                this.OrdersCache.AddOrUpdate(collection.FindAll());
-            }
+            this.InitializeOrders();
 
             this.AddOrderCommand = ReactiveCommand.Create(this.CreateNewOrderWindow);
             this.EditOrderCommand = ReactiveCommand.Create(this.CreateOrderEditorWindow);
@@ -102,6 +91,30 @@ namespace MinitureOrderManagementTool.ViewModels
             }
 
             this.SelectedOrder = order;
+        }
+
+        private void InitializeOrders()
+        {
+            using var db = new LiteDatabase(databasePath);
+            var collection = db.GetCollection<Order>("orders");
+
+            this.OrdersCache = new SourceCache<Order, int>(i => i.ID);
+            this.OrdersCache.Connect()
+                            .ObserveOn(RxApp.MainThreadScheduler)
+                            .Sort(new OrderDeadlineComparer())
+                            .Bind(out this.orders)
+                            .Subscribe();
+            this.OrdersCache.AddOrUpdate(collection.FindAll());
+
+            foreach (var order in this.OrdersCache.Items.OrderBy(o => o.Deadline))
+            {
+                if (!order.IsFinished && order.Deadline < DateTime.Now)
+                {
+                    this.SelectedOrder = order;
+
+                    break;
+                }
+            }
         }
 
         private void CreateNewOrderWindow()

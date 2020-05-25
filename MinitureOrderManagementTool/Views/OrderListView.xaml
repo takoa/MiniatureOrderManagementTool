@@ -7,6 +7,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:rxui="http://reactiveui.net"
         xmlns:local="clr-namespace:MinitureOrderManagementTool.Views"
+        xmlns:ctrls="clr-namespace:MinitureOrderManagementTool.Controls"
         xmlns:mvs="clr-namespace:MinitureOrderManagementTool.ViewModels"
         xmlns:helpers="clr-namespace:MinitureOrderManagementTool.Helpers"
         mc:Ignorable="d" 
@@ -28,7 +29,7 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="45" />
             </Grid.RowDefinitions>
-            <ListView x:Name="ordersListView" Grid.ColumnSpan="3" HorizontalContentAlignment="Stretch" SelectionMode="Single" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ctrls:ProgrammaticallySelectableListView x:Name="ordersListView" Grid.ColumnSpan="3" HorizontalContentAlignment="Stretch">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="Background" Value="AliceBlue" />
@@ -64,7 +65,7 @@
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ListView>
+            </ctrls:ProgrammaticallySelectableListView>
             <Grid Grid.Row="1" Margin="0,10,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="75" />
