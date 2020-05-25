@@ -26,6 +26,7 @@ namespace MinitureOrderManagementTool.ViewModels
 
         private void AddOrder(IClosable closable)
         {
+            DateTime now = DateTime.Now;
             Order order = new Order
             {
                 IsFinished = false,
@@ -33,7 +34,8 @@ namespace MinitureOrderManagementTool.ViewModels
                 Price = this.CommonOrderEditorViewModel.OrderPrice,
                 Description = this.CommonOrderEditorViewModel.OrderDescription,
                 Customer = this.CommonOrderEditorViewModel.OrderCustomer,
-                CreatedAt = DateTime.Now,
+                CreatedAt = now,
+                ModifiedAt = now,
                 Deadline = this.CommonOrderEditorViewModel.OrderDeadline,
                 Parts = this.CommonOrderEditorViewModel.Parts.ToArray(),
                 TimeSpent = -1

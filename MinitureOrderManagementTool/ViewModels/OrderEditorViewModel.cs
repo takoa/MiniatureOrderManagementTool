@@ -62,7 +62,8 @@ namespace MinitureOrderManagementTool.ViewModels
                 Price = this.CommonOrderEditorViewModel.OrderPrice,
                 Description = this.CommonOrderEditorViewModel.OrderDescription,
                 Customer = this.CommonOrderEditorViewModel.OrderCustomer,
-                CreatedAt = DateTime.Now,
+                CreatedAt = this.OrderListViewModel.SelectedOrder.CreatedAt,
+                ModifiedAt = DateTime.Now,
                 Deadline = this.CommonOrderEditorViewModel.OrderDeadline,
                 Parts = this.CommonOrderEditorViewModel.Parts.ToArray(),
                 TimeSpent = OrderTimeSpent
