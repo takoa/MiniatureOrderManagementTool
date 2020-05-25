@@ -14,10 +14,15 @@
         d:DesignHeight="450" d:DesignWidth="800"
         Background="White">
     <UserControl.Resources>
-        <helpers:DateConverter x:Key="DateConverter" />
-        <helpers:DateCheckerConverter x:Key="DateCheckerConverter" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ResourceDirectory.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <helpers:DateConverter x:Key="DateConverter" />
+            <helpers:DateCheckerConverter x:Key="DateCheckerConverter" />
+        </ResourceDictionary>
     </UserControl.Resources>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250" />
@@ -29,23 +34,7 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="45" />
             </Grid.RowDefinitions>
-            <ctrls:ProgrammaticallySelectableListView x:Name="ordersListView" Grid.ColumnSpan="3" HorizontalContentAlignment="Stretch">
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="Background" Value="AliceBlue" />
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Deadline, Converter={StaticResource DateCheckerConverter}, ConverterParameter=7}" Value="false">
-                                <Setter Property="Background" Value="Khaki" />
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding Deadline, Converter={StaticResource DateCheckerConverter}, ConverterParameter=0}" Value="false">
-                                <Setter Property="Background" Value="LightCoral" />
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding IsFinished}" Value="true">
-                                <Setter Property="Background" Value="#FFCCFFCC" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </ListView.ItemContainerStyle>
+            <ctrls:ProgrammaticallySelectableListView x:Name="ordersListView" Grid.ColumnSpan="3" HorizontalContentAlignment="Stretch" ItemContainerStyle="{StaticResource orderListViewStyle}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
