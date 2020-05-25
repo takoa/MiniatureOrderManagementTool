@@ -120,10 +120,18 @@
             <Grid Grid.Row="3" Margin="0,5,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="締切: " />
                 <TextBlock x:Name="deadlineDateTextBlock" Grid.Column="1" />
+                <TextBlock Grid.Column="2" Text="作成日: " />
+                <TextBlock x:Name="createdAtTextBlock" Grid.Column="3" />
+                <TextBlock Grid.Column="4" Text="更新日: " />
+                <TextBlock x:Name="modifiedAtTextBlock" Grid.Column="5" />
             </Grid>
             <Grid Grid.Row="4" Margin="0,5,0,0">
                 <Grid.ColumnDefinitions>
