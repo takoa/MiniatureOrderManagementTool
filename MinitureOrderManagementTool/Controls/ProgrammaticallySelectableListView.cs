@@ -16,6 +16,11 @@ namespace MinitureOrderManagementTool.Controls
         {
             base.OnSelectionChanged(e);
 
+            if (e.AddedItems.Count == 0)
+            {
+                return;
+            }
+
             this.ItemContainerGenerator.StatusChanged += StatusChangedHandler;
             this.isArrowKeysDisabled = true;
         }
@@ -48,8 +53,11 @@ namespace MinitureOrderManagementTool.Controls
                 this.ItemContainerGenerator.StatusChanged -= StatusChangedHandler;
                 this.isArrowKeysDisabled = false;
 
-                this.ScrollIntoView(this.SelectedItem);
-                ((UIElement)this.ItemContainerGenerator.ContainerFromItem(this.SelectedItem)).Focus();
+                if (this.SelectedItem != null)
+                {
+                    this.ScrollIntoView(this.SelectedItem);
+                    ((UIElement)this.ItemContainerGenerator.ContainerFromItem(this.SelectedItem)).Focus();
+                }
             }
         }
     }
