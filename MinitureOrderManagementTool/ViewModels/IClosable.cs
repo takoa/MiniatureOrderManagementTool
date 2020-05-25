@@ -1,4 +1,4 @@
-﻿namespace MinitureOrderManagementTool.Helpers
+﻿namespace MinitureOrderManagementTool.ViewModels
 {
     public interface IClosable
     {
