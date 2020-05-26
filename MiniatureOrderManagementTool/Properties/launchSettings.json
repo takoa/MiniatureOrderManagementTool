@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "MiniatureOrderManagementTool": {
+      "commandName": "Project",
+      "workingDirectory": "$(OutDir)"
+    }
+  }
+}

@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "MinitureOrderManagementTool": {
-      "commandName": "Project",
-      "workingDirectory": "$(OutDir)"
-    }
-  }
-}
