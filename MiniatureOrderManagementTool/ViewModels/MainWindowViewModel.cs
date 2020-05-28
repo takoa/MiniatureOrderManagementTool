@@ -6,7 +6,6 @@ namespace MiniatureOrderManagementTool.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        public string Greeting => "Hello World!";
         private readonly Config config;
 
         private double left;

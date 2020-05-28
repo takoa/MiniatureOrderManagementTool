@@ -5,7 +5,6 @@ using NLog;
 using ReactiveUI;
 using Splat;
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Text.Json;
@@ -33,14 +32,6 @@ namespace MiniatureOrderManagementTool
             Locator.CurrentMutable.Register(() => new NewOrderView(), typeof(IViewFor<NewOrderViewModel>));
             Locator.CurrentMutable.Register(() => new CommonOrderEditorView(), typeof(IViewFor<CommonOrderEditorViewModel>));
             Locator.CurrentMutable.Register(() => new OrderEditorView(), typeof(IViewFor<OrderEditorViewModel>));
-
-            //var asm = Assembly.GetCallingAssembly();
-
-            //foreach (var ti in asm.DefinedTypes
-            //    .Where(ti => ti.ImplementedInterfaces.Contains(typeof(IViewFor)) && !ti.IsAbstract))
-            //{
-            //    Trace.WriteLine(ti.ToString() + ": " + ti.GetCustomAttribute<SingleInstanceViewAttribute>()?.ToString());
-            //}
 
             this.InitializeConfig();
         }
