@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
+using System.Windows;
 
 namespace MiniatureOrderManagementTool.ViewModels
 {
@@ -119,7 +120,7 @@ namespace MiniatureOrderManagementTool.ViewModels
 
         private void CreateNewOrderWindow()
         {
-            var newOrderViewModel = new NewOrderViewModel(this);
+            var newOrderViewModel = new NewOrderViewModel(((App)Application.Current).Config, this);
 
             WindowViewHelper.ShowWindow(newOrderViewModel);
         }
@@ -131,7 +132,7 @@ namespace MiniatureOrderManagementTool.ViewModels
                 return;
             }
 
-            var orderEditorViewModel = new OrderEditorViewModel(this);
+            var orderEditorViewModel = new OrderEditorViewModel(((App)Application.Current).Config, this);
 
             WindowViewHelper.ShowWindow(orderEditorViewModel);
         }

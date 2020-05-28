@@ -1,10 +1,14 @@
-﻿using MiniatureOrderManagementTool.ViewModels;
+﻿using MiniatureOrderManagementTool.Models;
+using MiniatureOrderManagementTool.ViewModels;
 using MiniatureOrderManagementTool.Views;
 using NLog;
 using ReactiveUI;
 using Splat;
 using System;
+using System.Diagnostics;
+using System.IO;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -15,6 +19,10 @@ namespace MiniatureOrderManagementTool
     /// </summary>
     public partial class App : Application
     {
+        private const string configPath = "./config.json";
+
+        public Config Config { get; private set; }
+
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         public App()
@@ -33,6 +41,8 @@ namespace MiniatureOrderManagementTool
             //{
             //    Trace.WriteLine(ti.ToString() + ": " + ti.GetCustomAttribute<SingleInstanceViewAttribute>()?.ToString());
             //}
+
+            this.InitializeConfig();
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -40,6 +50,13 @@ namespace MiniatureOrderManagementTool
             base.OnStartup(e);
 
             this.SetupExceptionHandling();
+        }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            base.OnExit(e);
+
+            this.WriteConfig();
         }
 
         private void SetupExceptionHandling()
@@ -92,6 +109,35 @@ namespace MiniatureOrderManagementTool
             {
                 App.logger.Error(exception, message);
             }
+        }
+
+        private void InitializeConfig()
+        {
+            try
+            {
+                using StreamReader reader = new StreamReader(App.configPath, Encoding.UTF8);
+                string json = reader.ReadToEnd();
+
+                this.Config = JsonSerializer.Deserialize<Config>(json);
+            }
+            catch (FileNotFoundException)
+            {
+                this.Config = new Config()
+                {
+                    MainWindowPosition = new Point(200d, 200d),
+                    MainWindowSize = new Size(800, 600),
+                    OrderEditorWindowDelta = new Point(100d, 100d),
+                    OrderEditorWindowSize = new Size(400, 600)
+                };
+            }
+        }
+
+        private void WriteConfig()
+        {
+            string json = JsonSerializer.Serialize(this.Config);
+            using StreamWriter writer = new StreamWriter(App.configPath, false, Encoding.UTF8);
+
+            writer.Write(json);
         }
     }
 }

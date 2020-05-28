@@ -17,6 +17,11 @@ namespace MiniatureOrderManagementTool.Views
             {
                 this.ViewModel.CommonOrderEditorViewModel = this.commonOrderEditorView.ViewModel;
 
+                this.Bind(this.ViewModel, vm => vm.Left, v => v.Left).DisposeWith(d);
+                this.Bind(this.ViewModel, vm => vm.Top, v => v.Top).DisposeWith(d);
+                this.Bind(this.ViewModel, vm => vm.Width, v => v.Width).DisposeWith(d);
+                this.Bind(this.ViewModel, vm => vm.Height, v => v.Height).DisposeWith(d);
+
                 this.BindCommand(this.ViewModel, vm => vm.AddOrderCommand, view => view.addOrderButton).DisposeWith(d);
                 this.BindCommand(this.ViewModel, vm => vm.CancelCommand, view => view.cancelButton).DisposeWith(d);
             });
