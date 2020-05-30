@@ -36,7 +36,7 @@ namespace MiniatureOrderManagementTool.Controls
         }
 
         public static readonly DependencyProperty MaximumProperty =
-            DependencyProperty.Register("Maximum", typeof(decimal), typeof(NumericTextBox), new PropertyMetadata(decimal.MaxValue, OnMaximumChanged));
+            DependencyProperty.Register("Maximum", typeof(decimal), typeof(NumericTextBox), new PropertyMetadata((decimal)int.MaxValue, OnMaximumChanged));
 
         public decimal Minimum
         {
@@ -45,7 +45,7 @@ namespace MiniatureOrderManagementTool.Controls
         }
 
         public static readonly DependencyProperty MinimumProperty =
-            DependencyProperty.Register("Minimum", typeof(decimal), typeof(NumericTextBox), new PropertyMetadata(decimal.MinValue, OnMinimumChanged));
+            DependencyProperty.Register("Minimum", typeof(decimal), typeof(NumericTextBox), new PropertyMetadata((decimal)int.MinValue, OnMinimumChanged));
 
         static NumericTextBox()
         {
