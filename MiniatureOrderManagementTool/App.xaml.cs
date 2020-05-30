@@ -55,9 +55,9 @@ namespace MiniatureOrderManagementTool
             var config = new NLog.Config.LoggingConfiguration();
             var logfile = new NLog.Targets.FileTarget("logfile")
             {
-                FileName = "${basedir}/logs/logfile.txt",
+                FileName = "${currentdir}/logs/logfile.txt",
                 ArchiveAboveSize = 10240,
-                ArchiveFileName = "${basedir}/archives/log.{#####}.txt",
+                ArchiveFileName = "${currentdir}/archives/log.{#####}.txt",
                 ArchiveNumbering = NLog.Targets.ArchiveNumberingMode.Sequence,
                 ConcurrentWrites = true,
                 KeepFileOpen = false,
