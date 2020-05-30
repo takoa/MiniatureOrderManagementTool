@@ -74,14 +74,14 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="40" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Button x:Name="removePartButton" Content="削除" />
                 <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="パーツ名: " />
                 <TextBox x:Name="partNameTextBox" Grid.Column="3" VerticalAlignment="Center" />
                 <TextBlock Grid.Column="4" Margin="5,0,0,0" VerticalAlignment="Center" Text="数量: " />
-                <controls:NumericTextBox x:Name="partAmountNumericTextBox" Grid.Column="5" VerticalAlignment="Center" TextAlignment="Right" />
+                <controls:NumericUpDown x:Name="partAmountNumericTextBox" Grid.Column="5" VerticalAlignment="Center" TextAlignment="Right" Minimum="0" />
                 <Button x:Name="addPartButton" Grid.Column="6" Margin="5,0,0,0" Content="追加" />
             </Grid>
         </Grid>
