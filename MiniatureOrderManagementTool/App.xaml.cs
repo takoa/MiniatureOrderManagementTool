@@ -1,11 +1,10 @@
 ﻿using MiniatureOrderManagementTool.Models;
-using MiniatureOrderManagementTool.ViewModels;
-using MiniatureOrderManagementTool.Views;
 using NLog;
 using ReactiveUI;
 using Splat;
 using System;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -26,12 +25,7 @@ namespace MiniatureOrderManagementTool
 
         public App()
         {
-            //Locator.CurrentMutable.RegisterViewsForViewModels(Assembly.GetCallingAssembly());
-            Locator.CurrentMutable.RegisterLazySingleton(() => new MainWindow(), typeof(IViewFor<MainWindowViewModel>));
-            Locator.CurrentMutable.Register(() => new OrderListView(), typeof(IViewFor<OrderListViewModel>));
-            Locator.CurrentMutable.Register(() => new NewOrderView(), typeof(IViewFor<NewOrderViewModel>));
-            Locator.CurrentMutable.Register(() => new CommonOrderEditorView(), typeof(IViewFor<CommonOrderEditorViewModel>));
-            Locator.CurrentMutable.Register(() => new OrderEditorView(), typeof(IViewFor<OrderEditorViewModel>));
+            Locator.CurrentMutable.RegisterViewsForViewModels(Assembly.GetCallingAssembly());
 
             this.InitializeConfig();
         }
