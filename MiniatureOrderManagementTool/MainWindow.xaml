@@ -1,4 +1,5 @@
 ﻿<rxui:ReactiveWindow
+        x:Name="mainWindow"
         x:Class="MiniatureOrderManagementTool.Views.MainWindow"
         x:TypeArguments="mvs:MainWindowViewModel"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -12,6 +13,23 @@
         mc:Ignorable="d"
         Title="注文管理ツール" Height="450" Width="800">
     <Grid>
-        <vs:OrderListView Margin="5" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Menu>
+            <MenuItem Header="ファイル">
+                <MenuItem x:Name="quitMenuItem" Header="終了" CommandParameter="{Binding ElementName=mainWindow}" />
+            </MenuItem>
+            <MenuItem Header="編集">
+                <MenuItem x:Name="newOrderMenuItem" Header="新規作成" />
+                <MenuItem x:Name="editOrderMenuItem" Header="編集" />
+                <MenuItem x:Name="removeOrderMenuItem" Header="削除" />
+            </MenuItem>
+            <MenuItem Header="ヘルプ">
+                <MenuItem x:Name="showAboutMenuItem" Header="このソフトについて" />
+            </MenuItem>
+        </Menu>
+        <vs:OrderListView x:Name="orderListView" Grid.Row="1" Margin="5,2,5,5" />
     </Grid>
 </rxui:ReactiveWindow>

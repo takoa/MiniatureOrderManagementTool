@@ -1,5 +1,7 @@
-﻿using MiniatureOrderManagementTool.Models;
+﻿using MiniatureOrderManagementTool.Helpers;
+using MiniatureOrderManagementTool.Models;
 using ReactiveUI;
+using System.Reactive;
 using System.Windows;
 
 namespace MiniatureOrderManagementTool.ViewModels
@@ -7,6 +9,8 @@ namespace MiniatureOrderManagementTool.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         private readonly Config config;
+
+        public OrderListViewModel OrderListViewModel { get; set; }
 
         private double left;
         public double Left
@@ -52,6 +56,9 @@ namespace MiniatureOrderManagementTool.ViewModels
             }
         }
 
+        public ReactiveCommand<IClosable, Unit> QuitCommand { get; }
+        public ReactiveCommand<Unit, Unit> ShowAboutCommand { get; }
+
         public MainWindowViewModel(Config config)
         {
             this.config = config;
@@ -60,6 +67,21 @@ namespace MiniatureOrderManagementTool.ViewModels
             this.Top = this.config.MainWindowPosition.Y;
             this.Width = this.config.MainWindowSize.Width;
             this.Height = this.config.MainWindowSize.Height;
+
+            this.QuitCommand = ReactiveCommand.Create<IClosable>(this.Quit);
+            this.ShowAboutCommand = ReactiveCommand.Create(this.ShowAbout);
+        }
+
+        private void Quit(IClosable closable)
+        {
+            closable.Close();
+        }
+
+        private void ShowAbout()
+        {
+            var aboutViewModel = new AboutViewModel();
+
+            WindowViewHelper.ShowWindow(aboutViewModel);
         }
     }
 }
