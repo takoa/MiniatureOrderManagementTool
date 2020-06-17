@@ -1,5 +1,6 @@
 using DynamicData;
 using LiteDB;
+using MiniatureOrderManagementTool.Dtos;
 using MiniatureOrderManagementTool.Helpers;
 using MiniatureOrderManagementTool.Models;
 using ReactiveUI;

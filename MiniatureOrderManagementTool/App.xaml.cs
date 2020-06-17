@@ -1,4 +1,4 @@
-﻿using MiniatureOrderManagementTool.Models;
+﻿using MiniatureOrderManagementTool.Dtos;
 using NLog;
 using ReactiveUI;
 using Splat;
