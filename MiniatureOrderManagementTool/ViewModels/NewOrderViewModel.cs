@@ -1,4 +1,5 @@
 ﻿using MiniatureOrderManagementTool.Dtos;
+using MiniatureOrderManagementTool.Models;
 using ReactiveUI;
 using System;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace MiniatureOrderManagementTool.ViewModels
     {
         private Config config;
 
-        public OrderListViewModel OrderListViewModel { get; }
+        public OrderManager OrderManager { get; }
         public CommonOrderEditorViewModel CommonOrderEditorViewModel { get; set; }
 
         private double left;
@@ -62,10 +63,10 @@ namespace MiniatureOrderManagementTool.ViewModels
         public ReactiveCommand<IClosable, Unit> AddOrderCommand { get; }
         public ReactiveCommand<IClosable, Unit> CancelCommand { get; }
 
-        public NewOrderViewModel(Config config, OrderListViewModel orderListViewModel)
+        public NewOrderViewModel(Config config, OrderManager orderManager)
         {
-            this.OrderListViewModel = orderListViewModel;
             this.config = config;
+            this.OrderManager = orderManager;
 
             this.Left = this.config.MainWindowPosition.X + this.config.OrderEditorWindowDelta.X;
             this.Top = this.config.MainWindowPosition.Y + this.config.OrderEditorWindowDelta.Y;
@@ -93,7 +94,7 @@ namespace MiniatureOrderManagementTool.ViewModels
                 TimeSpent = -1
             };
 
-            this.OrderListViewModel.AddOrder(order);
+            this.OrderManager.AddOrder(order);
             closable.Close();
         }
 

@@ -1,5 +1,6 @@
 ﻿using LiteDB;
 using MiniatureOrderManagementTool.Dtos;
+using MiniatureOrderManagementTool.Models;
 using ReactiveUI;
 using System;
 using System.Linq;
@@ -11,8 +12,8 @@ namespace MiniatureOrderManagementTool.ViewModels
     public class OrderEditorViewModel : ViewModelBase
     {
         private Config config;
-
-        public OrderListViewModel OrderListViewModel { get; }
+        private OrderManager orderManager;
+        private Order selectedOrder;
 
         private CommonOrderEditorViewModel commonOrderEditorViewModel;
         public CommonOrderEditorViewModel CommonOrderEditorViewModel
@@ -21,7 +22,7 @@ namespace MiniatureOrderManagementTool.ViewModels
             set
             {
                 this.commonOrderEditorViewModel = value;
-                value.Order = this.OrderListViewModel.SelectedOrder;
+                value.Order = this.selectedOrder;
             }
         }
 
@@ -86,17 +87,18 @@ namespace MiniatureOrderManagementTool.ViewModels
         public ReactiveCommand<IClosable, Unit> UpdateOrderCommand { get; }
         public ReactiveCommand<IClosable, Unit> CancelCommand { get; }
 
-        public OrderEditorViewModel(Config config, OrderListViewModel orderListViewModel)
+        public OrderEditorViewModel(Config config, OrderManager orderManager, Order selectedOrder)
         {
             this.config = config;
-            this.OrderListViewModel = orderListViewModel;
+            this.orderManager = orderManager;
+            this.selectedOrder = selectedOrder;
 
             this.Left = this.config.MainWindowPosition.X + this.config.OrderEditorWindowDelta.X;
             this.Top = this.config.MainWindowPosition.Y + this.config.OrderEditorWindowDelta.Y;
             this.Width = this.config.OrderEditorWindowSize.Width;
             this.Height = this.config.OrderEditorWindowSize.Height;
-            this.IsOrderFinished = this.OrderListViewModel.SelectedOrder.IsFinished;
-            this.OrderTimeSpent = this.OrderListViewModel.SelectedOrder.TimeSpent;
+            this.IsOrderFinished = this.selectedOrder.IsFinished;
+            this.OrderTimeSpent = this.selectedOrder.TimeSpent;
 
             this.UpdateOrderCommand = ReactiveCommand.Create<IClosable>(this.UpdateOrder);
             this.CancelCommand = ReactiveCommand.Create<IClosable>(this.Cancel);
@@ -106,21 +108,21 @@ namespace MiniatureOrderManagementTool.ViewModels
         {
             Order order = new Order
             {
-                ID = this.OrderListViewModel.SelectedOrder.ID,
+                ID = this.selectedOrder.ID,
                 ObjectID = ObjectId.NewObjectId(),
                 IsFinished = this.IsOrderFinished ?? false,
                 Name = this.CommonOrderEditorViewModel.OrderName,
                 Price = this.CommonOrderEditorViewModel.OrderPrice,
                 Description = this.CommonOrderEditorViewModel.OrderDescription,
                 Customer = this.CommonOrderEditorViewModel.OrderCustomer,
-                CreatedAt = this.OrderListViewModel.SelectedOrder.CreatedAt,
+                CreatedAt = this.selectedOrder.CreatedAt,
                 ModifiedAt = DateTime.Now,
                 Deadline = this.CommonOrderEditorViewModel.OrderDeadline,
                 Parts = this.CommonOrderEditorViewModel.Parts.ToArray(),
                 TimeSpent = OrderTimeSpent
             };
 
-            this.OrderListViewModel.UpdateOrder(order);
+            this.orderManager.UpdateOrder(order);
             closable.Close();
         }
 

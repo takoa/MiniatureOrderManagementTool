@@ -15,17 +15,9 @@ namespace MiniatureOrderManagementTool.ViewModels
 {
     public class OrderListViewModel : ViewModelBase
     {
-        private string databasePath;
+        private OrderManager orderManager = new OrderManager();
 
-        private SourceCache<Order, int> ordersCache;
-        public SourceCache<Order, int> OrdersCache
-        {
-            get => this.ordersCache;
-            set => this.RaiseAndSetIfChanged(ref this.ordersCache, value);
-        }
-
-        private ReadOnlyObservableCollection<Order> orders;
-        public ReadOnlyObservableCollection<Order> Orders => this.orders;
+        public ReadOnlyObservableCollection<Order> Orders => this.orderManager.Orders;
 
         private Order selectedOrder;
         public Order SelectedOrder
@@ -38,90 +30,16 @@ namespace MiniatureOrderManagementTool.ViewModels
         public ReactiveCommand<Unit, Unit> EditOrderCommand { get; }
         public ReactiveCommand<Unit, Unit> DeleteOrderCommand { get; }
 
-        public OrderListViewModel(string databasePath)
+        public OrderListViewModel()
         {
-            this.databasePath = databasePath;
-            this.InitializeOrders();
-
             this.AddOrderCommand = ReactiveCommand.Create(this.CreateNewOrderWindow);
             this.EditOrderCommand = ReactiveCommand.Create(this.CreateOrderEditorWindow);
             this.DeleteOrderCommand = ReactiveCommand.Create(this.DeleteOrder);
         }
 
-        public static string GetIsFinishedString(bool isFinished)
-        {
-            return isFinished ? "Š®—¹" : "–¢Š®—¹";
-        }
-
-        public static string GetTimeSpentString(decimal timeSpent)
-        {
-            if (0 <= timeSpent)
-            {
-                return timeSpent + "ŽžŠÔ";
-            }
-            else
-            {
-                return "–¢Ý’è";
-            }
-        }
-
-        public static string GetDeadlineString(DateTime deadline)
-        {
-            return deadline.ToString("yyyy”NMMŒŽdd“ú");
-        }
-
-        public void AddOrder(Order order)
-        {
-            using (var db = new LiteDatabase(this.databasePath))
-            {
-                var orders = db.GetCollection<Order>("orders");
-
-                orders.Insert(order);
-                orders.EnsureIndex(x => x.ID, true);
-                this.OrdersCache.AddOrUpdate(order);
-            }
-        }
-
-        public void UpdateOrder(Order order)
-        {
-            using (var db = new LiteDatabase(this.databasePath))
-            {
-                var orders = db.GetCollection<Order>("orders");
-
-                orders.Update(order);
-                this.OrdersCache.AddOrUpdate(order);
-            }
-
-            this.SelectedOrder = order;
-        }
-
-        private void InitializeOrders()
-        {
-            using var db = new LiteDatabase(this.databasePath);
-            var collection = db.GetCollection<Order>("orders");
-
-            this.OrdersCache = new SourceCache<Order, int>(i => i.ID);
-            this.OrdersCache.Connect()
-                            .ObserveOn(RxApp.MainThreadScheduler)
-                            .Sort(new OrderDeadlineComparer())
-                            .Bind(out this.orders)
-                            .Subscribe();
-            this.OrdersCache.AddOrUpdate(collection.FindAll());
-
-            foreach (var order in this.OrdersCache.Items.OrderBy(o => o.Deadline))
-            {
-                if (!order.IsFinished && order.Deadline < DateTime.Now)
-                {
-                    this.SelectedOrder = order;
-
-                    break;
-                }
-            }
-        }
-
         private void CreateNewOrderWindow()
         {
-            var newOrderViewModel = new NewOrderViewModel(((App)Application.Current).Config, this);
+            var newOrderViewModel = new NewOrderViewModel(((App)Application.Current).Config, this.orderManager);
 
             WindowViewHelper.ShowWindow(newOrderViewModel);
         }
@@ -133,25 +51,14 @@ namespace MiniatureOrderManagementTool.ViewModels
                 return;
             }
 
-            var orderEditorViewModel = new OrderEditorViewModel(((App)Application.Current).Config, this);
+            var orderEditorViewModel = new OrderEditorViewModel(((App)Application.Current).Config, this.orderManager, this.SelectedOrder);
 
             WindowViewHelper.ShowWindow(orderEditorViewModel);
         }
 
         private void DeleteOrder()
         {
-            if (this.SelectedOrder == null)
-            {
-                return;
-            }
-
-            using (var db = new LiteDatabase(this.databasePath))
-            {
-                var orders = db.GetCollection<Order>("orders");
-
-                orders.Delete(this.SelectedOrder.ID);
-                this.OrdersCache.RemoveKey(this.selectedOrder.ID);
-            }
+            this.orderManager.DeleteOrder(this.SelectedOrder);
         }
     }
 }
