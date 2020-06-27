@@ -12,9 +12,6 @@ using System.Windows;
 
 namespace MiniatureOrderManagementTool
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
         private const string configPath = "./config.json";

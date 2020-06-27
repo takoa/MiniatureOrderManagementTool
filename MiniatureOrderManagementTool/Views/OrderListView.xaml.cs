@@ -5,9 +5,6 @@ using System.Reactive.Disposables;
 
 namespace MiniatureOrderManagementTool.Views
 {
-    /// <summary>
-    /// Interaction logic for OrderListView.xaml
-    /// </summary>
     public partial class OrderListView : ReactiveUserControl<OrderListViewModel>
     {
         public OrderListView()

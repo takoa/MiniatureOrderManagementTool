@@ -5,9 +5,6 @@ using System.Windows;
 
 namespace MiniatureOrderManagementTool.Views
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : ReactiveWindow<MainWindowViewModel>, IClosable
     {
         public MainWindow()

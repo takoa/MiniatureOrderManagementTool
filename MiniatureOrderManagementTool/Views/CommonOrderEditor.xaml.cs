@@ -4,9 +4,6 @@ using System.Reactive.Disposables;
 
 namespace MiniatureOrderManagementTool.Views
 {
-    /// <summary>
-    /// Interaction logic for CommonOrderEditor.xaml
-    /// </summary>
     public partial class CommonOrderEditorView : ReactiveUserControl<CommonOrderEditorViewModel>
     {
         public CommonOrderEditorView()
