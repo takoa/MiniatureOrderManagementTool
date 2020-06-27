@@ -1,14 +1,9 @@
-using DynamicData;
-using LiteDB;
 using MiniatureOrderManagementTool.Dtos;
 using MiniatureOrderManagementTool.Helpers;
 using MiniatureOrderManagementTool.Models;
 using ReactiveUI;
-using System;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Reactive;
-using System.Reactive.Linq;
 using System.Windows;
 
 namespace MiniatureOrderManagementTool.ViewModels
