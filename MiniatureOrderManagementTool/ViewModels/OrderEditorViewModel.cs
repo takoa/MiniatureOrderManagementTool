@@ -3,7 +3,6 @@ using MiniatureOrderManagementTool.Dtos;
 using MiniatureOrderManagementTool.Models;
 using ReactiveUI;
 using System;
-using System.Linq;
 using System.Reactive;
 using System.Windows;
 
@@ -15,14 +14,19 @@ namespace MiniatureOrderManagementTool.ViewModels
         private OrderManager orderManager;
         private Order selectedOrder;
 
-        private CommonOrderEditorViewModel commonOrderEditorViewModel;
-        public CommonOrderEditorViewModel CommonOrderEditorViewModel
+        private ICommonOrderInfo commonOrderInfo;
+        public ICommonOrderInfo CommonOrderInfo
         {
-            get => this.commonOrderEditorViewModel;
+            get => this.commonOrderInfo;
             set
             {
-                this.commonOrderEditorViewModel = value;
-                value.Order = this.selectedOrder;
+                this.commonOrderInfo = value;
+                value.Name = this.selectedOrder.Name;
+                value.Price = this.selectedOrder.Price;
+                value.Description = this.selectedOrder.Description;
+                value.Customer = this.selectedOrder.Customer;
+                value.Deadline = this.selectedOrder.Deadline;
+                value.Parts = this.selectedOrder.Parts;
             }
         }
 
@@ -111,14 +115,14 @@ namespace MiniatureOrderManagementTool.ViewModels
                 ID = this.selectedOrder.ID,
                 ObjectID = ObjectId.NewObjectId(),
                 IsFinished = this.IsOrderFinished ?? false,
-                Name = this.CommonOrderEditorViewModel.OrderName,
-                Price = this.CommonOrderEditorViewModel.OrderPrice,
-                Description = this.CommonOrderEditorViewModel.OrderDescription,
-                Customer = this.CommonOrderEditorViewModel.OrderCustomer,
+                Name = this.CommonOrderInfo.Name,
+                Price = this.CommonOrderInfo.Price,
+                Description = this.CommonOrderInfo.Description,
+                Customer = this.CommonOrderInfo.Customer,
                 CreatedAt = this.selectedOrder.CreatedAt,
                 ModifiedAt = DateTime.Now,
-                Deadline = this.CommonOrderEditorViewModel.OrderDeadline,
-                Parts = this.CommonOrderEditorViewModel.Parts.ToArray(),
+                Deadline = this.CommonOrderInfo.Deadline,
+                Parts = this.CommonOrderInfo.Parts,
                 TimeSpent = OrderTimeSpent
             };
 

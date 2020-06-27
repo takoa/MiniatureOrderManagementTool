@@ -5,62 +5,62 @@ using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 
 namespace MiniatureOrderManagementTool.ViewModels
 {
-    public class CommonOrderEditorViewModel : ViewModelBase
+    public class CommonOrderEditorViewModel : ViewModelBase, ICommonOrderInfo
     {
-        private Order order;
-        public Order Order
+        private string name;
+        public string Name
         {
-            get => this.Order;
+            get => this.name;
             set
             {
-                this.order = value;
-                this.OrderName = value.Name;
-                this.OrderDeadline = value.Deadline;
-                this.OrderCustomer = value.Customer;
-                this.OrderPrice = value.Price;
-                this.OrderDescription = value.Description;
-                this.PartsCache.AddOrUpdate(value.Parts);
+                this.RaiseAndSetIfChanged(ref this.name, value);
             }
         }
 
-        private string orderName;
-        public string OrderName
+        private string customer;
+        public string Customer
         {
-            get => this.orderName;
-            set => this.RaiseAndSetIfChanged(ref this.orderName, value);
+            get => this.customer;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref this.customer, value);
+            }
         }
 
-        private string orderCustomer;
-        public string OrderCustomer
+        private DateTime deadline;
+        public DateTime Deadline
         {
-            get => this.orderCustomer;
-            set => this.RaiseAndSetIfChanged(ref this.orderCustomer, value);
+            get => this.deadline;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref this.deadline, value);
+            }
         }
 
-        private DateTime orderDeadline;
-        public DateTime OrderDeadline
+        private string description;
+        public string Description
         {
-            get => this.orderDeadline;
-            set => this.RaiseAndSetIfChanged(ref this.orderDeadline, value);
+            get => this.description;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref this.description, value);
+            }
         }
 
-        private string orderDescription;
-        public string OrderDescription
+        private decimal price;
+        public decimal Price
         {
-            get => this.orderDescription;
-            set => this.RaiseAndSetIfChanged(ref this.orderDescription, value);
-        }
-
-        private decimal orderPrice;
-        public decimal OrderPrice
-        {
-            get => this.orderPrice;
-            set => this.RaiseAndSetIfChanged(ref this.orderPrice, value);
+            get => this.price;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref this.price, value);
+            }
         }
 
         private string partName;
@@ -91,21 +91,33 @@ namespace MiniatureOrderManagementTool.ViewModels
             set => this.RaiseAndSetIfChanged(ref this.partsCache, value);
         }
 
-        private ReadOnlyObservableCollection<Part> parts;
-        public ReadOnlyObservableCollection<Part> Parts => this.parts;
+        private ReadOnlyObservableCollection<Part> observableParts;
+        public ReadOnlyObservableCollection<Part> ObservableParts => this.observableParts;
+
+        public Part[] Parts
+        {
+            get => this.ObservableParts.ToArray();
+            set
+            {
+                if (value != null)
+                {
+                    this.PartsCache.AddOrUpdate(value);
+                }
+            }
+        }
 
         public ReactiveCommand<Unit, Unit> AddPartCommand { get; }
         public ReactiveCommand<Unit, Unit> RemovePartCommand { get; }
 
         public CommonOrderEditorViewModel()
         {
-            this.orderDeadline = DateTime.Now;
+            this.Deadline = DateTime.Now;
 
             this.PartsCache = new SourceCache<Part, string>(p => p.Name);
             this.PartsCache.Connect()
                            .ObserveOn(RxApp.MainThreadScheduler)
                            .Sort(new PartNameComparer())
-                           .Bind(out this.parts)
+                           .Bind(out this.observableParts)
                            .Subscribe();
 
             this.AddPartCommand = ReactiveCommand.Create(this.AddPart);
@@ -114,9 +126,8 @@ namespace MiniatureOrderManagementTool.ViewModels
 
         public static int GetPartAmountInt(string str)
         {
-            int i;
 
-            if (Int32.TryParse(str, out i))
+            if (Int32.TryParse(str, out int i))
             {
                 return i;
             }

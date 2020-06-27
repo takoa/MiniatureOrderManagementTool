@@ -2,9 +2,7 @@
 using MiniatureOrderManagementTool.Models;
 using ReactiveUI;
 using System;
-using System.Linq;
 using System.Reactive;
-using System.Reactive.Linq;
 using System.Windows;
 
 namespace MiniatureOrderManagementTool.ViewModels
@@ -14,7 +12,7 @@ namespace MiniatureOrderManagementTool.ViewModels
         private Config config;
 
         public OrderManager OrderManager { get; }
-        public CommonOrderEditorViewModel CommonOrderEditorViewModel { get; set; }
+        public ICommonOrderInfo CommonOrderInfo { get; set; }
 
         private double left;
         public double Left
@@ -83,14 +81,14 @@ namespace MiniatureOrderManagementTool.ViewModels
             Order order = new Order
             {
                 IsFinished = false,
-                Name = this.CommonOrderEditorViewModel.OrderName,
-                Price = this.CommonOrderEditorViewModel.OrderPrice,
-                Description = this.CommonOrderEditorViewModel.OrderDescription,
-                Customer = this.CommonOrderEditorViewModel.OrderCustomer,
+                Name = this.CommonOrderInfo.Name,
+                Price = this.CommonOrderInfo.Price,
+                Description = this.CommonOrderInfo.Description,
+                Customer = this.CommonOrderInfo.Customer,
                 CreatedAt = now,
                 ModifiedAt = now,
-                Deadline = this.CommonOrderEditorViewModel.OrderDeadline,
-                Parts = this.CommonOrderEditorViewModel.Parts.ToArray(),
+                Deadline = this.CommonOrderInfo.Deadline,
+                Parts = this.CommonOrderInfo.Parts,
                 TimeSpent = -1
             };
 
