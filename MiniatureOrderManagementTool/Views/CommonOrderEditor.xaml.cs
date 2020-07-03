@@ -10,8 +10,6 @@ namespace MiniatureOrderManagementTool.Views
         {
             this.InitializeComponent();
 
-            this.ViewModel = new CommonOrderEditorViewModel();
-
             this.WhenActivated(d =>
             {
                 this.Bind(this.ViewModel, vm => vm.Name, v => v.orderNameTextBox.Text).DisposeWith(d);
@@ -24,6 +22,7 @@ namespace MiniatureOrderManagementTool.Views
                 this.Bind(this.ViewModel, vm => vm.PartAmount, v => v.partAmountNumericTextBox.Text, x => x.ToString(), CommonOrderEditorViewModel.GetPartAmountInt).DisposeWith(d);
 
                 this.OneWayBind(this.ViewModel, vm => vm.ObservableParts, v => v.partsDataGrid.ItemsSource).DisposeWith(d);
+                this.OneWayBind(this.ViewModel, vm => vm.PartCount, v => v.partCountTextBlock.Text).DisposeWith(d);
 
                 this.BindCommand(this.ViewModel, vm => vm.AddPartCommand, view => view.addPartButton).DisposeWith(d);
                 this.BindCommand(this.ViewModel, vm => vm.RemovePartCommand, view => view.removePartButton).DisposeWith(d);

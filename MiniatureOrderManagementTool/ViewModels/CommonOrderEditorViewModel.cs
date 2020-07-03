@@ -11,7 +11,7 @@ using System.Reactive.Linq;
 
 namespace MiniatureOrderManagementTool.ViewModels
 {
-    public class CommonOrderEditorViewModel : ViewModelBase, ICommonOrderInfo
+    public class CommonOrderEditorViewModel : ViewModelBase
     {
         private string name;
         public string Name

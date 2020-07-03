@@ -7,12 +7,11 @@ using System.Windows;
 
 namespace MiniatureOrderManagementTool.ViewModels
 {
-    public class NewOrderViewModel : ViewModelBase
+    public class NewOrderViewModel : CommonOrderEditorViewModel
     {
         private Config config;
 
         public OrderManager OrderManager { get; }
-        public ICommonOrderInfo CommonOrderInfo { get; set; }
 
         private double left;
         public double Left
@@ -81,14 +80,14 @@ namespace MiniatureOrderManagementTool.ViewModels
             Order order = new Order
             {
                 IsFinished = false,
-                Name = this.CommonOrderInfo.Name,
-                Price = this.CommonOrderInfo.Price,
-                Description = this.CommonOrderInfo.Description,
-                Customer = this.CommonOrderInfo.Customer,
+                Name = this.Name,
+                Price = this.Price,
+                Description = this.Description,
+                Customer = this.Customer,
                 CreatedAt = now,
                 ModifiedAt = now,
-                Deadline = this.CommonOrderInfo.Deadline,
-                Parts = this.CommonOrderInfo.Parts,
+                Deadline = this.Deadline,
+                Parts = this.Parts,
                 TimeSpent = -1
             };
 

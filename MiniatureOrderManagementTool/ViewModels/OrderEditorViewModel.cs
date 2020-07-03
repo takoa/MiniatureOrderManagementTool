@@ -8,27 +8,11 @@ using System.Windows;
 
 namespace MiniatureOrderManagementTool.ViewModels
 {
-    public class OrderEditorViewModel : ViewModelBase
+    public class OrderEditorViewModel : CommonOrderEditorViewModel
     {
         private Config config;
         private OrderManager orderManager;
         private Order selectedOrder;
-
-        private ICommonOrderInfo commonOrderInfo;
-        public ICommonOrderInfo CommonOrderInfo
-        {
-            get => this.commonOrderInfo;
-            set
-            {
-                this.commonOrderInfo = value;
-                value.Name = this.selectedOrder.Name;
-                value.Price = this.selectedOrder.Price;
-                value.Description = this.selectedOrder.Description;
-                value.Customer = this.selectedOrder.Customer;
-                value.Deadline = this.selectedOrder.Deadline;
-                value.Parts = this.selectedOrder.Parts;
-            }
-        }
 
         private double left;
         public double Left
@@ -97,6 +81,12 @@ namespace MiniatureOrderManagementTool.ViewModels
             this.orderManager = orderManager;
             this.selectedOrder = selectedOrder;
 
+            this.Name = selectedOrder.Name;
+            this.Price = selectedOrder.Price;
+            this.Description = selectedOrder.Description;
+            this.Customer = selectedOrder.Customer;
+            this.Deadline = selectedOrder.Deadline;
+            this.Parts = selectedOrder.Parts;
             this.Left = this.config.MainWindowPosition.X + this.config.OrderEditorWindowDelta.X;
             this.Top = this.config.MainWindowPosition.Y + this.config.OrderEditorWindowDelta.Y;
             this.Width = this.config.OrderEditorWindowSize.Width;
@@ -115,14 +105,14 @@ namespace MiniatureOrderManagementTool.ViewModels
                 ID = this.selectedOrder.ID,
                 ObjectID = ObjectId.NewObjectId(),
                 IsFinished = this.IsOrderFinished ?? false,
-                Name = this.CommonOrderInfo.Name,
-                Price = this.CommonOrderInfo.Price,
-                Description = this.CommonOrderInfo.Description,
-                Customer = this.CommonOrderInfo.Customer,
+                Name = this.Name,
+                Price = this.Price,
+                Description = this.Description,
+                Customer = this.Customer,
                 CreatedAt = this.selectedOrder.CreatedAt,
                 ModifiedAt = DateTime.Now,
-                Deadline = this.CommonOrderInfo.Deadline,
-                Parts = this.CommonOrderInfo.Parts,
+                Deadline = this.Deadline,
+                Parts = this.Parts,
                 TimeSpent = OrderTimeSpent
             };
 

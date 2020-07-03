@@ -12,7 +12,7 @@ namespace MiniatureOrderManagementTool.Views
 
             this.WhenActivated(d =>
             {
-                this.ViewModel.CommonOrderInfo = this.commonOrderEditorView.ViewModel;
+                this.commonOrderEditorView.ViewModel = this.ViewModel;
 
                 this.Bind(this.ViewModel, vm => vm.Left, v => v.Left).DisposeWith(d);
                 this.Bind(this.ViewModel, vm => vm.Top, v => v.Top).DisposeWith(d);
