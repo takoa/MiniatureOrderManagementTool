@@ -63,6 +63,13 @@ namespace MiniatureOrderManagementTool.ViewModels
             }
         }
 
+        private int partCount;
+        public int PartCount
+        {
+            get => this.partCount;
+            set => this.RaiseAndSetIfChanged(ref this.partCount, value);
+        }
+
         private string partName;
         public string PartName
         {
@@ -101,7 +108,16 @@ namespace MiniatureOrderManagementTool.ViewModels
             {
                 if (value != null)
                 {
+                    int count = 0;
+
                     this.PartsCache.AddOrUpdate(value);
+
+                    for (int i = 0; i < value.Length; i++)
+                    {
+                        count += value[i].Count;
+                    }
+
+                    this.PartCount = count;
                 }
             }
         }
@@ -155,6 +171,7 @@ namespace MiniatureOrderManagementTool.ViewModels
             };
 
             this.PartsCache.AddOrUpdate(part);
+            this.PartCount += part.Count;
             this.PartName = "";
             this.PartAmount = 0;
         }
@@ -162,6 +179,7 @@ namespace MiniatureOrderManagementTool.ViewModels
         private void RemovePart()
         {
             this.PartsCache.Remove(this.SelectedPart);
+            this.PartCount -= this.SelectedPart.Count;
         }
     }
 }

@@ -51,7 +51,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <TextBlock VerticalAlignment="Center" Text="詳細: " />
+            <TextBlock VerticalAlignment="Center" Text="詳細 " />
             <TextBox x:Name="descriptionTextBox" Grid.Row="1" Margin="0,3,0,0" TextWrapping="Wrap" />
         </Grid>
         <Grid Grid.Row="3" Margin="0,5,0,0">
@@ -60,7 +60,16 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <TextBlock VerticalAlignment="Center" Text="パーツ: " />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock VerticalAlignment="Center" Text="パーツ " />
+                <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Text="合計: " />
+                <TextBlock x:Name="partCountTextBlock" Grid.Column="2" VerticalAlignment="Center" />
+            </Grid>
             <DataGrid x:Name="partsDataGrid" Grid.Row="1" Margin="0,3,0,0" AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="パーツ名" Binding="{Binding Name}" />
