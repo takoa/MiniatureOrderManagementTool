@@ -1,14 +1,10 @@
-﻿using DynamicData;
-using MiniatureOrderManagementTool.Dtos;
+﻿using MiniatureOrderManagementTool.Dtos;
 using MiniatureOrderManagementTool.Models;
 using ReactiveUI;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Linq;
 using System.Reactive;
-using System.Reactive.Linq;
 
 namespace MiniatureOrderManagementTool.ViewModels
 {
