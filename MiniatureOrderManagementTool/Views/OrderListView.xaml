@@ -20,6 +20,7 @@
             </ResourceDictionary.MergedDictionaries>
             <helpers:DateConverter x:Key="DateConverter" />
             <helpers:DateCheckerConverter x:Key="DateCheckerConverter" />
+            <helpers:NewLineConverter x:Key="NewLineConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -50,7 +51,7 @@
                                 <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Customer}" />
                                 <TextBlock Grid.Column="1" Margin="10,0,0,0" Text="{Binding Deadline, Converter={StaticResource DateConverter}}" />
                             </Grid>
-                            <TextBlock Grid.Row="1" Text="{Binding Description}" />
+                            <TextBlock Grid.Row="1" Text="{Binding Description, Converter={StaticResource NewLineConverter}}" />
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
