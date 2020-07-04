@@ -3,6 +3,7 @@ using MiniatureOrderManagementTool.Dtos;
 using MiniatureOrderManagementTool.Models;
 using ReactiveUI;
 using System;
+using System.Linq;
 using System.Reactive;
 using System.Windows;
 
@@ -86,7 +87,7 @@ namespace MiniatureOrderManagementTool.ViewModels
             this.Description = selectedOrder.Description;
             this.Customer = selectedOrder.Customer;
             this.Deadline = selectedOrder.Deadline;
-            this.Parts = selectedOrder.Parts;
+            this.PartManager.Parts = selectedOrder.Parts;
             this.Left = this.config.MainWindowPosition.X + this.config.OrderEditorWindowDelta.X;
             this.Top = this.config.MainWindowPosition.Y + this.config.OrderEditorWindowDelta.Y;
             this.Width = this.config.OrderEditorWindowSize.Width;
@@ -112,7 +113,7 @@ namespace MiniatureOrderManagementTool.ViewModels
                 CreatedAt = this.selectedOrder.CreatedAt,
                 ModifiedAt = DateTime.Now,
                 Deadline = this.Deadline,
-                Parts = this.Parts,
+                Parts = this.PartManager.Parts,
                 TimeSpent = OrderTimeSpent
             };
 

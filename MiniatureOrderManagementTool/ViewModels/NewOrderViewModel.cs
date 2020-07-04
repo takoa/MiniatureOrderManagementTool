@@ -87,7 +87,7 @@ namespace MiniatureOrderManagementTool.ViewModels
                 CreatedAt = now,
                 ModifiedAt = now,
                 Deadline = this.Deadline,
-                Parts = this.Parts,
+                Parts = this.PartManager.Parts,
                 TimeSpent = -1
             };
 

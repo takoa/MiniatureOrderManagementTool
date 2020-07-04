@@ -5,6 +5,7 @@ using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
@@ -13,6 +14,8 @@ namespace MiniatureOrderManagementTool.ViewModels
 {
     public class CommonOrderEditorViewModel : ViewModelBase
     {
+        public PartManager PartManager { get; } = new PartManager();
+
         private string name;
         public string Name
         {
@@ -63,11 +66,11 @@ namespace MiniatureOrderManagementTool.ViewModels
             }
         }
 
-        private int partCount;
-        public int PartCount
+        private int totalPartCount;
+        public int TotalPartCount
         {
-            get => this.partCount;
-            set => this.RaiseAndSetIfChanged(ref this.partCount, value);
+            get => this.totalPartCount;
+            set => this.RaiseAndSetIfChanged(ref this.totalPartCount, value);
         }
 
         private string partName;
@@ -91,36 +94,7 @@ namespace MiniatureOrderManagementTool.ViewModels
             set => this.RaiseAndSetIfChanged(ref this.selectedPart, value);
         }
 
-        private SourceCache<Part, string> partsCache;
-        public SourceCache<Part, string> PartsCache
-        {
-            get => this.partsCache;
-            set => this.RaiseAndSetIfChanged(ref this.partsCache, value);
-        }
-
-        private ReadOnlyObservableCollection<Part> observableParts;
-        public ReadOnlyObservableCollection<Part> ObservableParts => this.observableParts;
-
-        public Part[] Parts
-        {
-            get => this.ObservableParts.ToArray();
-            set
-            {
-                if (value != null)
-                {
-                    int count = 0;
-
-                    this.PartsCache.AddOrUpdate(value);
-
-                    for (int i = 0; i < value.Length; i++)
-                    {
-                        count += value[i].Count;
-                    }
-
-                    this.PartCount = count;
-                }
-            }
-        }
+        public ReadOnlyObservableCollection<Part> ObservableParts => this.PartManager.ObservableParts;
 
         public ReactiveCommand<Unit, Unit> AddPartCommand { get; }
         public ReactiveCommand<Unit, Unit> RemovePartCommand { get; }
@@ -129,32 +103,10 @@ namespace MiniatureOrderManagementTool.ViewModels
         {
             this.Deadline = DateTime.Now;
 
-            this.PartsCache = new SourceCache<Part, string>(p => p.Name);
-            this.PartsCache.Connect()
-                           .ObserveOn(RxApp.MainThreadScheduler)
-                           .Sort(new PartNameComparer())
-                           .Bind(out this.observableParts)
-                           .Subscribe();
+            ((INotifyCollectionChanged)this.PartManager.ObservableParts).CollectionChanged += this.PartCollectionChanged;
 
             this.AddPartCommand = ReactiveCommand.Create(this.AddPart);
             this.RemovePartCommand = ReactiveCommand.Create(this.RemovePart);
-        }
-
-        public static int GetPartAmountInt(string str)
-        {
-
-            if (Int32.TryParse(str, out int i))
-            {
-                return i;
-            }
-            else if (str == "" || i < 0)
-            {
-                return 0;
-            }
-            else
-            {
-                return int.MaxValue;
-            }
         }
 
         private void AddPart()
@@ -170,16 +122,19 @@ namespace MiniatureOrderManagementTool.ViewModels
                 Count = PartAmount
             };
 
-            this.PartsCache.AddOrUpdate(part);
-            this.PartCount += part.Count;
+            this.PartManager.AddPart(part);
             this.PartName = "";
             this.PartAmount = 0;
         }
 
         private void RemovePart()
         {
-            this.PartsCache.Remove(this.SelectedPart);
-            this.PartCount -= this.SelectedPart.Count;
+            this.PartManager.RemovePart(this.selectedPart);
+        }
+
+        private void PartCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            this.TotalPartCount = this.PartManager.TotalPartCount;
         }
     }
 }
