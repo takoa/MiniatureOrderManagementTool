@@ -34,7 +34,7 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="45" />
             </Grid.RowDefinitions>
-            <ctrls:ProgrammaticallySelectableListView x:Name="ordersListView" Grid.ColumnSpan="3" HorizontalContentAlignment="Stretch" ItemContainerStyle="{StaticResource orderListViewStyle}">
+            <ctrls:ProgrammaticallySelectableListView x:Name="ordersListView" Grid.ColumnSpan="3" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemContainerStyle="{StaticResource orderListViewStyle}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -42,8 +42,7 @@
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
-                            <TextBlock Text="{Binding Name}" />
-                            <Grid Grid.Row="1">
+                            <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="75" />
@@ -51,6 +50,7 @@
                                 <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Customer}" />
                                 <TextBlock Grid.Column="1" Margin="10,0,0,0" Text="{Binding Deadline, Converter={StaticResource DateConverter}}" />
                             </Grid>
+                            <TextBlock Grid.Row="1" Text="{Binding Description}" />
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
