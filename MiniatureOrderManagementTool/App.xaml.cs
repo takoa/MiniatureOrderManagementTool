@@ -16,9 +16,9 @@ namespace MiniatureOrderManagementTool
     {
         private const string configPath = "./config.json";
 
-        public Config Config { get; private set; }
-
         private static Logger logger = LogManager.GetCurrentClassLogger();
+
+        public Config Config { get; private set; }
 
         public App()
         {
@@ -47,8 +47,8 @@ namespace MiniatureOrderManagementTool
             var logfile = new NLog.Targets.FileTarget("logfile")
             {
                 FileName = "${currentdir}/logs/logfile.txt",
-                ArchiveAboveSize = 10240,
-                ArchiveFileName = "${currentdir}/archives/log.{#####}.txt",
+                ArchiveAboveSize = 1048576,
+                ArchiveFileName = "${currentdir}/logs/archives/log.{#####}.txt",
                 ArchiveNumbering = NLog.Targets.ArchiveNumberingMode.Sequence,
                 ConcurrentWrites = true,
                 KeepFileOpen = false,
@@ -65,22 +65,24 @@ namespace MiniatureOrderManagementTool
             DispatcherUnhandledException += (s, e) =>
             {
                 this.LogUnhandledException(e.Exception, "Application.Current.DispatcherUnhandledException");
-                e.Handled = true;
+                //e.Handled = true;
             };
 
             TaskScheduler.UnobservedTaskException += (s, e) =>
             {
                 this.LogUnhandledException(e.Exception, "TaskScheduler.UnobservedTaskException");
-                e.SetObserved();
+                //e.SetObserved();
             };
         }
 
         private void LogUnhandledException(Exception exception, string source)
         {
-            string message = $"Unhandled exception ({source})";
+            string message = null;
+
             try
             {
-                System.Reflection.AssemblyName assemblyName = System.Reflection.Assembly.GetExecutingAssembly().GetName();
+                AssemblyName assemblyName = Assembly.GetExecutingAssembly().GetName();
+                
                 message = string.Format("Unhandled exception in {0} v{1}", assemblyName.Name, assemblyName.Version);
             }
             catch (Exception ex)
@@ -90,6 +92,7 @@ namespace MiniatureOrderManagementTool
             finally
             {
                 App.logger.Error(exception, message);
+                App.logger.Error(exception.StackTrace);
             }
         }
 
