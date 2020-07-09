@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace MiniatureOrderManagementTool.ViewModels
 {
-    public class OrderEditorViewModel : CommonOrderEditorViewModel
+    public class OrderEditorViewModel : OrderEditorViewModelBase
     {
         private Config config;
         private OrderManager orderManager;
@@ -117,11 +117,6 @@ namespace MiniatureOrderManagementTool.ViewModels
             };
 
             this.orderManager.UpdateOrder(order);
-            closable.Close();
-        }
-
-        private void Cancel(IClosable closable)
-        {
             closable.Close();
         }
     }

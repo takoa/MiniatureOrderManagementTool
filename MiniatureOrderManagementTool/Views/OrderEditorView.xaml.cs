@@ -13,6 +13,7 @@ namespace MiniatureOrderManagementTool.Views
             this.WhenActivated(d =>
             {
                 this.commonOrderEditorView.ViewModel = this.ViewModel;
+                this.ViewModel.ConfirmationBox = new ConfirmationBox(this);
 
                 this.Bind(this.ViewModel, vm => vm.Left, v => v.Left).DisposeWith(d);
                 this.Bind(this.ViewModel, vm => vm.Top, v => v.Top).DisposeWith(d);
