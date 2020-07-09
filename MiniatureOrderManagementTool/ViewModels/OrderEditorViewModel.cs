@@ -72,8 +72,8 @@ namespace MiniatureOrderManagementTool.ViewModels
             set => this.RaiseAndSetIfChanged(ref this.orderTimeSpent, value);
         }
 
-        public ReactiveCommand<IClosable, Unit> UpdateOrderCommand { get; }
-        public ReactiveCommand<IClosable, Unit> CancelCommand { get; }
+        public ReactiveCommand<Unit, Unit> UpdateOrderCommand { get; }
+        public ReactiveCommand<Unit, Unit> CancelCommand { get; }
 
         public OrderEditorViewModel(Config config, OrderManager orderManager, Order selectedOrder)
         {
@@ -94,11 +94,11 @@ namespace MiniatureOrderManagementTool.ViewModels
             this.IsOrderFinished = this.selectedOrder.IsFinished;
             this.OrderTimeSpent = this.selectedOrder.TimeSpent;
 
-            this.UpdateOrderCommand = ReactiveCommand.Create<IClosable>(this.UpdateOrder);
-            this.CancelCommand = ReactiveCommand.Create<IClosable>(this.Cancel);
+            this.UpdateOrderCommand = ReactiveCommand.Create(this.UpdateOrder);
+            this.CancelCommand = ReactiveCommand.Create(this.Cancel);
         }
 
-        private void UpdateOrder(IClosable closable)
+        private void UpdateOrder()
         {
             Order order = new Order
             {
@@ -117,7 +117,7 @@ namespace MiniatureOrderManagementTool.ViewModels
             };
 
             this.orderManager.UpdateOrder(order);
-            closable.Close();
+            this.Window.Close();
         }
     }
 }

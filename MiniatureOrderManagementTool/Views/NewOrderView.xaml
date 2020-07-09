@@ -1,5 +1,4 @@
 ﻿<rxui:ReactiveWindow
-        x:Name="newOrderWindow"
         x:Class="MiniatureOrderManagementTool.Views.NewOrderView"
         x:TypeArguments="mvs:NewOrderViewModel"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -24,8 +23,8 @@
                 <ColumnDefinition Width="50" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button x:Name="cancelButton" Content="キャンセル" CommandParameter="{Binding ElementName=newOrderWindow}" />
-            <Button x:Name="addOrderButton" Grid.Column="2" Content="追加" CommandParameter="{Binding ElementName=newOrderWindow}" />
+            <Button x:Name="cancelButton" Content="キャンセル" />
+            <Button x:Name="addOrderButton" Grid.Column="2" Content="追加" />
         </Grid>
     </Grid>
 </rxui:ReactiveWindow>

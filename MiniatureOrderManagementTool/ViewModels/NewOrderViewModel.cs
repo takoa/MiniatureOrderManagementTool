@@ -57,8 +57,8 @@ namespace MiniatureOrderManagementTool.ViewModels
             }
         }
 
-        public ReactiveCommand<IClosable, Unit> AddOrderCommand { get; }
-        public ReactiveCommand<IClosable, Unit> CancelCommand { get; }
+        public ReactiveCommand<Unit, Unit> AddOrderCommand { get; }
+        public ReactiveCommand<Unit, Unit> CancelCommand { get; }
 
         public NewOrderViewModel(Config config, OrderManager orderManager)
         {
@@ -70,11 +70,11 @@ namespace MiniatureOrderManagementTool.ViewModels
             this.Width = this.config.OrderEditorWindowSize.Width;
             this.Height = this.config.OrderEditorWindowSize.Height;
 
-            this.AddOrderCommand = ReactiveCommand.Create<IClosable>(this.AddOrder);
-            this.CancelCommand = ReactiveCommand.Create<IClosable>(this.Cancel);
+            this.AddOrderCommand = ReactiveCommand.Create(this.AddOrder);
+            this.CancelCommand = ReactiveCommand.Create(this.Cancel);
         }
 
-        private void AddOrder(IClosable closable)
+        private void AddOrder()
         {
             DateTime now = DateTime.Now;
             Order order = new Order
@@ -92,7 +92,7 @@ namespace MiniatureOrderManagementTool.ViewModels
             };
 
             this.OrderManager.AddOrder(order);
-            closable.Close();
+            this.Window.Close();
         }
     }
 }
