@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MiniatureOrderManagementTool.ViewModels
+﻿namespace MiniatureOrderManagementTool.ViewModels
 {
     public class OrderEditorViewModelBase : CommonOrderEditorViewModel
     {
