@@ -4,7 +4,7 @@ using System.Reactive.Disposables;
 
 namespace MiniatureOrderManagementTool.Views
 {
-    public partial class OrderEditorView : ReactiveWindow<OrderEditorViewModel>, IClosable
+    public partial class OrderEditorView : ReactiveWindow<OrderEditorViewModel>, IWindow
     {
         public OrderEditorView()
         {

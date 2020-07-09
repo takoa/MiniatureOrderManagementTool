@@ -1,6 +1,6 @@
 ﻿namespace MiniatureOrderManagementTool.ViewModels
 {
-    public interface IClosable
+    public interface IWindow
     {
         void Close();
     }

@@ -5,7 +5,7 @@ using System.Windows;
 
 namespace MiniatureOrderManagementTool.Views
 {
-    public partial class MainWindow : ReactiveWindow<MainWindowViewModel>, IClosable
+    public partial class MainWindow : ReactiveWindow<MainWindowViewModel>, IWindow
     {
         public MainWindow()
         {

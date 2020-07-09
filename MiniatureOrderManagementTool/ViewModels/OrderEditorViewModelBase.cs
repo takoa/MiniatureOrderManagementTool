@@ -7,7 +7,7 @@ namespace MiniatureOrderManagementTool.ViewModels
     public class OrderEditorViewModelBase : CommonOrderEditorViewModel
     {
         public IConfirmationBox ConfirmationBox { get; set; }
-        public IClosable Window { get; set; }
+        public IWindow Window { get; set; }
 
         public void Cancel()
         {

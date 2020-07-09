@@ -56,7 +56,7 @@ namespace MiniatureOrderManagementTool.ViewModels
             }
         }
 
-        public ReactiveCommand<IClosable, Unit> QuitCommand { get; }
+        public ReactiveCommand<IWindow, Unit> QuitCommand { get; }
         public ReactiveCommand<Unit, Unit> ShowAboutCommand { get; }
 
         public MainWindowViewModel(Config config)
@@ -68,11 +68,11 @@ namespace MiniatureOrderManagementTool.ViewModels
             this.Width = this.config.MainWindowSize.Width;
             this.Height = this.config.MainWindowSize.Height;
 
-            this.QuitCommand = ReactiveCommand.Create<IClosable>(this.Quit);
+            this.QuitCommand = ReactiveCommand.Create<IWindow>(this.Quit);
             this.ShowAboutCommand = ReactiveCommand.Create(this.ShowAbout);
         }
 
-        private void Quit(IClosable closable)
+        private void Quit(IWindow closable)
         {
             closable.Close();
         }
