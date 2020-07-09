@@ -1,4 +1,4 @@
-﻿using MiniatureOrderManagementTool.Dtos;
+﻿using MiniatureOrderManagementTool.Models.Dtos;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 

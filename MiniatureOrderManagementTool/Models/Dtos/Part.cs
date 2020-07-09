@@ -1,4 +1,4 @@
-﻿namespace MiniatureOrderManagementTool.Dtos
+﻿namespace MiniatureOrderManagementTool.Models.Dtos
 {
     public class Part
     {

@@ -1,5 +1,5 @@
-﻿using MiniatureOrderManagementTool.Dtos;
-using MiniatureOrderManagementTool.Helpers;
+﻿using MiniatureOrderManagementTool.Helpers;
+using MiniatureOrderManagementTool.Models.Dtos;
 using ReactiveUI;
 using System.Reactive;
 using System.Windows;

@@ -1,4 +1,4 @@
-﻿using MiniatureOrderManagementTool.Dtos;
+﻿using MiniatureOrderManagementTool.Models.Dtos;
 using NLog;
 using ReactiveUI;
 using Splat;
@@ -82,7 +82,7 @@ namespace MiniatureOrderManagementTool
             try
             {
                 AssemblyName assemblyName = Assembly.GetExecutingAssembly().GetName();
-                
+
                 message = string.Format("Unhandled exception in {0} v{1}", assemblyName.Name, assemblyName.Version);
             }
             catch (Exception ex)

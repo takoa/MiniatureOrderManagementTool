@@ -1,7 +1,7 @@
 using LiteDB;
 using System;
 
-namespace MiniatureOrderManagementTool.Dtos
+namespace MiniatureOrderManagementTool.Models.Dtos
 {
     public class Order
     {
