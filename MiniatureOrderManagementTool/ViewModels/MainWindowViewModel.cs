@@ -10,6 +10,7 @@ namespace MiniatureOrderManagementTool.ViewModels
     {
         private readonly Config config;
 
+        public IWindow Window { get; set; }
         public OrderListViewModel OrderListViewModel { get; set; }
 
         private double left;
@@ -56,7 +57,7 @@ namespace MiniatureOrderManagementTool.ViewModels
             }
         }
 
-        public ReactiveCommand<IWindow, Unit> QuitCommand { get; }
+        public ReactiveCommand<Unit, Unit> QuitCommand { get; }
         public ReactiveCommand<Unit, Unit> ShowAboutCommand { get; }
 
         public MainWindowViewModel(Config config)
@@ -68,13 +69,13 @@ namespace MiniatureOrderManagementTool.ViewModels
             this.Width = this.config.MainWindowSize.Width;
             this.Height = this.config.MainWindowSize.Height;
 
-            this.QuitCommand = ReactiveCommand.Create<IWindow>(this.Quit);
+            this.QuitCommand = ReactiveCommand.Create(this.Quit);
             this.ShowAboutCommand = ReactiveCommand.Create(this.ShowAbout);
         }
 
-        private void Quit(IWindow closable)
+        private void Quit()
         {
-            closable.Close();
+            this.Window.Close();
         }
 
         private void ShowAbout()

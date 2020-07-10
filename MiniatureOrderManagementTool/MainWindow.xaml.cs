@@ -15,6 +15,7 @@ namespace MiniatureOrderManagementTool.Views
             this.WhenActivated(d =>
             {
                 this.ViewModel.OrderListViewModel = this.orderListView.ViewModel;
+                this.ViewModel.Window = this;
 
                 this.Bind(this.ViewModel, vm => vm.Left, v => v.Left).DisposeWith(d);
                 this.Bind(this.ViewModel, vm => vm.Top, v => v.Top).DisposeWith(d);
