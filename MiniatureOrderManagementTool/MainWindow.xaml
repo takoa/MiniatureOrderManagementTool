@@ -1,6 +1,6 @@
 ﻿<rxui:ReactiveWindow
         x:Class="MiniatureOrderManagementTool.Views.MainWindow"
-        x:TypeArguments="mvs:MainWindowViewModel"
+        x:TypeArguments="vms:MainWindowViewModel"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,7 +8,7 @@
         xmlns:rxui="http://reactiveui.net"
         xmlns:local="clr-namespace:MiniatureOrderManagementTool"
         xmlns:vs="clr-namespace:MiniatureOrderManagementTool.Views"
-        xmlns:mvs="clr-namespace:MiniatureOrderManagementTool.ViewModels"
+        xmlns:vms="clr-namespace:MiniatureOrderManagementTool.ViewModels"
         mc:Ignorable="d"
         Title="注文管理ツール" Height="450" Width="800">
     <Grid>

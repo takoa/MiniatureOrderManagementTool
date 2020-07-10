@@ -1,6 +1,6 @@
 ﻿<rxui:ReactiveWindow
         x:Class="MiniatureOrderManagementTool.Views.OrderEditorView"
-        x:TypeArguments="mvs:OrderEditorViewModel"
+        x:TypeArguments="vms:OrderEditorViewModel"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,7 +8,7 @@
         xmlns:rxui="http://reactiveui.net"
         xmlns:local="clr-namespace:MiniatureOrderManagementTool.Views"
         xmlns:views="clr-namespace:MiniatureOrderManagementTool.Views"
-        xmlns:mvs="clr-namespace:MiniatureOrderManagementTool.ViewModels"
+        xmlns:vms="clr-namespace:MiniatureOrderManagementTool.ViewModels"
         xmlns:ctrls="clr-namespace:MiniatureOrderManagementTool.Controls"
         mc:Ignorable="d"
         Title="編集" Height="600" Width="400">
