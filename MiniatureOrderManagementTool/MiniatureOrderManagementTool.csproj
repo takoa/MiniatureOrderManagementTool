@@ -6,7 +6,7 @@
     <UseWPF>true</UseWPF>
     <Platforms>AnyCPU;x64</Platforms>
     <Authors>Takao Kaburaki</Authors>
-    <Version>0.1.1</Version>
+    <Version>0.1.2</Version>
     <Product>MiniatureOrderManagementTool</Product>
     <PackageId>MiniatureOrderManagementTool</PackageId>
     <AssemblyName>ミニチュア注文管理ツール</AssemblyName>
