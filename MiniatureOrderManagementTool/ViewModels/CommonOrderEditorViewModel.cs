@@ -16,50 +16,35 @@ namespace MiniatureOrderManagementTool.ViewModels
         public string Name
         {
             get => this.name;
-            set
-            {
-                this.RaiseAndSetIfChanged(ref this.name, value);
-            }
+            set => this.RaiseAndSetIfChanged(ref this.name, value);
         }
 
         private string customer;
         public string Customer
         {
             get => this.customer;
-            set
-            {
-                this.RaiseAndSetIfChanged(ref this.customer, value);
-            }
+            set => this.RaiseAndSetIfChanged(ref this.customer, value);
         }
 
         private DateTime deadline;
         public DateTime Deadline
         {
             get => this.deadline;
-            set
-            {
-                this.RaiseAndSetIfChanged(ref this.deadline, value);
-            }
+            set => this.RaiseAndSetIfChanged(ref this.deadline, value);
         }
 
         private string description;
         public string Description
         {
             get => this.description;
-            set
-            {
-                this.RaiseAndSetIfChanged(ref this.description, value);
-            }
+            set => this.RaiseAndSetIfChanged(ref this.description, value);
         }
 
         private decimal price;
         public decimal Price
         {
             get => this.price;
-            set
-            {
-                this.RaiseAndSetIfChanged(ref this.price, value);
-            }
+            set => this.RaiseAndSetIfChanged(ref this.price, value);
         }
 
         private int totalPartCount;
