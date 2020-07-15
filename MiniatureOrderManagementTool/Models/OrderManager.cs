@@ -63,26 +63,22 @@ namespace MiniatureOrderManagementTool.Models
 
         public void AddOrder(Order order)
         {
-            using (var db = new LiteDatabase(OrderManager.databasePath))
-            {
-                var orders = db.GetCollection<Order>("orders");
+            using var db = new LiteDatabase(OrderManager.databasePath);
+            var orders = db.GetCollection<Order>("orders");
 
-                orders.Insert(order);
-                orders.EnsureIndex(x => x.ID, true);
-                this.OrdersCache.AddOrUpdate(order);
-            }
+            orders.Insert(order);
+            orders.EnsureIndex(x => x.ID, true);
+            this.OrdersCache.AddOrUpdate(order);
         }
 
         public void UpdateOrder(Order order)
         {
-            using (var db = new LiteDatabase(OrderManager.databasePath))
-            {
-                var orders = db.GetCollection<Order>("orders");
+            using var db = new LiteDatabase(OrderManager.databasePath);
+            var orders = db.GetCollection<Order>("orders");
 
-                if (orders.Update(order))
-                {
-                    this.OrdersCache.AddOrUpdate(order);
-                }
+            if (orders.Update(order))
+            {
+                this.OrdersCache.AddOrUpdate(order);
             }
         }
 
@@ -93,14 +89,12 @@ namespace MiniatureOrderManagementTool.Models
                 return;
             }
 
-            using (var db = new LiteDatabase(OrderManager.databasePath))
-            {
-                var orders = db.GetCollection<Order>("orders");
+            using var db = new LiteDatabase(OrderManager.databasePath);
+            var orders = db.GetCollection<Order>("orders");
 
-                if (orders.Delete(order.ID))
-                {
-                    this.OrdersCache.RemoveKey(order.ID);
-                }
+            if (orders.Delete(order.ID))
+            {
+                this.OrdersCache.RemoveKey(order.ID);
             }
         }
 
