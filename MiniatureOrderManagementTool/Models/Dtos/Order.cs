@@ -13,6 +13,7 @@ namespace MiniatureOrderManagementTool.Models.Dtos
         public DateTime ModifiedAt { get; set; }
         public string Customer { get; set; }
         public decimal Price { get; set; }
+        public decimal Discount { get; set; }
         public DateTime Deadline { get; set; }
         public Part[] Parts { get; set; }
         public string Description { get; set; }

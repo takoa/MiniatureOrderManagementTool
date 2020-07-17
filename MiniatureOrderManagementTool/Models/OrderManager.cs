@@ -44,6 +44,11 @@ namespace MiniatureOrderManagementTool.Models
             return isFinished ? "完了" : "未完了";
         }
 
+        public static string GetDiscountedPrice(Order order)
+        {
+            return order != null ? (order.Price - order.Discount).ToString() : string.Empty;
+        }
+
         public static string GetTimeSpentString(decimal timeSpent)
         {
             if (0 <= timeSpent)

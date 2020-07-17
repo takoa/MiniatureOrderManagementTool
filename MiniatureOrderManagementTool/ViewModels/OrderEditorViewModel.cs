@@ -83,6 +83,7 @@ namespace MiniatureOrderManagementTool.ViewModels
 
             this.Name = selectedOrder.Name;
             this.Price = selectedOrder.Price;
+            this.Discount = selectedOrder.Discount;
             this.Description = selectedOrder.Description;
             this.Customer = selectedOrder.Customer;
             this.Deadline = selectedOrder.Deadline;
@@ -107,6 +108,7 @@ namespace MiniatureOrderManagementTool.ViewModels
                 IsFinished = this.IsOrderFinished ?? false,
                 Name = this.Name,
                 Price = this.Price,
+                Discount = this.Discount,
                 Description = this.Description,
                 Customer = this.Customer,
                 CreatedAt = this.selectedOrder.CreatedAt,

@@ -47,6 +47,13 @@ namespace MiniatureOrderManagementTool.ViewModels
             set => this.RaiseAndSetIfChanged(ref this.price, value);
         }
 
+        private decimal discount;
+        public decimal Discount
+        {
+            get => this.discount;
+            set => this.RaiseAndSetIfChanged(ref this.discount, value);
+        }
+
         private int totalPartCount;
         public int TotalPartCount
         {

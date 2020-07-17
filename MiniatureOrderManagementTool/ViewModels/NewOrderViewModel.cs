@@ -82,6 +82,7 @@ namespace MiniatureOrderManagementTool.ViewModels
                 IsFinished = false,
                 Name = this.Name,
                 Price = this.Price,
+                Discount = this.Discount,
                 Description = this.Description,
                 Customer = this.Customer,
                 CreatedAt = now,

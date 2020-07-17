@@ -21,7 +21,9 @@ namespace MiniatureOrderManagementTool.Views
                 this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.TimeSpent, view => view.timeSpantTextBlock.Text, OrderManager.GetTimeSpentString).DisposeWith(d);
                 this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.Name, view => view.orderNameTextBlock.Text).DisposeWith(d);
                 this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.Customer, view => view.customerTextBlock.Text).DisposeWith(d);
-                this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.Price, view => view.priceTextBlock.Text).DisposeWith(d);
+                this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder, view => view.priceTextBlock.Text, OrderManager.GetDiscountedPrice).DisposeWith(d);
+                this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.Discount, view => view.discountTextBlock.Text).DisposeWith(d);
+                this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.Price, view => view.originalPriceTextBlock.Text).DisposeWith(d);
                 this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.Deadline, view => view.deadlineDateTextBlock.Text, OrderManager.GetDeadlineString).DisposeWith(d);
                 this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.CreatedAt, view => view.createdAtTextBlock.Text, OrderManager.GetDeadlineString).DisposeWith(d);
                 this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.ModifiedAt, view => view.modifiedAtTextBlock.Text, OrderManager.GetDeadlineString).DisposeWith(d);

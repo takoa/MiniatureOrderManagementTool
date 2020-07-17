@@ -128,10 +128,22 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="価格: "/>
                 <TextBlock x:Name="priceTextBlock" Grid.Column="1" />
                 <TextBlock Grid.Column="2" Text="円" />
+                <TextBlock Grid.Column="3" Margin="10,0,0,0" Text="割引: "/>
+                <TextBlock x:Name="discountTextBlock" Grid.Column="4" />
+                <TextBlock Grid.Column="5" Text="円" />
+                <TextBlock Grid.Column="6" Margin="10,0,0,0" Text="定価: "/>
+                <TextBlock x:Name="originalPriceTextBlock" Grid.Column="7" />
+                <TextBlock Grid.Column="8" Text="円" />
             </Grid>
             <Grid Grid.Row="5" Margin="0,5,0,0">
                 <Grid.RowDefinitions>

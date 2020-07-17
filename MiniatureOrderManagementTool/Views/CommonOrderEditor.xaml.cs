@@ -15,6 +15,7 @@ namespace MiniatureOrderManagementTool.Views
             {
                 this.Bind(this.ViewModel, vm => vm.Name, v => v.orderNameTextBox.Text).DisposeWith(d);
                 this.Bind(this.ViewModel, vm => vm.Price, v => v.priceNumericTextBox.Text).DisposeWith(d);
+                this.Bind(this.ViewModel, vm => vm.Discount, v => v.discountNumericTextBox.Text).DisposeWith(d);
                 this.Bind(this.ViewModel, vm => vm.Customer, v => v.customerTextBox.Text).DisposeWith(d);
                 this.Bind(this.ViewModel, vm => vm.Deadline, v => v.deadlineDatePicker.SelectedDate).DisposeWith(d);
                 this.Bind(this.ViewModel, vm => vm.Description, v => v.descriptionTextBox.Text).DisposeWith(d);
