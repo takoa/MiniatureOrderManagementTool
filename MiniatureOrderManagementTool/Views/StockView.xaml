@@ -9,14 +9,16 @@
         xmlns:local="clr-namespace:MiniatureOrderManagementTool.Views"
         xmlns:ctrls="clr-namespace:MiniatureOrderManagementTool.Controls"
         xmlns:vms="clr-namespace:MiniatureOrderManagementTool.ViewModels"
+        xmlns:helpers="clr-namespace:MiniatureOrderManagementTool.Helpers"
         mc:Ignorable="d" 
         d:DesignHeight="450" d:DesignWidth="800" x:Name="stockView">
     <UserControl.Resources>
+        <helpers:DateTimeConverter x:Key="DateTimeConverter" />
         <Style x:Key="rightAlignedTextColumn" TargetType="TextBlock">
             <Setter Property="TextAlignment" Value="Right"/>
         </Style>
     </UserControl.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -29,7 +31,7 @@
                 <DataGridTextColumn Header="単価" Binding="{Binding UnitPrice}" MinWidth="75" ElementStyle="{StaticResource rightAlignedTextColumn}" />
                 <DataGridTextColumn Header="原材料費" Binding="{Binding MaterialCost}" MinWidth="75" ElementStyle="{StaticResource rightAlignedTextColumn}" />
                 <DataGridTextColumn Header="製作時間" Binding="{Binding TimeSpent}" MinWidth="50" ElementStyle="{StaticResource rightAlignedTextColumn}" />
-                <DataGridTextColumn Header="最終更新日時" Binding="{Binding ModifiedAt}" IsReadOnly="True" />
+                <DataGridTextColumn Header="最終更新日時" Binding="{Binding ModifiedAt, Converter={StaticResource DateTimeConverter}}" IsReadOnly="True" />
             </DataGrid.Columns>
         </DataGrid>
         <Grid Grid.Row="1" Margin="0,5,0,0">
