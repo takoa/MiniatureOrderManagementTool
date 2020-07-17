@@ -12,6 +12,12 @@
         mc:Ignorable="d"
         d:DesignHeight="450"
         Background="White">
+    <UserControl.Resources>
+        <Style x:Key="rightAlignedTextColumn" TargetType="TextBlock">
+            <Setter Property="TextAlignment" Value="Right"/>
+        </Style>
+    </UserControl.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -73,7 +79,7 @@
             <DataGrid x:Name="partsDataGrid" Grid.Row="1" Margin="0,3,0,0" AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="パーツ名" Binding="{Binding Name}" />
-                    <DataGridTextColumn Header="数量" Binding="{Binding Count}" />
+                    <DataGridTextColumn Header="数量" Binding="{Binding Count}" ElementStyle="{StaticResource rightAlignedTextColumn}" />
                 </DataGrid.Columns>
             </DataGrid>
             <Grid Grid.Row="2" Margin="0,5,0,0">
