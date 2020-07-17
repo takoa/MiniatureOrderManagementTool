@@ -29,6 +29,17 @@
                 <MenuItem x:Name="showAboutMenuItem" Header="このソフトについて" />
             </MenuItem>
         </Menu>
-        <vs:OrderListView x:Name="orderListView" Grid.Row="1" Margin="5,2,5,5" />
+        <TabControl Grid.Row="1" Margin="5,2,5,5">
+            <TabItem Header="注文" MinWidth="50">
+                <Grid>
+                    <vs:OrderListView x:Name="orderListView" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="在庫" MinWidth="50">
+                <Grid>
+                    <vs:StockView x:Name="stockView" />
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </rxui:ReactiveWindow>
