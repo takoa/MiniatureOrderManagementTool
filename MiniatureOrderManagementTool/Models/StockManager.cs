@@ -20,22 +20,6 @@ namespace MiniatureOrderManagementTool.Models
             this.InitializeOrders();
         }
 
-        private void InitializeOrders()
-        {
-            using var db = new LiteDatabase(StockManager.databasePath);
-            var collection = db.GetCollection<StockItem>("parts");
-
-            this.stockItemCache = new SourceCache<StockItem, string>(s => s.Name);
-            this.stockItemCache.Connect()
-                               .ObserveOn(RxApp.MainThreadScheduler)
-                               .Sort(new StockItemNameComparer())
-                               .Bind(this.StockItems)
-                               .WhenAnyPropertyChanged("Name", "Count", "UnitPrice", "MaterialCost", "TimeSpent")
-                               .Subscribe(this.WhenChanged);
-
-            this.stockItemCache.AddOrUpdate(collection.FindAll());
-        }
-
         public void AddStockItem(StockItem stockItem)
         {
             if (stockItem == null)
@@ -65,6 +49,22 @@ namespace MiniatureOrderManagementTool.Models
             {
                 this.stockItemCache.RemoveKey(stockItem.Name);
             }
+        }
+
+        private void InitializeOrders()
+        {
+            using var db = new LiteDatabase(StockManager.databasePath);
+            var collection = db.GetCollection<StockItem>("parts");
+
+            this.stockItemCache = new SourceCache<StockItem, string>(s => s.Name);
+            this.stockItemCache.Connect()
+                               .ObserveOn(RxApp.MainThreadScheduler)
+                               .Sort(new StockItemNameComparer())
+                               .Bind(this.StockItems)
+                               .WhenAnyPropertyChanged("Name", "Count", "UnitPrice", "MaterialCost", "TimeSpent")
+                               .Subscribe(this.WhenChanged);
+
+            this.stockItemCache.AddOrUpdate(collection.FindAll());
         }
 
         private void WhenChanged(StockItem stockItem)
