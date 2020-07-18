@@ -13,7 +13,7 @@ namespace MiniatureOrderManagementTool.Views
 
             this.WhenActivated(d =>
             {
-                this.OneWayBind(this.ViewModel, vm => vm.Test, view => view.stockGrid.ItemsSource).DisposeWith(d);
+                this.OneWayBind(this.ViewModel, vm => vm.StockItems, view => view.stockGrid.ItemsSource).DisposeWith(d);
 
                 this.Bind(this.ViewModel, vm => vm.SelectedStockItem, v => v.stockGrid.SelectedItem).DisposeWith(d);
                 this.Bind(this.ViewModel, vm => vm.Name, v => v.nameTextBox.Text).DisposeWith(d);

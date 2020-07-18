@@ -12,7 +12,7 @@ namespace MiniatureOrderManagementTool.ViewModels
     {
         private StockManager stockManager = new StockManager();
 
-        public IObservableCollection<StockItem> Test => this.stockManager.StockItems;
+        public IObservableCollection<StockItem> StockItems => this.stockManager.StockItems;
 
         private StockItem selectedStockItem;
         public StockItem SelectedStockItem
