@@ -14,6 +14,7 @@
         d:DesignHeight="450" d:DesignWidth="800" x:Name="stockView">
     <UserControl.Resources>
         <helpers:DateTimeConverter x:Key="DateTimeConverter" />
+        <helpers:StockItemValueConverter x:Key="StockItemValueConverter" />
         <Style x:Key="rightAlignedTextColumn" TargetType="TextBlock">
             <Setter Property="TextAlignment" Value="Right"/>
         </Style>
@@ -23,18 +24,20 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <DataGrid x:Name="stockGrid" AutoGenerateColumns="False" CanUserAddRows="False">
+        <DataGrid x:Name="stockGrid" AutoGenerateColumns="False" CanUserAddRows="False" CanUserResizeRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="名前" Binding="{Binding Name}" MinWidth="150" />
-                <DataGridTextColumn Header="在庫数" Binding="{Binding Count}" MinWidth="50" ElementStyle="{StaticResource rightAlignedTextColumn}" />
-                <DataGridTextColumn Header="単価" Binding="{Binding UnitPrice}" MinWidth="75" ElementStyle="{StaticResource rightAlignedTextColumn}" />
-                <DataGridTextColumn Header="原材料費" Binding="{Binding MaterialCost}" MinWidth="75" ElementStyle="{StaticResource rightAlignedTextColumn}" />
-                <DataGridTextColumn Header="製作時間" Binding="{Binding TimeSpent}" MinWidth="50" ElementStyle="{StaticResource rightAlignedTextColumn}" />
+                <DataGridTextColumn Header="在庫数(個)" Binding="{Binding Count}" MinWidth="50" ElementStyle="{StaticResource rightAlignedTextColumn}" />
+                <DataGridTextColumn Header="単価(円)" Binding="{Binding UnitPrice}" MinWidth="75" ElementStyle="{StaticResource rightAlignedTextColumn}" />
+                <DataGridTextColumn Header="原材料費(円)" Binding="{Binding MaterialCost}" MinWidth="75" ElementStyle="{StaticResource rightAlignedTextColumn}" />
+                <DataGridTextColumn Header="製作時間(分)" Binding="{Binding TimeSpent}" MinWidth="50" ElementStyle="{StaticResource rightAlignedTextColumn}" />
+                <DataGridTextColumn Header="在庫価値(円)" Binding="{Binding ., Converter={StaticResource StockItemValueConverter}}" MinWidth="75" ElementStyle="{StaticResource rightAlignedTextColumn}" IsReadOnly="True" />
                 <DataGridTextColumn Header="最終更新日時" Binding="{Binding ModifiedAt, Converter={StaticResource DateTimeConverter}}" IsReadOnly="True" />
             </DataGrid.Columns>
         </DataGrid>
-        <Grid Grid.Row="1" Margin="0,5,0,0">
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,5,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -69,6 +72,16 @@
             <ctrls:NumericUpDown x:Name="timeSpentTextNumericUpDown" Grid.Column="13" VerticalAlignment="Center" TextAlignment="Right" Minimum="0" />
             <TextBlock Grid.Column="14" VerticalAlignment="Center" Text="分" />
             <Button x:Name="addStockItemButton" Grid.Column="15" Margin="10,0,0,0" VerticalAlignment="Center" Content="追加" />
+        </Grid>
+        <Grid Grid.Row="2" Margin="0,5,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="合計在庫価値: " />
+            <TextBlock x:Name="totalStockValueTextBlock" Grid.Column="1" />
+            <TextBlock Grid.Column="2" Text="円" />
         </Grid>
     </Grid>
 </rxui:ReactiveUserControl>

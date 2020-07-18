@@ -21,6 +21,7 @@ namespace MiniatureOrderManagementTool.Views
                 this.Bind(this.ViewModel, vm => vm.UnitPrice, v => v.unitPriceNumericTextBox.Text).DisposeWith(d);
                 this.Bind(this.ViewModel, vm => vm.MaterialCost, v => v.materialCostNumericTextBox.Text).DisposeWith(d);
                 this.Bind(this.ViewModel, vm => vm.TimeSpent, v => v.timeSpentTextNumericUpDown.Text).DisposeWith(d);
+                this.Bind(this.ViewModel, vm => vm.TotalStockValue, v => v.totalStockValueTextBlock.Text).DisposeWith(d);
 
                 this.BindCommand(this.ViewModel, vm => vm.AddStockItemCommand, v => v.addStockItemButton).DisposeWith(d);
                 this.BindCommand(this.ViewModel, vm => vm.RemoveStockItemCommand, v => v.removeStockItemButton).DisposeWith(d);

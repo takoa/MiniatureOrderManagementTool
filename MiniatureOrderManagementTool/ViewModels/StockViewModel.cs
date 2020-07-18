@@ -3,6 +3,7 @@ using MiniatureOrderManagementTool.Models;
 using MiniatureOrderManagementTool.Models.Dtos;
 using ReactiveUI;
 using System;
+using System.Linq;
 using System.Reactive;
 
 namespace MiniatureOrderManagementTool.ViewModels
@@ -55,6 +56,13 @@ namespace MiniatureOrderManagementTool.ViewModels
             set => this.RaiseAndSetIfChanged(ref this.timeSpent, value);
         }
 
+        private decimal totalStockValue;
+        public decimal TotalStockValue
+        {
+            get => this.totalStockValue;
+            set => this.RaiseAndSetIfChanged(ref this.totalStockValue, value);
+        }
+
         public ReactiveCommand<Unit, Unit> AddStockItemCommand { get; }
         public ReactiveCommand<Unit, Unit> RemoveStockItemCommand { get; }
 
@@ -62,6 +70,8 @@ namespace MiniatureOrderManagementTool.ViewModels
         {
             this.AddStockItemCommand = ReactiveCommand.Create(this.AddStockItem);
             this.RemoveStockItemCommand = ReactiveCommand.Create(this.RemoveStockItem);
+            this.stockManager.StockCountChanged += this.StockCountChanged;
+            this.stockManager.StockItems.CollectionChanged += (s, e) => this.StockCountChanged();
         }
 
         private void AddStockItem()
@@ -90,6 +100,11 @@ namespace MiniatureOrderManagementTool.ViewModels
         private void RemoveStockItem()
         {
             this.stockManager.RemoveStockItem(this.SelectedStockItem);
+        }
+
+        private void StockCountChanged()
+        {
+            this.TotalStockValue = this.stockManager.StockItems.Sum(si => si.UnitPrice * si.Count);
         }
     }
 }

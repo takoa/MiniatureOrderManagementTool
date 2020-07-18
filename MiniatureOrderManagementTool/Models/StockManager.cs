@@ -11,9 +11,11 @@ namespace MiniatureOrderManagementTool.Models
     public class StockManager
     {
         private const string databasePath = "./database.db";
-        private SourceCache<StockItem, string> stockItemCache;
+        private SourceCache<StockItem, string> stockItemCache = new SourceCache<StockItem, string>(s => s.Name);
 
         public IObservableCollection<StockItem> StockItems { get; } = new ObservableCollectionExtended<StockItem>();
+
+        public event Action StockCountChanged; 
 
         public StockManager()
         {
@@ -55,14 +57,21 @@ namespace MiniatureOrderManagementTool.Models
         {
             using var db = new LiteDatabase(StockManager.databasePath);
             var collection = db.GetCollection<StockItem>("parts");
+            var observable = this.stockItemCache.Connect()
+                                 .ObserveOn(RxApp.MainThreadScheduler)
+                                 .Sort(new StockItemNameComparer())
+                                 .Bind(this.StockItems);
 
-            this.stockItemCache = new SourceCache<StockItem, string>(s => s.Name);
             this.stockItemCache.Connect()
                                .ObserveOn(RxApp.MainThreadScheduler)
                                .Sort(new StockItemNameComparer())
                                .Bind(this.StockItems)
                                .WhenAnyPropertyChanged("Name", "Count", "UnitPrice", "MaterialCost", "TimeSpent")
                                .Subscribe(this.WhenChanged);
+            this.stockItemCache.Connect()
+                               .ObserveOn(RxApp.MainThreadScheduler)
+                               .WhenValueChanged(si => si.Count)
+                               .Subscribe(count => this.StockCountChanged?.Invoke());
 
             this.stockItemCache.AddOrUpdate(collection.FindAll());
         }
