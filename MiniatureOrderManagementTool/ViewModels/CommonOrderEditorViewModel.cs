@@ -134,6 +134,11 @@ namespace MiniatureOrderManagementTool.ViewModels
 
         private void RemovePart()
         {
+            if (this.SelectedPart == null)
+            {
+                return;
+            }
+
             this.PartManager.RemovePart(this.selectedPart);
         }
 
