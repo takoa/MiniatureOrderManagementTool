@@ -79,5 +79,23 @@ namespace MiniatureOrderManagementTool.Models
         {
             this.PartsCache.Remove(part);
         }
+
+        public bool TryGetPart(string name, out Part part)
+        {
+            var p = this.PartsCache.Lookup(name);
+
+            if (p.HasValue)
+            {
+                part = p.Value;
+
+                return true;
+            }
+            else
+            {
+                part = null;
+
+                return false;
+            }
+        }
     }
 }

@@ -20,14 +20,18 @@ namespace MiniatureOrderManagementTool.Views
                 this.Bind(this.ViewModel, vm => vm.Deadline, v => v.deadlineDatePicker.SelectedDate).DisposeWith(d);
                 this.Bind(this.ViewModel, vm => vm.Description, v => v.descriptionTextBox.Text).DisposeWith(d);
                 this.Bind(this.ViewModel, vm => vm.SelectedPart, v => v.partsDataGrid.SelectedItem).DisposeWith(d);
+                this.Bind(this.ViewModel, vm => vm.SelectedStockItem, v => v.stockDataGrid.SelectedItem).DisposeWith(d);
                 this.Bind(this.ViewModel, vm => vm.PartName, v => v.partNameTextBox.Text).DisposeWith(d);
                 this.Bind(this.ViewModel, vm => vm.PartAmount, v => v.partAmountNumericTextBox.Text, x => x.ToString(), PartManager.GetPartAmountInt).DisposeWith(d);
 
                 this.OneWayBind(this.ViewModel, vm => vm.ObservableParts, v => v.partsDataGrid.ItemsSource).DisposeWith(d);
                 this.OneWayBind(this.ViewModel, vm => vm.TotalPartCount, v => v.partCountTextBlock.Text).DisposeWith(d);
 
+                this.OneWayBind(this.ViewModel, vm => vm.StockItems, v => v.stockDataGrid.ItemsSource).DisposeWith(d);
+
                 this.BindCommand(this.ViewModel, vm => vm.AddPartCommand, view => view.addPartButton).DisposeWith(d);
                 this.BindCommand(this.ViewModel, vm => vm.RemovePartCommand, view => view.removePartButton).DisposeWith(d);
+                this.BindCommand(this.ViewModel, vm => vm.AddStockedPartCommand, view => view.addStockedPartButton).DisposeWith(d);
             });
         }
     }

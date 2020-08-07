@@ -1,4 +1,5 @@
-﻿using MiniatureOrderManagementTool.Models;
+﻿using DynamicData.Binding;
+using MiniatureOrderManagementTool.Models;
 using MiniatureOrderManagementTool.Models.Dtos;
 using ReactiveUI;
 using System;
@@ -11,6 +12,7 @@ namespace MiniatureOrderManagementTool.ViewModels
     public class CommonOrderEditorViewModel : ViewModelBase
     {
         public PartManager PartManager { get; } = new PartManager();
+        public StockManager StockManager { get; } = new StockManager();
 
         private string name;
         public string Name
@@ -82,10 +84,19 @@ namespace MiniatureOrderManagementTool.ViewModels
             set => this.RaiseAndSetIfChanged(ref this.selectedPart, value);
         }
 
+        private StockItem selectedStockItem;
+        public StockItem SelectedStockItem
+        {
+            get => this.selectedStockItem;
+            set => this.RaiseAndSetIfChanged(ref this.selectedStockItem, value);
+        }
+
         public ReadOnlyObservableCollection<Part> ObservableParts => this.PartManager.ObservableParts;
+        public IObservableCollection<StockItem> StockItems => this.StockManager.StockItems;
 
         public ReactiveCommand<Unit, Unit> AddPartCommand { get; }
         public ReactiveCommand<Unit, Unit> RemovePartCommand { get; }
+        public ReactiveCommand<Unit, Unit> AddStockedPartCommand { get; }
 
         public CommonOrderEditorViewModel()
         {
@@ -95,6 +106,12 @@ namespace MiniatureOrderManagementTool.ViewModels
 
             this.AddPartCommand = ReactiveCommand.Create(this.AddPart);
             this.RemovePartCommand = ReactiveCommand.Create(this.RemovePart);
+            this.AddStockedPartCommand = ReactiveCommand.Create(this.AddStockedPart);
+        }
+
+        private void PartCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            this.TotalPartCount = this.PartManager.TotalPartCount;
         }
 
         private void AddPart()
@@ -120,9 +137,23 @@ namespace MiniatureOrderManagementTool.ViewModels
             this.PartManager.RemovePart(this.selectedPart);
         }
 
-        private void PartCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void AddStockedPart()
         {
-            this.TotalPartCount = this.PartManager.TotalPartCount;
+            if (this.SelectedStockItem == null)
+            {
+                return;
+            }
+
+            if (this.PartManager.TryGetPart(this.SelectedStockItem.Name, out Part part))
+            {
+                part.Count++;
+            }
+            else
+            {
+                part = new Part(this.selectedStockItem.Name, 1);
+            }
+
+            this.PartManager.AddPart(part);
         }
     }
 }
