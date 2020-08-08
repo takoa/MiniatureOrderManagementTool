@@ -3,7 +3,6 @@ using MiniatureOrderManagementTool.Models;
 using MiniatureOrderManagementTool.Models.Dtos;
 using ReactiveUI;
 using System;
-using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Reactive;
 
