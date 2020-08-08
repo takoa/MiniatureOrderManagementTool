@@ -1,4 +1,5 @@
 ﻿using DynamicData;
+using DynamicData.Binding;
 using MiniatureOrderManagementTool.Models.Dtos;
 using ReactiveUI;
 using System;
@@ -13,8 +14,7 @@ namespace MiniatureOrderManagementTool.Models
     {
         public SourceCache<Part, string> PartsCache { get; private set; }
 
-        private ReadOnlyObservableCollection<Part> observableParts;
-        public ReadOnlyObservableCollection<Part> ObservableParts => this.observableParts;
+        public IObservableCollection<Part> ObservableParts { get; } = new ObservableCollectionExtended<Part>();
 
         public Part[] Parts
         {
@@ -28,14 +28,17 @@ namespace MiniatureOrderManagementTool.Models
             }
         }
 
+        public event Action WhenPartChanged;
+
         public PartManager()
         {
             this.PartsCache = new SourceCache<Part, string>(p => p.Name);
             this.PartsCache.Connect()
                            .ObserveOn(RxApp.MainThreadScheduler)
                            .Sort(new PartNameComparer())
-                           .Bind(out this.observableParts)
-                           .Subscribe();
+                           .Bind(this.ObservableParts)
+                           .WhenAnyPropertyChanged("Name", "UnitPrice", "Count")
+                           .Subscribe(_ => this.WhenPartChanged?.Invoke());
         }
 
         public static int GetPartAmountInt(string str)

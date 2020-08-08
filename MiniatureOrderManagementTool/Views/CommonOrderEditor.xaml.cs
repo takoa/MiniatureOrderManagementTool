@@ -25,7 +25,7 @@ namespace MiniatureOrderManagementTool.Views
                 this.Bind(this.ViewModel, vm => vm.PartUnitPrice, v => v.partUnitPriceNumericTextBox.Text).DisposeWith(d);
                 this.Bind(this.ViewModel, vm => vm.PartAmount, v => v.partAmountNumericTextBox.Text, x => x.ToString(), PartManager.GetPartAmountInt).DisposeWith(d);
 
-                this.OneWayBind(this.ViewModel, vm => vm.ObservableParts, v => v.partsDataGrid.ItemsSource).DisposeWith(d);
+                this.OneWayBind(this.ViewModel, vm => vm.Parts, v => v.partsDataGrid.ItemsSource).DisposeWith(d);
                 this.OneWayBind(this.ViewModel, vm => vm.TotalPartCount, v => v.partCountTextBlock.Text, PartManager.GetTotalPartCountString).DisposeWith(d);
                 this.OneWayBind(this.ViewModel, vm => vm.TotalPartValue, v => v.partValueTextBlock.Text, PartManager.GetTotalPartValueString).DisposeWith(d);
 

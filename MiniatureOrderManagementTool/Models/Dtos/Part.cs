@@ -1,10 +1,29 @@
-﻿namespace MiniatureOrderManagementTool.Models.Dtos
+﻿using ReactiveUI;
+
+namespace MiniatureOrderManagementTool.Models.Dtos
 {
-    public class Part
+    public class Part : ReactiveObject
     {
-        public string Name { get; set; }
-        public decimal UnitPrice { get; set; }
-        public int Count { get; set; }
+        private string name;
+        public string Name
+        {
+            get => this.name;
+            set => this.RaiseAndSetIfChanged(ref this.name, value);
+        }
+
+        private decimal unitPrice;
+        public decimal UnitPrice
+        {
+            get => this.unitPrice;
+            set => this.RaiseAndSetIfChanged(ref this.unitPrice, value);
+        }
+
+        private int count;
+        public int Count
+        {
+            get => this.count;
+            set => this.RaiseAndSetIfChanged(ref this.count, value);
+        }
 
         public Part()
         {

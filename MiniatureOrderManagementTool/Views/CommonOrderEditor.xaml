@@ -89,7 +89,7 @@
                     <TextBlock x:Name="partCountTextBlock" Grid.Column="2" VerticalAlignment="Center" />
                     <TextBlock x:Name="partValueTextBlock" Grid.Column="3" Margin="5,0,0,0" VerticalAlignment="Center" />
                 </Grid>
-                <DataGrid x:Name="partsDataGrid" Grid.Row="1" Margin="0,3,0,0" AutoGenerateColumns="False">
+                <DataGrid x:Name="partsDataGrid" Grid.Row="1" Margin="0,3,0,0" AutoGenerateColumns="False" CanUserAddRows="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="パーツ名" Binding="{Binding Name}" />
                         <DataGridTextColumn Header="単価" Binding="{Binding UnitPrice}" ElementStyle="{StaticResource rightAlignedTextColumn}" />

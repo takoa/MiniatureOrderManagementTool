@@ -105,7 +105,7 @@ namespace MiniatureOrderManagementTool.ViewModels
             set => this.RaiseAndSetIfChanged(ref this.selectedStockedPart, value);
         }
 
-        public ReadOnlyObservableCollection<Part> ObservableParts => this.PartManager.ObservableParts;
+        public IObservableCollection<Part> Parts => this.PartManager.ObservableParts;
         public IObservableCollection<StockedPart> StockedParts => this.StockManager.StockedParts;
 
         public ReactiveCommand<Unit, Unit> AddPartCommand { get; }
@@ -116,7 +116,8 @@ namespace MiniatureOrderManagementTool.ViewModels
         {
             this.Deadline = DateTime.Now;
 
-            ((INotifyCollectionChanged)this.PartManager.ObservableParts).CollectionChanged += this.PartCollectionChanged;
+            this.Parts.CollectionChanged += this.PartCollectionChanged;
+            this.PartManager.WhenPartChanged += this.PartCollectionChanged;
 
             this.AddPartCommand = ReactiveCommand.Create(this.AddPart);
             this.RemovePartCommand = ReactiveCommand.Create(this.RemovePart);
@@ -125,10 +126,15 @@ namespace MiniatureOrderManagementTool.ViewModels
 
         private void PartCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            this.PartCollectionChanged();
+        }
+
+        private void PartCollectionChanged()
+        {
             var count = 0;
             var value = 0m;
 
-            foreach (var item in this.ObservableParts)
+            foreach (var item in this.Parts)
             {
                 count += item.Count;
                 value += item.UnitPrice * item.Count;
