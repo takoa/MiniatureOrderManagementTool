@@ -71,7 +71,7 @@ namespace MiniatureOrderManagementTool.Models
             this.stockedPartsCache.Connect()
                                .ObserveOn(RxApp.MainThreadScheduler)
                                .WhenValueChanged(sp => sp.Count)
-                               .Subscribe(count => this.StockCountChanged?.Invoke());
+                               .Subscribe(_ => this.StockCountChanged?.Invoke());
 
             this.stockedPartsCache.AddOrUpdate(collection.FindAll());
         }

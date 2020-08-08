@@ -4,7 +4,6 @@ using MiniatureOrderManagementTool.Models.Dtos;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Linq;
 
@@ -12,7 +11,7 @@ namespace MiniatureOrderManagementTool.Models
 {
     public class PartManager
     {
-        public SourceCache<Part, string> PartsCache { get; private set; }
+        private SourceCache<Part, string> partsCache = new SourceCache<Part, string>(p => p.Name);
 
         public IObservableCollection<Part> ObservableParts { get; } = new ObservableCollectionExtended<Part>();
 
@@ -23,7 +22,7 @@ namespace MiniatureOrderManagementTool.Models
             {
                 if (value != null)
                 {
-                    this.PartsCache.AddOrUpdate(value);
+                    this.partsCache.AddOrUpdate(value);
                 }
             }
         }
@@ -32,8 +31,7 @@ namespace MiniatureOrderManagementTool.Models
 
         public PartManager()
         {
-            this.PartsCache = new SourceCache<Part, string>(p => p.Name);
-            this.PartsCache.Connect()
+            this.partsCache.Connect()
                            .ObserveOn(RxApp.MainThreadScheduler)
                            .Sort(new PartNameComparer())
                            .Bind(this.ObservableParts)
@@ -70,17 +68,17 @@ namespace MiniatureOrderManagementTool.Models
 
         public void AddPart(Part part)
         {
-            this.PartsCache.AddOrUpdate(part);
+            this.partsCache.AddOrUpdate(part);
         }
 
         public void RemovePart(Part part)
         {
-            this.PartsCache.Remove(part);
+            this.partsCache.Remove(part);
         }
 
         public bool TryGetPart(string name, out Part part)
         {
-            var p = this.PartsCache.Lookup(name);
+            var p = this.partsCache.Lookup(name);
 
             if (p.HasValue)
             {
