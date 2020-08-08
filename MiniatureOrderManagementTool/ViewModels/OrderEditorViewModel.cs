@@ -73,7 +73,6 @@ namespace MiniatureOrderManagementTool.ViewModels
         }
 
         public ReactiveCommand<Unit, Unit> UpdateOrderCommand { get; }
-        public ReactiveCommand<Unit, Unit> CancelCommand { get; }
 
         public OrderEditorViewModel(Config config, OrderManager orderManager, Order selectedOrder)
         {
@@ -96,7 +95,6 @@ namespace MiniatureOrderManagementTool.ViewModels
             this.OrderTimeSpent = this.selectedOrder.TimeSpent;
 
             this.UpdateOrderCommand = ReactiveCommand.Create(this.UpdateOrder);
-            this.CancelCommand = ReactiveCommand.Create(this.Cancel);
         }
 
         private void UpdateOrder()

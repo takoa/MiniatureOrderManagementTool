@@ -58,7 +58,6 @@ namespace MiniatureOrderManagementTool.ViewModels
         }
 
         public ReactiveCommand<Unit, Unit> AddOrderCommand { get; }
-        public ReactiveCommand<Unit, Unit> CancelCommand { get; }
 
         public NewOrderViewModel(Config config, OrderManager orderManager)
         {
@@ -71,7 +70,6 @@ namespace MiniatureOrderManagementTool.ViewModels
             this.Height = this.config.OrderEditorWindowSize.Height;
 
             this.AddOrderCommand = ReactiveCommand.Create(this.AddOrder);
-            this.CancelCommand = ReactiveCommand.Create(this.Cancel);
         }
 
         private void AddOrder()

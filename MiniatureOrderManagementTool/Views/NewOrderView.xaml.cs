@@ -1,6 +1,7 @@
 ﻿using MiniatureOrderManagementTool.ViewModels;
 using ReactiveUI;
 using System.Reactive.Disposables;
+using System.Windows;
 
 namespace MiniatureOrderManagementTool.Views
 {
@@ -23,6 +24,8 @@ namespace MiniatureOrderManagementTool.Views
 
                 this.BindCommand(this.ViewModel, vm => vm.AddOrderCommand, view => view.addOrderButton).DisposeWith(d);
                 this.BindCommand(this.ViewModel, vm => vm.CancelCommand, view => view.cancelButton).DisposeWith(d);
+
+                this.Events().Closing.InvokeCommand(this, x => x.ViewModel.ClosingEventCommand);
             });
         }
     }
