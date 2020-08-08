@@ -14,25 +14,25 @@ namespace MiniatureOrderManagementTool.Views
 
             this.WhenActivated(d =>
             {
-                this.OneWayBind(this.ViewModel, vm => vm.Orders, view => view.ordersListView.ItemsSource).DisposeWith(d);
-                this.Bind(this.ViewModel, vm => vm.SelectedOrder, view => view.ordersListView.SelectedItem).DisposeWith(d);
+                this.OneWayBind(this.ViewModel, vm => vm.Orders, v => v.ordersListView.ItemsSource).DisposeWith(d);
+                this.Bind(this.ViewModel, vm => vm.SelectedOrder, v => v.ordersListView.SelectedItem).DisposeWith(d);
 
-                this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.IsFinished, view => view.isFinishedTextBlock.Text, OrderManager.GetIsFinishedString).DisposeWith(d);
-                this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.TimeSpent, view => view.timeSpantTextBlock.Text, OrderManager.GetTimeSpentString).DisposeWith(d);
-                this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.Name, view => view.orderNameTextBlock.Text).DisposeWith(d);
-                this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.Customer, view => view.customerTextBlock.Text).DisposeWith(d);
-                this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder, view => view.priceTextBlock.Text, OrderManager.GetDiscountedPrice).DisposeWith(d);
-                this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.Discount, view => view.discountTextBlock.Text).DisposeWith(d);
-                this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.Price, view => view.originalPriceTextBlock.Text).DisposeWith(d);
-                this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.Deadline, view => view.deadlineDateTextBlock.Text, OrderManager.GetDeadlineString).DisposeWith(d);
-                this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.CreatedAt, view => view.createdAtTextBlock.Text, OrderManager.GetDeadlineString).DisposeWith(d);
-                this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.ModifiedAt, view => view.modifiedAtTextBlock.Text, OrderManager.GetDeadlineString).DisposeWith(d);
-                this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.Description, view => view.descriptionTextBlock.Text).DisposeWith(d);
-                this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.Parts, view => view.partsDataGrid.ItemsSource).DisposeWith(d);
+                this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.IsFinished, v => v.isFinishedTextBlock.Text, OrderManager.GetIsFinishedString).DisposeWith(d);
+                this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.TimeSpent, v => v.timeSpantTextBlock.Text, OrderManager.GetTimeSpentString).DisposeWith(d);
+                this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.Name, v => v.orderNameTextBlock.Text).DisposeWith(d);
+                this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.Customer, v => v.customerTextBlock.Text).DisposeWith(d);
+                this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder, v => v.priceTextBlock.Text, OrderManager.GetDiscountedPrice).DisposeWith(d);
+                this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.Discount, v => v.discountTextBlock.Text).DisposeWith(d);
+                this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.Price, v => v.originalPriceTextBlock.Text).DisposeWith(d);
+                this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.Deadline, v => v.deadlineDateTextBlock.Text, OrderManager.GetDeadlineString).DisposeWith(d);
+                this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.CreatedAt, v => v.createdAtTextBlock.Text, OrderManager.GetDeadlineString).DisposeWith(d);
+                this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.ModifiedAt, v => v.modifiedAtTextBlock.Text, OrderManager.GetDeadlineString).DisposeWith(d);
+                this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.Description, v => v.descriptionTextBlock.Text).DisposeWith(d);
+                this.OneWayBind(this.ViewModel, vm => vm.SelectedOrder.Parts, v => v.partsDataGrid.ItemsSource).DisposeWith(d);
 
-                this.BindCommand(this.ViewModel, vm => vm.AddOrderCommand, view => view.addOrderButton).DisposeWith(d);
-                this.BindCommand(this.ViewModel, vm => vm.EditOrderCommand, view => view.editOrderButton).DisposeWith(d);
-                this.BindCommand(this.ViewModel, vm => vm.DeleteOrderCommand, view => view.deleteOrderButton).DisposeWith(d);
+                this.BindCommand(this.ViewModel, vm => vm.AddOrderCommand, v => v.addOrderButton).DisposeWith(d);
+                this.BindCommand(this.ViewModel, vm => vm.EditOrderCommand, v => v.editOrderButton).DisposeWith(d);
+                this.BindCommand(this.ViewModel, vm => vm.DeleteOrderCommand, v => v.deleteOrderButton).DisposeWith(d);
             });
         }
     }

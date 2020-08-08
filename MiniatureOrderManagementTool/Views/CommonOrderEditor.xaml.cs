@@ -29,9 +29,9 @@ namespace MiniatureOrderManagementTool.Views
 
                 this.OneWayBind(this.ViewModel, vm => vm.StockedParts, v => v.stockDataGrid.ItemsSource).DisposeWith(d);
 
-                this.BindCommand(this.ViewModel, vm => vm.AddPartCommand, view => view.addPartButton).DisposeWith(d);
-                this.BindCommand(this.ViewModel, vm => vm.RemovePartCommand, view => view.removePartButton).DisposeWith(d);
-                this.BindCommand(this.ViewModel, vm => vm.AddStockedPartCommand, view => view.addStockedPartButton).DisposeWith(d);
+                this.BindCommand(this.ViewModel, vm => vm.AddPartCommand, v => v.addPartButton).DisposeWith(d);
+                this.BindCommand(this.ViewModel, vm => vm.RemovePartCommand, v => v.removePartButton).DisposeWith(d);
+                this.BindCommand(this.ViewModel, vm => vm.AddStockedPartCommand, v => v.addStockedPartButton).DisposeWith(d);
             });
         }
     }

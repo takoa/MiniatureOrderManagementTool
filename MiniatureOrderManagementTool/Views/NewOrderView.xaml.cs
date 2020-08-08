@@ -22,8 +22,8 @@ namespace MiniatureOrderManagementTool.Views
                 this.Bind(this.ViewModel, vm => vm.Width, v => v.Width).DisposeWith(d);
                 this.Bind(this.ViewModel, vm => vm.Height, v => v.Height).DisposeWith(d);
 
-                this.BindCommand(this.ViewModel, vm => vm.AddOrderCommand, view => view.addOrderButton).DisposeWith(d);
-                this.BindCommand(this.ViewModel, vm => vm.CancelCommand, view => view.cancelButton).DisposeWith(d);
+                this.BindCommand(this.ViewModel, vm => vm.AddOrderCommand, v => v.addOrderButton).DisposeWith(d);
+                this.BindCommand(this.ViewModel, vm => vm.CancelCommand, v => v.cancelButton).DisposeWith(d);
 
                 this.Events().Closing.InvokeCommand(this, x => x.ViewModel.ClosingEventCommand);
             });
