@@ -28,21 +28,6 @@ namespace MiniatureOrderManagementTool.Models
             }
         }
 
-        public int TotalPartCount
-        {
-            get
-            {
-                var count = 0;
-
-                foreach (var item in this.ObservableParts)
-                {
-                    count += item.Count;
-                }
-
-                return count;
-            }
-        }
-
         public PartManager()
         {
             this.PartsCache = new SourceCache<Part, string>(p => p.Name);
@@ -68,6 +53,16 @@ namespace MiniatureOrderManagementTool.Models
             {
                 return int.MaxValue;
             }
+        }
+
+        public static string GetTotalPartCountString(int totalPartCount)
+        {
+            return totalPartCount + "個";
+        }
+
+        public static string GetTotalPartValueString(decimal totalPartValue)
+        {
+            return totalPartValue + "円";
         }
 
         public void AddPart(Part part)

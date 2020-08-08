@@ -164,6 +164,7 @@
                 <DataGrid x:Name="partsDataGrid" Grid.Row="1" Margin="0,3,0,0" AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="パーツ名" Binding="{Binding Name}" />
+                        <DataGridTextColumn Header="単価" Binding="{Binding UnitPrice}" />
                         <DataGridTextColumn Header="数量" Binding="{Binding Count}" />
                     </DataGrid.Columns>
                 </DataGrid>

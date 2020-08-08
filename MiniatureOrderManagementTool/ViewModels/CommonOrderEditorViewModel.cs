@@ -63,11 +63,25 @@ namespace MiniatureOrderManagementTool.ViewModels
             set => this.RaiseAndSetIfChanged(ref this.totalPartCount, value);
         }
 
+        private decimal totalPartValue;
+        public decimal TotalPartValue
+        {
+            get => this.totalPartValue;
+            set => this.RaiseAndSetIfChanged(ref this.totalPartValue, value);
+        }
+
         private string partName;
         public string PartName
         {
             get => this.partName;
             set => this.RaiseAndSetIfChanged(ref this.partName, value);
+        }
+
+        private decimal partUnitPrice;
+        public decimal PartUnitPrice
+        {
+            get => this.partUnitPrice;
+            set => this.RaiseAndSetIfChanged(ref this.partUnitPrice, value);
         }
 
         private int partAmount;
@@ -111,7 +125,17 @@ namespace MiniatureOrderManagementTool.ViewModels
 
         private void PartCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            this.TotalPartCount = this.PartManager.TotalPartCount;
+            var count = 0;
+            var value = 0m;
+
+            foreach (var item in this.ObservableParts)
+            {
+                count += item.Count;
+                value += item.UnitPrice * item.Count;
+            }
+
+            this.TotalPartCount = count;
+            this.TotalPartValue = value;
         }
 
         private void AddPart()
@@ -121,14 +145,11 @@ namespace MiniatureOrderManagementTool.ViewModels
                 return;
             }
 
-            var part = new Part
-            {
-                Name = PartName,
-                Count = PartAmount
-            };
+            var part = new Part(this.PartName, this.PartUnitPrice, this.PartAmount);
 
             this.PartManager.AddPart(part);
             this.PartName = "";
+            this.PartUnitPrice = 0m;
             this.PartAmount = 0;
         }
 
@@ -155,7 +176,7 @@ namespace MiniatureOrderManagementTool.ViewModels
             }
             else
             {
-                part = new Part(this.selectedStockedPart.Name, 1);
+                part = new Part(this.SelectedStockedPart.Name, this.SelectedStockedPart.UnitPrice, 1);
             }
 
             this.PartManager.AddPart(part);
