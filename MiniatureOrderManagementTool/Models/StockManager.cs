@@ -15,7 +15,7 @@ namespace MiniatureOrderManagementTool.Models
 
         public IObservableCollection<StockItem> StockItems { get; } = new ObservableCollectionExtended<StockItem>();
 
-        public event Action StockCountChanged; 
+        public event Action StockCountChanged;
 
         public StockManager()
         {
