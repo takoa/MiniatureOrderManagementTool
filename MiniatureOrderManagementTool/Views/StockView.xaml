@@ -14,7 +14,7 @@
         d:DesignHeight="450" d:DesignWidth="800" x:Name="stockView">
     <UserControl.Resources>
         <helpers:DateTimeConverter x:Key="DateTimeConverter" />
-        <helpers:StockItemValueConverter x:Key="StockItemValueConverter" />
+        <helpers:StockedPartValueConverter x:Key="StockedPartValueConverter" />
         <Style x:Key="rightAlignedTextColumn" TargetType="TextBlock">
             <Setter Property="TextAlignment" Value="Right"/>
         </Style>
@@ -33,7 +33,7 @@
                 <DataGridTextColumn Header="単価(円)" Binding="{Binding UnitPrice}" MinWidth="75" ElementStyle="{StaticResource rightAlignedTextColumn}" />
                 <DataGridTextColumn Header="原材料費(円)" Binding="{Binding MaterialCost}" MinWidth="75" ElementStyle="{StaticResource rightAlignedTextColumn}" />
                 <DataGridTextColumn Header="製作時間(分)" Binding="{Binding TimeSpent}" MinWidth="50" ElementStyle="{StaticResource rightAlignedTextColumn}" />
-                <DataGridTextColumn Header="在庫価値(円)" Binding="{Binding ., Converter={StaticResource StockItemValueConverter}}" MinWidth="75" ElementStyle="{StaticResource rightAlignedTextColumn}" IsReadOnly="True" />
+                <DataGridTextColumn Header="在庫価値(円)" Binding="{Binding ., Converter={StaticResource StockedPartValueConverter}}" MinWidth="75" ElementStyle="{StaticResource rightAlignedTextColumn}" IsReadOnly="True" />
                 <DataGridTextColumn Header="最終更新日時" Binding="{Binding ModifiedAt, Converter={StaticResource DateTimeConverter}}" IsReadOnly="True" />
             </DataGrid.Columns>
         </DataGrid>
@@ -56,7 +56,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Button x:Name="removeStockItemButton" VerticalAlignment="Center" Content="削除" />
+            <Button x:Name="removeStockedPartButton" VerticalAlignment="Center" Content="削除" />
             <TextBlock Grid.Column="1" Margin="20,0,0,0" VerticalAlignment="Center" Text="名前: " />
             <TextBox x:Name="nameTextBox" Grid.Column="2" VerticalAlignment="Center" />
             <TextBlock Grid.Column="3" Margin="5,0,0,0" VerticalAlignment="Center" Text="在庫数: " />
@@ -71,7 +71,7 @@
             <TextBlock Grid.Column="12" Margin="5,0,0,0" VerticalAlignment="Center" Text="製作時間: " />
             <ctrls:NumericUpDown x:Name="timeSpentTextNumericUpDown" Grid.Column="13" VerticalAlignment="Center" TextAlignment="Right" Minimum="0" />
             <TextBlock Grid.Column="14" VerticalAlignment="Center" Text="分" />
-            <Button x:Name="addStockItemButton" Grid.Column="15" Margin="10,0,0,0" VerticalAlignment="Center" Content="追加" />
+            <Button x:Name="addStockedPartButton" Grid.Column="15" Margin="10,0,0,0" VerticalAlignment="Center" Content="追加" />
         </Grid>
         <Grid Grid.Row="2" Margin="0,5,0,0">
             <Grid.ColumnDefinitions>

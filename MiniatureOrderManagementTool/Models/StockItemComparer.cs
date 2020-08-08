@@ -4,9 +4,9 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace MiniatureOrderManagementTool.Models
 {
-    public class StockItemNameComparer : IComparer<StockItem>
+    public class StockedPartNameComparer : IComparer<StockedPart>
     {
-        public int Compare([DisallowNull] StockItem x, [DisallowNull] StockItem y)
+        public int Compare([DisallowNull] StockedPart x, [DisallowNull] StockedPart y)
         {
             return x.Name.CompareTo(y.Name);
         }

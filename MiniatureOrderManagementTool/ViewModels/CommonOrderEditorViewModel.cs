@@ -84,15 +84,15 @@ namespace MiniatureOrderManagementTool.ViewModels
             set => this.RaiseAndSetIfChanged(ref this.selectedPart, value);
         }
 
-        private StockItem selectedStockItem;
-        public StockItem SelectedStockItem
+        private StockedPart selectedStockedPart;
+        public StockedPart SelectedStockedPart
         {
-            get => this.selectedStockItem;
-            set => this.RaiseAndSetIfChanged(ref this.selectedStockItem, value);
+            get => this.selectedStockedPart;
+            set => this.RaiseAndSetIfChanged(ref this.selectedStockedPart, value);
         }
 
         public ReadOnlyObservableCollection<Part> ObservableParts => this.PartManager.ObservableParts;
-        public IObservableCollection<StockItem> StockItems => this.StockManager.StockItems;
+        public IObservableCollection<StockedPart> StockedParts => this.StockManager.StockedParts;
 
         public ReactiveCommand<Unit, Unit> AddPartCommand { get; }
         public ReactiveCommand<Unit, Unit> RemovePartCommand { get; }
@@ -144,18 +144,18 @@ namespace MiniatureOrderManagementTool.ViewModels
 
         private void AddStockedPart()
         {
-            if (this.SelectedStockItem == null)
+            if (this.SelectedStockedPart == null)
             {
                 return;
             }
 
-            if (this.PartManager.TryGetPart(this.SelectedStockItem.Name, out Part part))
+            if (this.PartManager.TryGetPart(this.SelectedStockedPart.Name, out Part part))
             {
                 part.Count++;
             }
             else
             {
-                part = new Part(this.selectedStockItem.Name, 1);
+                part = new Part(this.selectedStockedPart.Name, 1);
             }
 
             this.PartManager.AddPart(part);

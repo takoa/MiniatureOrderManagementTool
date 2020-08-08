@@ -5,13 +5,13 @@ using System.Windows.Data;
 
 namespace MiniatureOrderManagementTool.Helpers
 {
-    public class StockItemValueConverter : IValueConverter
+    public class StockedPartValueConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is StockItem si)
+            if (value is StockedPart sp)
             {
-                return si.UnitPrice * si.Count;
+                return sp.UnitPrice * sp.Count;
             }
             else
             {

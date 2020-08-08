@@ -12,13 +12,13 @@ namespace MiniatureOrderManagementTool.ViewModels
     {
         private StockManager stockManager = new StockManager();
 
-        public IObservableCollection<StockItem> StockItems => this.stockManager.StockItems;
+        public IObservableCollection<StockedPart> StockedParts => this.stockManager.StockedParts;
 
-        private StockItem selectedStockItem;
-        public StockItem SelectedStockItem
+        private StockedPart selectedStockedPart;
+        public StockedPart SelectedStockedPart
         {
-            get => this.selectedStockItem;
-            set => this.RaiseAndSetIfChanged(ref this.selectedStockItem, value);
+            get => this.selectedStockedPart;
+            set => this.RaiseAndSetIfChanged(ref this.selectedStockedPart, value);
         }
 
         private string name;
@@ -63,21 +63,21 @@ namespace MiniatureOrderManagementTool.ViewModels
             set => this.RaiseAndSetIfChanged(ref this.totalStockValue, value);
         }
 
-        public ReactiveCommand<Unit, Unit> AddStockItemCommand { get; }
-        public ReactiveCommand<Unit, Unit> RemoveStockItemCommand { get; }
+        public ReactiveCommand<Unit, Unit> AddStockedPartCommand { get; }
+        public ReactiveCommand<Unit, Unit> RemoveStockedPartCommand { get; }
 
         public StockViewModel()
         {
-            this.AddStockItemCommand = ReactiveCommand.Create(this.AddStockItem);
-            this.RemoveStockItemCommand = ReactiveCommand.Create(this.RemoveStockItem);
+            this.AddStockedPartCommand = ReactiveCommand.Create(this.AddStockedPart);
+            this.RemoveStockedPartCommand = ReactiveCommand.Create(this.RemoveStockedPart);
             this.stockManager.StockCountChanged += this.StockCountChanged;
-            this.stockManager.StockItems.CollectionChanged += (s, e) => this.StockCountChanged();
+            this.stockManager.StockedParts.CollectionChanged += (s, e) => this.StockCountChanged();
         }
 
-        private void AddStockItem()
+        private void AddStockedPart()
         {
             DateTime currentTime = DateTime.Now;
-            StockItem si = new StockItem()
+            StockedPart sp = new StockedPart()
             {
                 Name = this.Name,
                 Count = this.Count,
@@ -88,7 +88,7 @@ namespace MiniatureOrderManagementTool.ViewModels
                 ModifiedAt = currentTime,
             };
 
-            this.stockManager.AddStockItem(si);
+            this.stockManager.AddStockedPart(sp);
 
             this.Name = "";
             this.Count = 0;
@@ -97,14 +97,14 @@ namespace MiniatureOrderManagementTool.ViewModels
             this.TimeSpent = 0m;
         }
 
-        private void RemoveStockItem()
+        private void RemoveStockedPart()
         {
-            this.stockManager.RemoveStockItem(this.SelectedStockItem);
+            this.stockManager.RemoveStockedPart(this.SelectedStockedPart);
         }
 
         private void StockCountChanged()
         {
-            this.TotalStockValue = this.stockManager.StockItems.Sum(si => si.UnitPrice * si.Count);
+            this.TotalStockValue = this.stockManager.StockedParts.Sum(sp => sp.UnitPrice * sp.Count);
         }
     }
 }

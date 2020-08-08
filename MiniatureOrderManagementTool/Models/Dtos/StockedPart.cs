@@ -3,7 +3,7 @@ using System;
 
 namespace MiniatureOrderManagementTool.Models.Dtos
 {
-    public class StockItem : ReactiveObject
+    public class StockedPart : ReactiveObject
     {
         private int id;
         public int ID

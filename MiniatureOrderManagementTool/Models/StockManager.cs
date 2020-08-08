@@ -11,9 +11,9 @@ namespace MiniatureOrderManagementTool.Models
     public class StockManager
     {
         private const string databasePath = "./database.db";
-        private SourceCache<StockItem, string> stockItemCache = new SourceCache<StockItem, string>(s => s.Name);
+        private SourceCache<StockedPart, string> stockedPartsCache = new SourceCache<StockedPart, string>(s => s.Name);
 
-        public IObservableCollection<StockItem> StockItems { get; } = new ObservableCollectionExtended<StockItem>();
+        public IObservableCollection<StockedPart> StockedParts { get; } = new ObservableCollectionExtended<StockedPart>();
 
         public event Action StockCountChanged;
 
@@ -22,63 +22,63 @@ namespace MiniatureOrderManagementTool.Models
             this.InitializeOrders();
         }
 
-        public void AddStockItem(StockItem stockItem)
+        public void AddStockedPart(StockedPart stockedPart)
         {
-            if (stockItem == null)
+            if (stockedPart == null)
             {
                 return;
             }
 
             using var db = new LiteDatabase(StockManager.databasePath);
-            var collection = db.GetCollection<StockItem>("parts");
+            var collection = db.GetCollection<StockedPart>("parts");
 
-            collection.Insert(stockItem);
-            collection.EnsureIndex(si => si.ID, true);
-            this.stockItemCache.AddOrUpdate(stockItem);
+            collection.Insert(stockedPart);
+            collection.EnsureIndex(sp => sp.ID, true);
+            this.stockedPartsCache.AddOrUpdate(stockedPart);
         }
 
-        public void RemoveStockItem(StockItem stockItem)
+        public void RemoveStockedPart(StockedPart stockedParts)
         {
-            if (stockItem == null)
+            if (stockedParts == null)
             {
                 return;
             }
 
             using var db = new LiteDatabase(StockManager.databasePath);
-            var collection = db.GetCollection<StockItem>("parts");
+            var collection = db.GetCollection<StockedPart>("parts");
 
-            if (collection.Delete(stockItem.ID))
+            if (collection.Delete(stockedParts.ID))
             {
-                this.stockItemCache.RemoveKey(stockItem.Name);
+                this.stockedPartsCache.RemoveKey(stockedParts.Name);
             }
         }
 
         private void InitializeOrders()
         {
             using var db = new LiteDatabase(StockManager.databasePath);
-            var collection = db.GetCollection<StockItem>("parts");
-            var observable = this.stockItemCache.Connect()
+            var collection = db.GetCollection<StockedPart>("parts");
+            var observable = this.stockedPartsCache.Connect()
                                  .ObserveOn(RxApp.MainThreadScheduler)
-                                 .Sort(new StockItemNameComparer())
-                                 .Bind(this.StockItems);
+                                 .Sort(new StockedPartNameComparer())
+                                 .Bind(this.StockedParts);
 
-            this.stockItemCache.Connect()
+            this.stockedPartsCache.Connect()
                                .ObserveOn(RxApp.MainThreadScheduler)
-                               .Sort(new StockItemNameComparer())
-                               .Bind(this.StockItems)
+                               .Sort(new StockedPartNameComparer())
+                               .Bind(this.StockedParts)
                                .WhenAnyPropertyChanged("Name", "Count", "UnitPrice", "MaterialCost", "TimeSpent")
                                .Subscribe(this.WhenChanged);
-            this.stockItemCache.Connect()
+            this.stockedPartsCache.Connect()
                                .ObserveOn(RxApp.MainThreadScheduler)
-                               .WhenValueChanged(si => si.Count)
+                               .WhenValueChanged(sp => sp.Count)
                                .Subscribe(count => this.StockCountChanged?.Invoke());
 
-            this.stockItemCache.AddOrUpdate(collection.FindAll());
+            this.stockedPartsCache.AddOrUpdate(collection.FindAll());
         }
 
-        private void WhenChanged(StockItem stockItem)
+        private void WhenChanged(StockedPart stockedPart)
         {
-            stockItem.ModifiedAt = DateTime.Now;
+            stockedPart.ModifiedAt = DateTime.Now;
         }
     }
 }
