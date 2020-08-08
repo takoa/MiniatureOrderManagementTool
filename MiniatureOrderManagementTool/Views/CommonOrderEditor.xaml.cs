@@ -34,6 +34,8 @@ namespace MiniatureOrderManagementTool.Views
                 this.BindCommand(this.ViewModel, vm => vm.AddPartCommand, v => v.addPartButton).DisposeWith(d);
                 this.BindCommand(this.ViewModel, vm => vm.RemovePartCommand, v => v.removePartButton).DisposeWith(d);
                 this.BindCommand(this.ViewModel, vm => vm.AddStockedPartCommand, v => v.addStockedPartButton).DisposeWith(d);
+                this.BindCommand(this.ViewModel, vm => vm.IncrementPartCountCommand, v => v.incrementPartCountButton).DisposeWith(d);
+                this.BindCommand(this.ViewModel, vm => vm.DecrementPartCountCommand, v => v.decrementPartCountButton).DisposeWith(d);
             });
         }
     }

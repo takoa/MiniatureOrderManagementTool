@@ -110,6 +110,8 @@ namespace MiniatureOrderManagementTool.ViewModels
         public ReactiveCommand<Unit, Unit> AddPartCommand { get; }
         public ReactiveCommand<Unit, Unit> RemovePartCommand { get; }
         public ReactiveCommand<Unit, Unit> AddStockedPartCommand { get; }
+        public ReactiveCommand<Unit, Unit> IncrementPartCountCommand { get; }
+        public ReactiveCommand<Unit, Unit> DecrementPartCountCommand { get; }
 
         public CommonOrderEditorViewModel()
         {
@@ -121,6 +123,8 @@ namespace MiniatureOrderManagementTool.ViewModels
             this.AddPartCommand = ReactiveCommand.Create(this.AddPart);
             this.RemovePartCommand = ReactiveCommand.Create(this.RemovePart);
             this.AddStockedPartCommand = ReactiveCommand.Create(this.AddStockedPart);
+            this.IncrementPartCountCommand = ReactiveCommand.Create(this.IncrementPartCount);
+            this.DecrementPartCountCommand = ReactiveCommand.Create(this.DecrementPartCount);
         }
 
         private void PartCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -185,6 +189,36 @@ namespace MiniatureOrderManagementTool.ViewModels
             }
 
             this.PartManager.AddPart(part);
+        }
+
+        private void IncrementPartCount()
+        {
+            if (this.SelectedPart == null)
+            {
+                return;
+            }
+
+            if (this.PartManager.TryGetPart(this.SelectedPart.Name, out Part part))
+            {
+                part.Count++;
+            }
+        }
+
+        private void DecrementPartCount()
+        {
+            if (this.SelectedPart == null)
+            {
+                return;
+            }
+
+            if (this.PartManager.TryGetPart(this.SelectedPart.Name, out Part part) && 1 < part.Count)
+            {
+                part.Count--;
+            }
+            else
+            {
+                this.PartManager.RemovePart(part);
+            }
         }
     }
 }

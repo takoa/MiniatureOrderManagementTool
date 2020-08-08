@@ -17,7 +17,7 @@
             <Setter Property="TextAlignment" Value="Right"/>
         </Style>
     </UserControl.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -72,45 +72,48 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock VerticalAlignment="Center" Text="パーツ" />
-                    <TextBlock x:Name="partCountTextBlock" Grid.Column="2" VerticalAlignment="Center" />
-                    <TextBlock x:Name="partValueTextBlock" Grid.Column="3" Margin="5,0,0,0" VerticalAlignment="Center" />
-                </Grid>
-                <DataGrid x:Name="partsDataGrid" Grid.Row="1" Margin="0,3,0,0" AutoGenerateColumns="False" CanUserAddRows="False">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="パーツ名" Binding="{Binding Name}" />
-                        <DataGridTextColumn Header="単価" Binding="{Binding UnitPrice}" ElementStyle="{StaticResource rightAlignedTextColumn}" />
-                        <DataGridTextColumn Header="数量" Binding="{Binding Count}" ElementStyle="{StaticResource rightAlignedTextColumn}" />
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Grid>
-            <Button x:Name="addStockedPartButton" Grid.Column="1" Margin="5,0" Width="25" Height="25" VerticalContentAlignment="Center" Content="←" />
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock VerticalAlignment="Center" Text="在庫" />
+            <DataGrid x:Name="stockDataGrid" Grid.Row="1" Margin="0,3,0,0" AutoGenerateColumns="False" CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="パーツ名" Binding="{Binding Name}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="単価" Binding="{Binding UnitPrice}" ElementStyle="{StaticResource rightAlignedTextColumn}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="在庫数" Binding="{Binding Count}" ElementStyle="{StaticResource rightAlignedTextColumn}" IsReadOnly="True" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button x:Name="addStockedPartButton" Grid.Column="1" Grid.Row="1" Margin="5,0" Width="25" Height="25" VerticalContentAlignment="Center" Content="→" />
             <Grid Grid.Column="2">
+                 <Grid.ColumnDefinitions>
+                     <ColumnDefinition Width="Auto" />
+                     <ColumnDefinition Width="*" />
+                     <ColumnDefinition Width="Auto" />
+                     <ColumnDefinition Width="Auto" />
+                 </Grid.ColumnDefinitions>
+                 <TextBlock VerticalAlignment="Center" Text="パーツ" />
+                 <TextBlock x:Name="partCountTextBlock" Grid.Column="2" VerticalAlignment="Center" />
+                 <TextBlock x:Name="partValueTextBlock" Grid.Column="3" Margin="5,0,0,0" VerticalAlignment="Center" />
+            </Grid>
+            <DataGrid x:Name="partsDataGrid" Grid.Column="2" Grid.Row="1" Margin="0,3,0,0" AutoGenerateColumns="False" CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="パーツ名" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="単価" Binding="{Binding UnitPrice}" ElementStyle="{StaticResource rightAlignedTextColumn}" />
+                    <DataGridTextColumn Header="数量" Binding="{Binding Count}" ElementStyle="{StaticResource rightAlignedTextColumn}" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <Grid Grid.Column="3" Grid.Row="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <TextBlock VerticalAlignment="Center" Text="在庫" />
-                <DataGrid x:Name="stockDataGrid" Grid.Row="1" Margin="0,3,0,0" AutoGenerateColumns="False" CanUserAddRows="False">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="パーツ名" Binding="{Binding Name}" IsReadOnly="True" />
-                        <DataGridTextColumn Header="単価" Binding="{Binding UnitPrice}" ElementStyle="{StaticResource rightAlignedTextColumn}" IsReadOnly="True" />
-                        <DataGridTextColumn Header="在庫数" Binding="{Binding Count}" ElementStyle="{StaticResource rightAlignedTextColumn}" IsReadOnly="True" />
-                    </DataGrid.Columns>
-                </DataGrid>
+                <Button x:Name="incrementPartCountButton" Grid.Row="0" Margin="5,0" Width="25" Height="25" VerticalContentAlignment="Center" Content="+1" />
+                <Button x:Name="decrementPartCountButton" Grid.Row="1" Margin="5,0" Width="25" Height="25" VerticalContentAlignment="Center" Content="-1" />
+                <Button x:Name="removePartButton" Grid.Row="2" Margin="5,0" Width="25" Height="25" VerticalContentAlignment="Center" Content="×" />
             </Grid>
         </Grid>
         <Grid Grid.Row="4">
@@ -121,8 +124,6 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="2" Margin="0,5,0,0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="30" />
-                    <ColumnDefinition Width="20" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
@@ -131,14 +132,13 @@
                     <ColumnDefinition Width="40" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <Button x:Name="removePartButton" Content="削除" />
-                <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="パーツ名: " />
-                <TextBox x:Name="partNameTextBox" Grid.Column="3" VerticalAlignment="Center" />
-                <TextBlock Grid.Column="4" Margin="5,0,0,0" VerticalAlignment="Center" Text="単価: " />
-                <controls:NumericTextBox x:Name="partUnitPriceNumericTextBox" Grid.Column="5" Margin="5,0,0,0" VerticalAlignment="Center" Minimum="0" />
-                <TextBlock Grid.Column="6" Margin="5,0,0,0" VerticalAlignment="Center" Text="数量: " />
-                <controls:NumericUpDown x:Name="partAmountNumericTextBox" Grid.Column="7" VerticalAlignment="Center" TextAlignment="Right" Minimum="0" />
-                <Button x:Name="addPartButton" Grid.Column="8" Margin="5,0,0,0" Content="追加" />
+                <TextBlock VerticalAlignment="Center" Text="パーツ名: " />
+                <TextBox x:Name="partNameTextBox" Grid.Column="1" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="2" Margin="5,0,0,0" VerticalAlignment="Center" Text="単価: " />
+                <controls:NumericTextBox x:Name="partUnitPriceNumericTextBox" Grid.Column="3" Margin="5,0,0,0" VerticalAlignment="Center" Minimum="0" />
+                <TextBlock Grid.Column="4" Margin="5,0,0,0" VerticalAlignment="Center" Text="数量: " />
+                <controls:NumericUpDown x:Name="partAmountNumericTextBox" Grid.Column="5" VerticalAlignment="Center" TextAlignment="Right" Minimum="0" />
+                <Button x:Name="addPartButton" Grid.Column="6" Margin="5,0,0,0" Content="追加" />
             </Grid>
         </Grid>
     </Grid>
