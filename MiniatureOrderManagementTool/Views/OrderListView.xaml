@@ -21,6 +21,9 @@
             <helpers:DateConverter x:Key="DateConverter" />
             <helpers:DateCheckerConverter x:Key="DateCheckerConverter" />
             <helpers:NewLineConverter x:Key="NewLineConverter" />
+            <Style x:Key="rightAlignedTextColumn" TargetType="TextBlock">
+                <Setter Property="TextAlignment" Value="Right"/>
+            </Style>
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -164,8 +167,8 @@
                 <DataGrid x:Name="partsDataGrid" Grid.Row="1" Margin="0,3,0,0" AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="パーツ名" Binding="{Binding Name}" />
-                        <DataGridTextColumn Header="単価" Binding="{Binding UnitPrice}" />
-                        <DataGridTextColumn Header="数量" Binding="{Binding Count}" />
+                        <DataGridTextColumn Header="単価" Binding="{Binding UnitPrice}" ElementStyle="{StaticResource rightAlignedTextColumn}" />
+                        <DataGridTextColumn Header="数量" Binding="{Binding Count}" ElementStyle="{StaticResource rightAlignedTextColumn}" />
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
