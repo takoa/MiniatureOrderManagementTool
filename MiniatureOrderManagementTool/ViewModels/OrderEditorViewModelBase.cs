@@ -8,6 +8,7 @@ namespace MiniatureOrderManagementTool.ViewModels
     {
         public IConfirmationBox ConfirmationBox { get; set; }
         public IWindow Window { get; set; }
+        public bool ShowsConfirmation { get; set; } = true;
 
         public ReactiveCommand<Unit, Unit> CancelCommand { get; }
         public ReactiveCommand<CancelEventArgs, Unit> ClosingEventCommand { get; }
@@ -25,7 +26,7 @@ namespace MiniatureOrderManagementTool.ViewModels
 
         public void Cancel(CancelEventArgs e)
         {
-            if (!this.ConfirmationBox.Show("本当に取り消しますか？", "キャンセル"))
+            if (this.ShowsConfirmation && !this.ConfirmationBox.Show("本当に取り消しますか？", "キャンセル"))
             {
                 e.Cancel = true;
             }

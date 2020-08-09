@@ -117,6 +117,7 @@ namespace MiniatureOrderManagementTool.ViewModels
             };
 
             this.orderManager.UpdateOrder(order);
+            this.ShowsConfirmation = false;
             this.Window.Close();
         }
     }
