@@ -75,18 +75,12 @@ namespace MiniatureOrderManagementTool.ViewModels
         public ReactiveCommand<Unit, Unit> UpdateOrderCommand { get; }
 
         public OrderEditorViewModel(Config config, OrderManager orderManager, Order selectedOrder)
+            : base(selectedOrder)
         {
             this.config = config;
             this.orderManager = orderManager;
             this.selectedOrder = selectedOrder;
 
-            this.Name = selectedOrder.Name;
-            this.Price = selectedOrder.Price;
-            this.Discount = selectedOrder.Discount;
-            this.Description = selectedOrder.Description;
-            this.Customer = selectedOrder.Customer;
-            this.Deadline = selectedOrder.Deadline;
-            this.PartManager.Parts = selectedOrder.Parts;
             this.Left = this.config.MainWindowPosition.X + this.config.OrderEditorWindowDelta.X;
             this.Top = this.config.MainWindowPosition.Y + this.config.OrderEditorWindowDelta.Y;
             this.Width = this.config.OrderEditorWindowSize.Width;

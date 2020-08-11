@@ -10,7 +10,7 @@ namespace MiniatureOrderManagementTool.ViewModels
 {
     public class CommonOrderEditorViewModel : ViewModelBase
     {
-        public PartManager PartManager { get; } = new PartManager();
+        public PartManager PartManager { get; }
         public StockManager StockManager { get; } = new StockManager();
 
         private string name;
@@ -114,8 +114,24 @@ namespace MiniatureOrderManagementTool.ViewModels
         public ReactiveCommand<Unit, Unit> DecrementPartCountCommand { get; }
 
         public CommonOrderEditorViewModel()
+            : this(null)
         {
+        }
+
+        public CommonOrderEditorViewModel(Order order)
+        {
+            this.PartManager = new PartManager(order?.Parts);
             this.Deadline = DateTime.Now;
+
+            if (order != null)
+            {
+                this.Name = order.Name;
+                this.Price = order.Price;
+                this.Discount = order.Discount;
+                this.Description = order.Description;
+                this.Customer = order.Customer;
+                this.Deadline = order.Deadline;
+            }
 
             this.Parts.CollectionChanged += this.PartCollectionChanged;
             this.PartManager.WhenPartChanged += this.PartCollectionChanged;

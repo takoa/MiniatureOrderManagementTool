@@ -1,4 +1,5 @@
-﻿using ReactiveUI;
+﻿using MiniatureOrderManagementTool.Models.Dtos;
+using ReactiveUI;
 using System.ComponentModel;
 using System.Reactive;
 
@@ -14,6 +15,12 @@ namespace MiniatureOrderManagementTool.ViewModels
         public ReactiveCommand<CancelEventArgs, Unit> ClosingEventCommand { get; }
 
         public OrderEditorViewModelBase()
+            : this(null)
+        {
+        }
+
+        public OrderEditorViewModelBase(Order order)
+            : base(order)
         {
             this.CancelCommand = ReactiveCommand.Create(this.Cancel);
             this.ClosingEventCommand = ReactiveCommand.Create<CancelEventArgs>(this.Cancel);

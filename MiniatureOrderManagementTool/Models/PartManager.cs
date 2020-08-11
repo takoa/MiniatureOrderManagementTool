@@ -15,21 +15,16 @@ namespace MiniatureOrderManagementTool.Models
 
         public IObservableCollection<Part> ObservableParts { get; } = new ObservableCollectionExtended<Part>();
 
-        public Part[] Parts
-        {
-            get => this.ObservableParts.ToArray();
-            set
-            {
-                if (value != null)
-                {
-                    this.partsCache.AddOrUpdate(value);
-                }
-            }
-        }
+        public Part[] Parts => this.ObservableParts.ToArray();
 
         public event Action WhenPartChanged;
 
         public PartManager()
+            : this(null)
+        {
+        }
+
+        public PartManager(IEnumerable<Part> parts)
         {
             this.partsCache.Connect()
                            .ObserveOn(RxApp.MainThreadScheduler)
@@ -37,6 +32,11 @@ namespace MiniatureOrderManagementTool.Models
                            .Bind(this.ObservableParts)
                            .WhenAnyPropertyChanged("Name", "UnitPrice", "Count")
                            .Subscribe(_ => this.WhenPartChanged?.Invoke());
+
+            if (parts != null)
+            {
+                this.partsCache.AddOrUpdate(parts);
+            }
         }
 
         public static int GetPartAmountInt(string str)
