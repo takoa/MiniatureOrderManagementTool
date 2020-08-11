@@ -90,7 +90,7 @@ namespace MiniatureOrderManagementTool.ViewModels
                 TimeSpent = -1
             };
 
-            this.OrderManager.AddOrder(order);
+            this.OrderManager.AddOrUpdateOrder(order);
             this.ShowsConfirmation = false;
             this.Window.Close();
         }

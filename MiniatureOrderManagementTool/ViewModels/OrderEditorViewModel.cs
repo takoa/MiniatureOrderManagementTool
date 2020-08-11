@@ -116,7 +116,7 @@ namespace MiniatureOrderManagementTool.ViewModels
                 TimeSpent = OrderTimeSpent
             };
 
-            this.orderManager.UpdateOrder(order);
+            this.orderManager.AddOrUpdateOrder(order);
             this.ShowsConfirmation = false;
             this.Window.Close();
         }

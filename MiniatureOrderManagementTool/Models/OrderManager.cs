@@ -66,25 +66,17 @@ namespace MiniatureOrderManagementTool.Models
             return deadline.ToString("yyyy年MM月dd日");
         }
 
-        public void AddOrder(Order order)
+        public void AddOrUpdateOrder(Order order)
         {
             using var db = new LiteDatabase(OrderManager.databasePath);
             var orders = db.GetCollection<Order>("orders");
 
-            orders.Insert(order);
-            orders.EnsureIndex(x => x.ID, true);
-            this.OrdersCache.AddOrUpdate(order);
-        }
-
-        public void UpdateOrder(Order order)
-        {
-            using var db = new LiteDatabase(OrderManager.databasePath);
-            var orders = db.GetCollection<Order>("orders");
-
-            if (orders.Update(order))
+            if (orders.Upsert(order))
             {
-                this.OrdersCache.AddOrUpdate(order);
+                orders.EnsureIndex(x => x.ID, true);
             }
+
+            this.OrdersCache.AddOrUpdate(order);
         }
 
         public void DeleteOrder(Order order)
