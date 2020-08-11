@@ -36,6 +36,9 @@
                 <DataGridTextColumn Header="在庫価値(円)" Binding="{Binding ., Converter={StaticResource StockedPartValueConverter}}" MinWidth="75" ElementStyle="{StaticResource rightAlignedTextColumn}" IsReadOnly="True" />
                 <DataGridTextColumn Header="最終更新日時" Binding="{Binding ModifiedAt, Converter={StaticResource DateTimeConverter}}" IsReadOnly="True" />
             </DataGrid.Columns>
+            <DataGrid.RowValidationRules>
+                <helpers:StockedPartValidationRule ValidationStep="UpdatedValue" />
+            </DataGrid.RowValidationRules>
         </DataGrid>
         <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,5,0,0">
             <Grid.ColumnDefinitions>
