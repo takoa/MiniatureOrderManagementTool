@@ -78,7 +78,11 @@ namespace MiniatureOrderManagementTool.Models
 
         private void WhenChanged(StockedPart stockedPart)
         {
+            using var db = new LiteDatabase(StockManager.databasePath);
+            var collection = db.GetCollection<StockedPart>("parts");
+
             stockedPart.ModifiedAt = DateTime.Now;
+            collection.Update(stockedPart);
         }
     }
 }
