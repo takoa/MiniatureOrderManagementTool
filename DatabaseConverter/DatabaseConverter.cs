@@ -21,6 +21,10 @@ namespace MiniatureOrderManagementTool.DatabaseConverter
             DatabaseConverter dc = new DatabaseConverter("./config.json", "./database.db");
 
             dc.Convert();
+
+            System.Console.WriteLine("変換完了");
+            System.Console.WriteLine("エンターキーを押して終了");
+            System.Console.ReadLine();
         }
 
         public DatabaseConverter(string configPath, string databasePath)
