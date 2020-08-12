@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniatureOrderManagementTool", "MiniatureOrderManagementTool\MiniatureOrderManagementTool.csproj", "{580AF56D-4F8D-4591-8B4D-481BA8BB7A22}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatabaseConverter", "DatabaseConverter\DatabaseConverter.csproj", "{1DC65CF0-1D1F-400B-864F-EAB5AD0A8017}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,14 @@ Global
 		{580AF56D-4F8D-4591-8B4D-481BA8BB7A22}.Release|Any CPU.Build.0 = Release|Any CPU
 		{580AF56D-4F8D-4591-8B4D-481BA8BB7A22}.Release|x64.ActiveCfg = Release|x64
 		{580AF56D-4F8D-4591-8B4D-481BA8BB7A22}.Release|x64.Build.0 = Release|x64
+		{1DC65CF0-1D1F-400B-864F-EAB5AD0A8017}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DC65CF0-1D1F-400B-864F-EAB5AD0A8017}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DC65CF0-1D1F-400B-864F-EAB5AD0A8017}.Debug|x64.ActiveCfg = Debug|x64
+		{1DC65CF0-1D1F-400B-864F-EAB5AD0A8017}.Debug|x64.Build.0 = Debug|x64
+		{1DC65CF0-1D1F-400B-864F-EAB5AD0A8017}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DC65CF0-1D1F-400B-864F-EAB5AD0A8017}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DC65CF0-1D1F-400B-864F-EAB5AD0A8017}.Release|x64.ActiveCfg = Release|x64
+		{1DC65CF0-1D1F-400B-864F-EAB5AD0A8017}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
