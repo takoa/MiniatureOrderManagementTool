@@ -1,4 +1,4 @@
-﻿using MiniatureOrderManagementTool.Models.Dtos;
+﻿using MiniatureOrderManagementTool.Models;
 using NLog;
 using ReactiveUI;
 using Splat;
@@ -103,7 +103,7 @@ namespace MiniatureOrderManagementTool
                 using StreamReader reader = new StreamReader(App.configPath, Encoding.UTF8);
                 string json = reader.ReadToEnd();
 
-                this.Config = JsonSerializer.Deserialize<Config>(json);
+                this.Config = new Config(JsonSerializer.Deserialize<Models.Dtos.Config>(json));
             }
             catch (FileNotFoundException)
             {

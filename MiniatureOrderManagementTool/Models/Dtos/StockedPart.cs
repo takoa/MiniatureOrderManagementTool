@@ -3,62 +3,15 @@ using System;
 
 namespace MiniatureOrderManagementTool.Models.Dtos
 {
-    public class StockedPart : ReactiveObject
+    public class StockedPart
     {
-        private int id;
-        public int ID
-        {
-            get => this.id;
-            set => this.RaiseAndSetIfChanged(ref this.id, value);
-        }
-
-        private string name;
-        public string Name
-        {
-            get => this.name;
-            set => this.RaiseAndSetIfChanged(ref this.name, value);
-        }
-
-        private DateTime createdAt;
-        public DateTime CreatedAt
-        {
-            get => this.createdAt;
-            set => this.RaiseAndSetIfChanged(ref this.createdAt, value);
-        }
-
-        private DateTime modifiedAt;
-        public DateTime ModifiedAt
-        {
-            get => this.modifiedAt;
-            set => this.RaiseAndSetIfChanged(ref this.modifiedAt, value);
-        }
-
-        private int count;
-        public int Count
-        {
-            get => this.count;
-            set => this.RaiseAndSetIfChanged(ref this.count, value);
-        }
-
-        private decimal timeSpent;
-        public decimal TimeSpent
-        {
-            get => this.timeSpent;
-            set => this.RaiseAndSetIfChanged(ref this.timeSpent, value);
-        }
-
-        private decimal materialCost;
-        public decimal MaterialCost
-        {
-            get => this.materialCost;
-            set => this.RaiseAndSetIfChanged(ref this.materialCost, value);
-        }
-
-        private decimal unitPrice;
-        public decimal UnitPrice
-        {
-            get => this.unitPrice;
-            set => this.RaiseAndSetIfChanged(ref this.unitPrice, value);
-        }
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime ModifiedAt { get; set; }
+        public int Count { get; set; }
+        public decimal TimeSpent { get; set; }
+        public decimal MaterialCost { get; set; }
+        public decimal UnitPrice { get; set; }
     }
 }

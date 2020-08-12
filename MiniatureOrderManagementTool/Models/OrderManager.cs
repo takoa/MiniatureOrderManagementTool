@@ -98,7 +98,7 @@ namespace MiniatureOrderManagementTool.Models
         private void InitializeOrders()
         {
             using var db = new LiteDatabase(OrderManager.databasePath);
-            var collection = db.GetCollection<Order>("orders");
+            var collection = db.GetCollection<Dtos.Order>("orders");
 
             this.OrdersCache = new SourceCache<Order, int>(i => i.ID);
             this.OrdersCache.Connect()
@@ -107,7 +107,10 @@ namespace MiniatureOrderManagementTool.Models
                             .Bind(out this.orders)
                             .Subscribe();
 
-            this.OrdersCache.AddOrUpdate(collection.FindAll());
+            foreach (var item in collection.FindAll())
+            {
+                this.OrdersCache.AddOrUpdate(new Order(item));
+            }
         }
     }
 }

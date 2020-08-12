@@ -1,6 +1,5 @@
 ﻿using DynamicData;
 using DynamicData.Binding;
-using MiniatureOrderManagementTool.Models.Dtos;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;

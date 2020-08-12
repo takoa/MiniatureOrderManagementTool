@@ -1,4 +1,4 @@
-﻿using MiniatureOrderManagementTool.Models.Dtos;
+﻿using MiniatureOrderManagementTool.Models;
 using System;
 using System.Globalization;
 using System.Windows.Data;

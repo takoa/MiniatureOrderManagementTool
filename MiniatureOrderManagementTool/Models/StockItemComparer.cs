@@ -1,5 +1,4 @@
-﻿using MiniatureOrderManagementTool.Models.Dtos;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
 namespace MiniatureOrderManagementTool.Models

@@ -1,6 +1,5 @@
 ﻿using LiteDB;
 using MiniatureOrderManagementTool.Models;
-using MiniatureOrderManagementTool.Models.Dtos;
 using ReactiveUI;
 using System;
 using System.Reactive;

@@ -1,7 +1,6 @@
 ﻿using DynamicData;
 using DynamicData.Binding;
 using LiteDB;
-using MiniatureOrderManagementTool.Models.Dtos;
 using ReactiveUI;
 using System;
 using System.Reactive.Linq;
@@ -56,7 +55,7 @@ namespace MiniatureOrderManagementTool.Models
         private void InitializeOrders()
         {
             using var db = new LiteDatabase(StockManager.databasePath);
-            var collection = db.GetCollection<StockedPart>("parts");
+            var collection = db.GetCollection<Dtos.StockedPart>("parts");
             var observable = this.stockedPartsCache.Connect()
                                  .ObserveOn(RxApp.MainThreadScheduler)
                                  .Sort(new StockedPartNameComparer())
@@ -73,7 +72,10 @@ namespace MiniatureOrderManagementTool.Models
                                .WhenValueChanged(sp => sp.Count)
                                .Subscribe(_ => this.StockCountChanged?.Invoke());
 
-            this.stockedPartsCache.AddOrUpdate(collection.FindAll());
+            foreach (var item in collection.FindAll())
+            {
+                this.stockedPartsCache.AddOrUpdate(new StockedPart(item));
+            }
         }
 
         private void WhenChanged(StockedPart stockedPart)

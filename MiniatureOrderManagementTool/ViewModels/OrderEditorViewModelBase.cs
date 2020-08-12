@@ -1,4 +1,4 @@
-﻿using MiniatureOrderManagementTool.Models.Dtos;
+﻿using MiniatureOrderManagementTool.Models;
 using ReactiveUI;
 using System.ComponentModel;
 using System.Reactive;
