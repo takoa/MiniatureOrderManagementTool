@@ -18,5 +18,33 @@ namespace MiniatureOrderManagementTool.Models.Dtos
         public Part[] Parts { get; set; }
         public string Description { get; set; }
         public decimal TimeSpent { get; set; }
+
+        public Order()
+        {
+        }
+
+        public Order(Models.Order order)
+        {
+            var parts = new Part[order.Parts.Length];
+
+            for (int i = 0; i < parts.Length; i++)
+            {
+                parts[i] = new Part(order.Parts[i]);
+            }
+
+            this.ID = order.ID;
+            this.ObjectID = order.ObjectID;
+            this.IsFinished = order.IsFinished;
+            this.Name = order.Name;
+            this.CreatedAt = order.CreatedAt;
+            this.ModifiedAt = order.ModifiedAt;
+            this.Customer = order.Customer;
+            this.Price = order.Price;
+            this.Discount = order.Discount;
+            this.Deadline = order.Deadline;
+            this.Parts = parts;
+            this.Description = order.Description;
+            this.TimeSpent = order.TimeSpent;
+        }
     }
 }

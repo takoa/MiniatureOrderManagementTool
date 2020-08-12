@@ -29,10 +29,13 @@ namespace MiniatureOrderManagementTool.Models
             }
 
             using var db = new LiteDatabase(StockManager.databasePath);
-            var collection = db.GetCollection<StockedPart>("parts");
+            var collection = db.GetCollection<Dtos.StockedPart>("parts");
+            var dtoStockedPart = new Dtos.StockedPart(stockedPart);
 
-            collection.Insert(stockedPart);
+            collection.Insert(dtoStockedPart);
             collection.EnsureIndex(sp => sp.ID, true);
+
+            stockedPart.ID = dtoStockedPart.ID;
             this.stockedPartsCache.AddOrUpdate(stockedPart);
         }
 
@@ -44,7 +47,7 @@ namespace MiniatureOrderManagementTool.Models
             }
 
             using var db = new LiteDatabase(StockManager.databasePath);
-            var collection = db.GetCollection<StockedPart>("parts");
+            var collection = db.GetCollection<Dtos.StockedPart>("parts");
 
             if (collection.Delete(stockedParts.ID))
             {
@@ -81,10 +84,11 @@ namespace MiniatureOrderManagementTool.Models
         private void WhenChanged(StockedPart stockedPart)
         {
             using var db = new LiteDatabase(StockManager.databasePath);
-            var collection = db.GetCollection<StockedPart>("parts");
+            var collection = db.GetCollection<Dtos.StockedPart>("parts");
 
             stockedPart.ModifiedAt = DateTime.Now;
-            collection.Update(stockedPart);
+
+            collection.Update(new Dtos.StockedPart(stockedPart));
         }
     }
 }

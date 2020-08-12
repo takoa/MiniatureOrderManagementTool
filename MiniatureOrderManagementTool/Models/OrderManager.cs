@@ -69,11 +69,13 @@ namespace MiniatureOrderManagementTool.Models
         public void AddOrUpdateOrder(Order order)
         {
             using var db = new LiteDatabase(OrderManager.databasePath);
-            var orders = db.GetCollection<Order>("orders");
+            var orders = db.GetCollection<Dtos.Order>("orders");
+            var dtoOrder = new Dtos.Order(order);
 
-            if (orders.Upsert(order))
+            if (orders.Upsert(dtoOrder))
             {
                 orders.EnsureIndex(x => x.ID, true);
+                order.ID = dtoOrder.ID;
             }
 
             this.OrdersCache.AddOrUpdate(order);
