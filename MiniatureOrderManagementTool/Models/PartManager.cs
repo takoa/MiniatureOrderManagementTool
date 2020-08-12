@@ -66,7 +66,7 @@ namespace MiniatureOrderManagementTool.Models
             return totalPartValue + "円";
         }
 
-        public void AddPart(Part part)
+        public void AddOrUpdatePart(Part part)
         {
             this.partsCache.AddOrUpdate(part);
         }

@@ -90,18 +90,24 @@ namespace MiniatureOrderManagementTool.ViewModels
             set => this.RaiseAndSetIfChanged(ref this.partAmount, value);
         }
 
-        private Part selectedPart;
-        public Part SelectedPart
-        {
-            get => this.selectedPart;
-            set => this.RaiseAndSetIfChanged(ref this.selectedPart, value);
-        }
-
         private StockedPart selectedStockedPart;
         public StockedPart SelectedStockedPart
         {
             get => this.selectedStockedPart;
             set => this.RaiseAndSetIfChanged(ref this.selectedStockedPart, value);
+        }
+
+        private Part selectedPart;
+        public Part SelectedPart
+        {
+            get => this.selectedPart;
+            set
+            {
+                if (value != null)
+                {
+                    this.RaiseAndSetIfChanged(ref this.selectedPart, value);
+                }
+            }
         }
 
         public IObservableCollection<Part> Parts => this.PartManager.ObservableParts;
@@ -120,7 +126,7 @@ namespace MiniatureOrderManagementTool.ViewModels
 
         public CommonOrderEditorViewModel(Order order)
         {
-            this.PartManager = new PartManager(order?.Parts);
+            this.PartManager = new PartManager(order?.Parts.Copy());
             this.Deadline = DateTime.Now;
 
             if (order != null)
@@ -172,7 +178,7 @@ namespace MiniatureOrderManagementTool.ViewModels
 
             var part = new Part(this.PartName, this.PartUnitPrice, this.PartAmount);
 
-            this.PartManager.AddPart(part);
+            this.PartManager.AddOrUpdatePart(part);
             this.PartName = "";
             this.PartUnitPrice = 0m;
             this.PartAmount = 0;
@@ -204,7 +210,7 @@ namespace MiniatureOrderManagementTool.ViewModels
                 part = new Part(this.SelectedStockedPart.Name, this.SelectedStockedPart.UnitPrice, 1);
             }
 
-            this.PartManager.AddPart(part);
+            this.PartManager.AddOrUpdatePart(part);
         }
 
         private void IncrementPartCount()
@@ -214,10 +220,8 @@ namespace MiniatureOrderManagementTool.ViewModels
                 return;
             }
 
-            if (this.PartManager.TryGetPart(this.SelectedPart.Name, out Part part))
-            {
-                part.Count++;
-            }
+            this.SelectedPart.Count++;
+            this.PartManager.AddOrUpdatePart(this.SelectedPart);
         }
 
         private void DecrementPartCount()
@@ -227,13 +231,14 @@ namespace MiniatureOrderManagementTool.ViewModels
                 return;
             }
 
-            if (this.PartManager.TryGetPart(this.SelectedPart.Name, out Part part) && 1 < part.Count)
+            if (1 < this.SelectedPart.Count)
             {
-                part.Count--;
+                this.SelectedPart.Count--;
+                this.PartManager.AddOrUpdatePart(this.SelectedPart);
             }
             else
             {
-                this.PartManager.RemovePart(part);
+                this.PartManager.RemovePart(this.selectedPart);
             }
         }
     }
