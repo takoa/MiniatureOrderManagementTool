@@ -1,10 +1,9 @@
 ﻿using System.Windows;
 
-namespace MiniatureOrderManagementTool.Models.Dtos
+namespace MiniatureOrderManagementTool.DatabaseConverter.Dtos.v2
 {
     public class Config
     {
-        public int DatabaseVersion { get; set; }
         public Point MainWindowPosition { get; set; }
         public Size MainWindowSize { get; set; }
         public Point OrderEditorWindowDelta { get; set; }

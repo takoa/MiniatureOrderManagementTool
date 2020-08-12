@@ -4,6 +4,7 @@ namespace MiniatureOrderManagementTool.Models
 {
     public class Config
     {
+        public int DatabaseVersion { get; set; }
         public Point MainWindowPosition { get; set; }
         public Size MainWindowSize { get; set; }
         public Point OrderEditorWindowDelta { get; set; }
@@ -15,6 +16,7 @@ namespace MiniatureOrderManagementTool.Models
 
         public Config(Dtos.Config config)
         {
+            this.DatabaseVersion = config.DatabaseVersion;
             this.MainWindowPosition = config.MainWindowPosition;
             this.MainWindowSize = config.MainWindowSize;
             this.OrderEditorWindowDelta = config.OrderEditorWindowDelta;
