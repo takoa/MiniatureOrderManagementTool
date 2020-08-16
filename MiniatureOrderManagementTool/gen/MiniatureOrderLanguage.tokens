@@ -1,0 +1,10 @@
+Types=1
+Count=2
+CountEach=3
+Total=4
+Dot=5
+Spaces=6
+Comment=7
+Newline=8
+DecimalInteger=9
+Name=10
