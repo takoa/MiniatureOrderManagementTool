@@ -1,4 +1,5 @@
 ﻿using DynamicData.Binding;
+using MiniatureOrderManagementTool.Helpers;
 using MiniatureOrderManagementTool.Models;
 using ReactiveUI;
 using System;
@@ -117,6 +118,7 @@ namespace MiniatureOrderManagementTool.ViewModels
         public ReactiveCommand<Unit, Unit> AddStockedPartCommand { get; }
         public ReactiveCommand<Unit, Unit> IncrementPartCountCommand { get; }
         public ReactiveCommand<Unit, Unit> DecrementPartCountCommand { get; }
+        public ReactiveCommand<Unit, Unit> OpenOrderCommentReaderCommand { get; }
 
         public CommonOrderEditorViewModel()
             : this(null)
@@ -146,6 +148,7 @@ namespace MiniatureOrderManagementTool.ViewModels
             this.AddStockedPartCommand = ReactiveCommand.Create(this.AddStockedPart);
             this.IncrementPartCountCommand = ReactiveCommand.Create(this.IncrementPartCount);
             this.DecrementPartCountCommand = ReactiveCommand.Create(this.DecrementPartCount);
+            this.OpenOrderCommentReaderCommand = ReactiveCommand.Create(this.OpenOrderCommentReader);
         }
 
         private void PartCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -239,6 +242,13 @@ namespace MiniatureOrderManagementTool.ViewModels
             {
                 this.PartManager.RemovePart(this.selectedPart);
             }
+        }
+
+        private void OpenOrderCommentReader()
+        {
+            var newOrderViewModel = new OrderCommentReaderViewModel(this.PartManager);
+
+            WindowViewHelper.ShowWindow(newOrderViewModel);
         }
     }
 }

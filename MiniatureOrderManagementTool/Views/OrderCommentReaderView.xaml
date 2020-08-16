@@ -1,0 +1,29 @@
+﻿<rxui:ReactiveWindow
+        x:Class="MiniatureOrderManagementTool.Views.OrderCommentReaderView"
+        x:TypeArguments="vms:OrderCommentReaderViewModel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:rxui="http://reactiveui.net"
+        xmlns:local="clr-namespace:MiniatureOrderManagementTool.Views"
+        xmlns:vms="clr-namespace:MiniatureOrderManagementTool.ViewModels"
+        mc:Ignorable="d"
+        Title="パーツ読み込み" Height="300" Width="400">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBox x:Name="commentTextBox" TextWrapping="Wrap" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" />
+        <Grid Grid.Row="1" Margin="0,15,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button x:Name="cancelButton" Content="キャンセル" />
+            <Button x:Name="addButton" Grid.Column="2" Content="追加" />
+        </Grid>
+    </Grid>
+</rxui:ReactiveWindow>

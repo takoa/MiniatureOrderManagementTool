@@ -110,10 +110,12 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Button x:Name="incrementPartCountButton" Grid.Row="0" Margin="5,0" Width="25" Height="25" VerticalContentAlignment="Center" Content="+1" />
-                <Button x:Name="decrementPartCountButton" Grid.Row="1" Margin="5,0" Width="25" Height="25" VerticalContentAlignment="Center" Content="-1" />
-                <Button x:Name="removePartButton" Grid.Row="2" Margin="5,0" Width="25" Height="25" VerticalContentAlignment="Center" Content="×" />
+                <Button x:Name="openReadOrderCommentButton" Grid.Row="0" Margin="5,0" Width="25" Height="25" VerticalContentAlignment="Center" Content="💬" />
+                <Button x:Name="incrementPartCountButton" Grid.Row="1" Margin="5,0" Width="25" Height="25" VerticalContentAlignment="Center" Content="+1" />
+                <Button x:Name="decrementPartCountButton" Grid.Row="2" Margin="5,0" Width="25" Height="25" VerticalContentAlignment="Center" Content="-1" />
+                <Button x:Name="removePartButton" Grid.Row="3" Margin="5,0" Width="25" Height="25" VerticalContentAlignment="Center" Content="×" />
             </Grid>
         </Grid>
         <Grid Grid.Row="4">
