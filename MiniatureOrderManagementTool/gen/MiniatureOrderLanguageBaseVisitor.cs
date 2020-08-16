@@ -64,7 +64,7 @@ public partial class MiniatureOrderLanguageBaseVisitor<Result> : AbstractParseTr
 	/// <return>The visitor result.</return>
 	public virtual Result VisitPart([NotNull] MiniatureOrderLanguageParser.PartContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="MiniatureOrderLanguageParser.singleKind"/>.
+	/// Visit a parse tree produced by <see cref="MiniatureOrderLanguageParser.count"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -72,7 +72,7 @@ public partial class MiniatureOrderLanguageBaseVisitor<Result> : AbstractParseTr
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitSingleKind([NotNull] MiniatureOrderLanguageParser.SingleKindContext context) { return VisitChildren(context); }
+	public virtual Result VisitCount([NotNull] MiniatureOrderLanguageParser.CountContext context) { return VisitChildren(context); }
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="MiniatureOrderLanguageParser.group"/>.
 	/// <para>

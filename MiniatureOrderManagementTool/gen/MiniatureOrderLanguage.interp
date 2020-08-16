@@ -28,7 +28,7 @@ rule names:
 main
 line
 part
-singleKind
+count
 group
 itemLine
 item

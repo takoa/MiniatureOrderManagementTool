@@ -50,11 +50,11 @@ public interface IMiniatureOrderLanguageVisitor<Result> : IParseTreeVisitor<Resu
 	/// <return>The visitor result.</return>
 	Result VisitPart([NotNull] MiniatureOrderLanguageParser.PartContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="MiniatureOrderLanguageParser.singleKind"/>.
+	/// Visit a parse tree produced by <see cref="MiniatureOrderLanguageParser.count"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitSingleKind([NotNull] MiniatureOrderLanguageParser.SingleKindContext context);
+	Result VisitCount([NotNull] MiniatureOrderLanguageParser.CountContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="MiniatureOrderLanguageParser.group"/>.
 	/// </summary>

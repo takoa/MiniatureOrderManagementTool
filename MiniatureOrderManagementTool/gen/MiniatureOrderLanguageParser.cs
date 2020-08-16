@@ -39,10 +39,10 @@ public partial class MiniatureOrderLanguageParser : Parser {
 		Types=1, Count=2, CountEach=3, Total=4, Dot=5, Spaces=6, Comment=7, Newline=8, 
 		DecimalInteger=9, Name=10;
 	public const int
-		RULE_main = 0, RULE_line = 1, RULE_part = 2, RULE_singleKind = 3, RULE_group = 4, 
+		RULE_main = 0, RULE_line = 1, RULE_part = 2, RULE_count = 3, RULE_group = 4, 
 		RULE_itemLine = 5, RULE_item = 6;
 	public static readonly string[] ruleNames = {
-		"main", "line", "part", "singleKind", "group", "itemLine", "item"
+		"main", "line", "part", "count", "group", "itemLine", "item"
 	};
 
 	private static readonly string[] _LiteralNames = {
@@ -189,8 +189,8 @@ public partial class MiniatureOrderLanguageParser : Parser {
 
 	public partial class PartContext : ParserRuleContext {
 		public ITerminalNode Dot() { return GetToken(MiniatureOrderLanguageParser.Dot, 0); }
-		public SingleKindContext singleKind() {
-			return GetRuleContext<SingleKindContext>(0);
+		public CountContext count() {
+			return GetRuleContext<CountContext>(0);
 		}
 		public GroupContext group() {
 			return GetRuleContext<GroupContext>(0);
@@ -265,7 +265,7 @@ public partial class MiniatureOrderLanguageParser : Parser {
 			switch (TokenStream.LA(1)) {
 			case Count:
 				{
-				State = 38; singleKind();
+				State = 38; count();
 				}
 				break;
 			case Eof:
@@ -293,25 +293,25 @@ public partial class MiniatureOrderLanguageParser : Parser {
 		return _localctx;
 	}
 
-	public partial class SingleKindContext : ParserRuleContext {
+	public partial class CountContext : ParserRuleContext {
 		public ITerminalNode Count() { return GetToken(MiniatureOrderLanguageParser.Count, 0); }
 		public ITerminalNode Newline() { return GetToken(MiniatureOrderLanguageParser.Newline, 0); }
-		public SingleKindContext(ParserRuleContext parent, int invokingState)
+		public CountContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_singleKind; } }
+		public override int RuleIndex { get { return RULE_count; } }
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IMiniatureOrderLanguageVisitor<TResult> typedVisitor = visitor as IMiniatureOrderLanguageVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitSingleKind(this);
+			if (typedVisitor != null) return typedVisitor.VisitCount(this);
 			else return visitor.VisitChildren(this);
 		}
 	}
 
 	[RuleVersion(0)]
-	public SingleKindContext singleKind() {
-		SingleKindContext _localctx = new SingleKindContext(Context, State);
-		EnterRule(_localctx, 6, RULE_singleKind);
+	public CountContext count() {
+		CountContext _localctx = new CountContext(Context, State);
+		EnterRule(_localctx, 6, RULE_count);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{

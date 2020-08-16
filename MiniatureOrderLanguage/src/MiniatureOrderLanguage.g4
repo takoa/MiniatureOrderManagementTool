@@ -2,8 +2,8 @@ grammar MiniatureOrderLanguage;
 
 main: line+;
 line: (part | Newline);
-part: Newline* Dot Name+ Types? (singleKind | group);
-singleKind: Count Newline;
+part: Newline* Dot Name+ Types? (count | group);
+count: Count Newline;
 group: CountEach? Total? itemLine*;
 itemLine: (item | Newline);
 item: Dot Name+ Newline;
