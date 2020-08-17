@@ -2,9 +2,11 @@ grammar MiniatureOrderLanguage;
 
 main: line+;
 line: (part | Newline);
-part: Newline* Dot Name+ Types? (count | group);
-count: Count Newline;
-group: CountEach? Total? itemLine*;
+part: Newline* Dot Name+ Types? (single | group);
+single: Count? Comma? Price?;
+group: each? total? itemLine*;
+each: CountEach (Comma Price)?;
+total: Total (Comma Price)?;
 itemLine: (item | Newline);
 item: Dot Name+ Newline;
 
@@ -12,10 +14,17 @@ Types: DecimalInteger '種類';
 Count: DecimalInteger '個';
 CountEach: '各' DecimalInteger '個';
 Total: '計' DecimalInteger '個';
+Price: DecimalInteger '円';
 
 Dot
  : '・'
  | '·'
+ ;
+
+Comma
+ : ','
+ | '、'
+ | '，'
  ;
 
 Spaces
@@ -49,6 +58,12 @@ fragment NonZeroDigit
 fragment Digit
  : [0-9]
  ;
+
+fragment CommentSign
+ : '*'
+ | '⬆'
+ | '✳'
+ | '☑';
 
 /// id_start     ::=  <all characters in general categories Lu, Ll, Lt, Lm, Lo, Nl, the underscore, and characters with the Other_ID_Start property>
 fragment IdStart
@@ -591,8 +606,4 @@ fragment IdContinue
 
 fragment Emoji: [\p{Emoji}];
 
-fragment CommentSign
- : '*'
- | '⬆'
- | '✳'
- | '☑';
+ErrorChar : . ;

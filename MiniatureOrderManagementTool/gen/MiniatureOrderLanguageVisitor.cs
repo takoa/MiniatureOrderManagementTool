@@ -50,17 +50,29 @@ public interface IMiniatureOrderLanguageVisitor<Result> : IParseTreeVisitor<Resu
 	/// <return>The visitor result.</return>
 	Result VisitPart([NotNull] MiniatureOrderLanguageParser.PartContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="MiniatureOrderLanguageParser.count"/>.
+	/// Visit a parse tree produced by <see cref="MiniatureOrderLanguageParser.single"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitCount([NotNull] MiniatureOrderLanguageParser.CountContext context);
+	Result VisitSingle([NotNull] MiniatureOrderLanguageParser.SingleContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="MiniatureOrderLanguageParser.group"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitGroup([NotNull] MiniatureOrderLanguageParser.GroupContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="MiniatureOrderLanguageParser.each"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitEach([NotNull] MiniatureOrderLanguageParser.EachContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="MiniatureOrderLanguageParser.total"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitTotal([NotNull] MiniatureOrderLanguageParser.TotalContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="MiniatureOrderLanguageParser.itemLine"/>.
 	/// </summary>

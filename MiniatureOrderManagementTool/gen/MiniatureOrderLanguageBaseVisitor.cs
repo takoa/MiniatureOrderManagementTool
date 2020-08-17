@@ -64,7 +64,7 @@ public partial class MiniatureOrderLanguageBaseVisitor<Result> : AbstractParseTr
 	/// <return>The visitor result.</return>
 	public virtual Result VisitPart([NotNull] MiniatureOrderLanguageParser.PartContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="MiniatureOrderLanguageParser.count"/>.
+	/// Visit a parse tree produced by <see cref="MiniatureOrderLanguageParser.single"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -72,7 +72,7 @@ public partial class MiniatureOrderLanguageBaseVisitor<Result> : AbstractParseTr
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitCount([NotNull] MiniatureOrderLanguageParser.CountContext context) { return VisitChildren(context); }
+	public virtual Result VisitSingle([NotNull] MiniatureOrderLanguageParser.SingleContext context) { return VisitChildren(context); }
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="MiniatureOrderLanguageParser.group"/>.
 	/// <para>
@@ -83,6 +83,26 @@ public partial class MiniatureOrderLanguageBaseVisitor<Result> : AbstractParseTr
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	public virtual Result VisitGroup([NotNull] MiniatureOrderLanguageParser.GroupContext context) { return VisitChildren(context); }
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="MiniatureOrderLanguageParser.each"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitEach([NotNull] MiniatureOrderLanguageParser.EachContext context) { return VisitChildren(context); }
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="MiniatureOrderLanguageParser.total"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitTotal([NotNull] MiniatureOrderLanguageParser.TotalContext context) { return VisitChildren(context); }
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="MiniatureOrderLanguageParser.itemLine"/>.
 	/// <para>
