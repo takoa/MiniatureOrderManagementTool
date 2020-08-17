@@ -3,7 +3,7 @@ grammar MiniatureOrderLanguage;
 main: line+;
 line: (part | Newline);
 part: Newline* Dot Name+ Types? (single | group);
-single: Count? Comma? Price?;
+single: Count? Price?;
 group: each? total? itemLine*;
 each: CountEach (Comma Price)?;
 total: Total (Comma Price)?;
@@ -52,15 +52,18 @@ Name
 /// nonzerodigit   ::=  "1"..."9"
 fragment NonZeroDigit
  : [1-9]
+ | [１-９]
  ;
 
 /// digit          ::=  "0"..."9"
 fragment Digit
  : [0-9]
+ | [０-９]
  ;
 
 fragment CommentSign
  : '*'
+ | '#'
  | '⬆'
  | '✳'
  | '☑';

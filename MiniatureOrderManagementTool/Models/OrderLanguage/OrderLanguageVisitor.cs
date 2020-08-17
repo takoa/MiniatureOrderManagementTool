@@ -84,8 +84,14 @@ namespace MiniatureOrderManagementTool.Models.OrderLanguage
         {
             (decimal UnitPrice, int Count) result = (0m, 1);
 
-            int.TryParse(context.Count()?.GetText()[0..^1], out result.Count);
-            decimal.TryParse(context.Price()?.GetText()[0..^1], out result.UnitPrice);
+            int.TryParse(
+                OrderLanguageVisitor.ConvertToAsciiDigits(context.Count()?.GetText()[0..^1]),
+                out result.Count);
+            decimal.TryParse(
+                OrderLanguageVisitor.ConvertToAsciiDigits(context.Price()?.GetText()[0..^1]),
+                out result.UnitPrice);
+
+            result.UnitPrice /= result.Count;
 
             return result;
         }
@@ -122,8 +128,12 @@ namespace MiniatureOrderManagementTool.Models.OrderLanguage
         {
             (decimal UnitPrice, int Count) result = (0m, 1);
 
-            int.TryParse(context.CountEach()?.GetText()[1..^1], out result.Count);
-            decimal.TryParse(context.Price()?.GetText()[0..^1], out result.UnitPrice);
+            int.TryParse(
+                OrderLanguageVisitor.ConvertToAsciiDigits(context.CountEach()?.GetText()[1..^1]),
+                out result.Count);
+            decimal.TryParse(
+                OrderLanguageVisitor.ConvertToAsciiDigits(context.Price()?.GetText()[0..^1]),
+                out result.UnitPrice);
 
             return result;
         }
@@ -156,6 +166,31 @@ namespace MiniatureOrderManagementTool.Models.OrderLanguage
             }
 
             return name;
+        }
+
+        private static string ConvertToAsciiDigits(string str)
+        {
+            var sb = new StringBuilder();
+
+            for (int i = 0; i < str.Length; i++)
+            {
+                sb.Append(str[i] switch
+                {
+                    '０' => '0',
+                    '１' => '1',
+                    '２' => '2',
+                    '３' => '3',
+                    '４' => '4',
+                    '５' => '5',
+                    '６' => '6',
+                    '７' => '7',
+                    '８' => '8',
+                    '９' => '9',
+                    _ => str[i]
+                });
+            }
+
+            return sb.ToString();
         }
     }
 }

@@ -10,3 +10,4 @@ Comment=9
 Newline=10
 DecimalInteger=11
 Name=12
+ErrorChar=13
