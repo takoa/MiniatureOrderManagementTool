@@ -14,6 +14,8 @@ namespace MiniatureOrderManagementTool.Views
             {
                 this.ViewModel.Window = this;
 
+                this.OneWayBind(this.ViewModel, vm => vm.ErrorMessages, v => v.errorTextBox.Text).DisposeWith(d);
+
                 this.Bind(this.ViewModel, vm => vm.Comment, v => v.commentTextBox.Text).DisposeWith(d);
 
                 this.BindCommand(this.ViewModel, vm => vm.AddCommand, v => v.addButton).DisposeWith(d);

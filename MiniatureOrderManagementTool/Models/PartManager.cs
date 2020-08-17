@@ -1,10 +1,14 @@
-﻿using DynamicData;
+﻿using Antlr4.Runtime;
+using DynamicData;
 using DynamicData.Binding;
+using MiniatureOrderManagementTool.Models.OrderLanguage;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Text;
 
 namespace MiniatureOrderManagementTool.Models
 {
@@ -65,6 +69,23 @@ namespace MiniatureOrderManagementTool.Models
             return totalPartValue + "円";
         }
 
+        public static string GetErrorString(IList<ParsingError> errorPositions)
+        {
+            var sb = new StringBuilder();
+            
+            sb.Append("文法エラー").AppendLine();
+
+            foreach (var item in errorPositions)
+            {
+                sb.Append("行").Append(item.Line).Append(" ");
+                sb.Append("列").Append(item.Column).Append(": ");
+                sb.Append(item.Message);
+                sb.AppendLine();
+            }
+
+            return sb.ToString();
+        }
+
         public void AddOrUpdatePart(Part part)
         {
             this.partsCache.AddOrUpdate(part);
@@ -91,6 +112,34 @@ namespace MiniatureOrderManagementTool.Models
 
                 return false;
             }
+        }
+
+        public IList<ParsingError> ReadOrderComment(string comment)
+        {
+            if (!comment.EndsWith(Environment.NewLine))
+            {
+                comment += Environment.NewLine;
+            }
+
+            var stream = new MemoryStream(Encoding.UTF8.GetBytes(comment));
+            var inputStream = new AntlrInputStream(stream);
+            var lexer = new MiniatureOrderLanguageLexer(inputStream);
+            var commonTokenStream = new CommonTokenStream(lexer);
+            var parser = new MiniatureOrderLanguageParser(commonTokenStream);
+            var visitor = new OrderLanguageVisitor();
+            var errorListener = new OrderLanguageErrorListener();
+
+            parser.RemoveErrorListeners();
+            parser.AddErrorListener(errorListener);
+
+            var parts = (IEnumerable<Part>)visitor.Visit(parser.main());
+
+            if (errorListener.ErrorPositions.Count == 0)
+            {
+                this.partsCache.AddOrUpdate(parts);
+            }
+
+            return errorListener.ErrorPositions;
         }
     }
 }

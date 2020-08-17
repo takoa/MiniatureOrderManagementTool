@@ -20,6 +20,13 @@ namespace MiniatureOrderManagementTool.ViewModels
             set => this.RaiseAndSetIfChanged(ref this.comment, value);
         }
 
+        public string errorMessages;
+        public string ErrorMessages
+        {
+            get => this.errorMessages;
+            set => this.RaiseAndSetIfChanged(ref this.errorMessages, value);
+        }
+
         public ReactiveCommand<Unit, Unit> AddCommand { get; }
         public ReactiveCommand<Unit, Unit> CancelCommand { get; }
 
@@ -33,7 +40,16 @@ namespace MiniatureOrderManagementTool.ViewModels
 
         private void Add()
         {
-            this.Window?.Close();
+            var errors = this.partManager.ReadOrderComment(this.Comment);
+
+            if (errors.Count != 0)
+            {
+                this.ErrorMessages = PartManager.GetErrorString(errors);
+            }
+            else
+            {
+                this.Window?.Close();
+            }
         }
 
         private void Cancel()
