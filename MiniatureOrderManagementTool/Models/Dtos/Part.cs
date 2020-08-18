@@ -1,6 +1,4 @@
-﻿using ReactiveUI;
-
-namespace MiniatureOrderManagementTool.Models.Dtos
+﻿namespace MiniatureOrderManagementTool.Models.Dtos
 {
     public class Part
     {

@@ -72,7 +72,7 @@ namespace MiniatureOrderManagementTool.Models
         public static string GetErrorString(IList<ParsingError> errorPositions)
         {
             var sb = new StringBuilder();
-            
+
             sb.Append("文法エラー").AppendLine();
 
             foreach (var item in errorPositions)

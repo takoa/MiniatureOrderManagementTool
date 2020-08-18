@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MiniatureOrderManagementTool.Models.OrderLanguage
+﻿namespace MiniatureOrderManagementTool.Models.OrderLanguage
 {
     public class ParsingError
     {
