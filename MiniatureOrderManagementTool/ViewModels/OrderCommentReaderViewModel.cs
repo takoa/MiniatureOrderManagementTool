@@ -1,9 +1,6 @@
 ﻿using MiniatureOrderManagementTool.Models;
 using ReactiveUI;
-using System;
-using System.Collections.Generic;
 using System.Reactive;
-using System.Text;
 
 namespace MiniatureOrderManagementTool.ViewModels
 {
@@ -36,6 +33,13 @@ namespace MiniatureOrderManagementTool.ViewModels
 
             this.AddCommand = ReactiveCommand.Create(this.Add);
             this.CancelCommand = ReactiveCommand.Create(this.Cancel);
+        }
+
+        public void ParseComment()
+        {
+            var errors = this.partManager.ReadOrderComment(this.Comment);
+
+            this.ErrorMessages = errors.Count == 0 ? "" : PartManager.GetErrorString(errors);
         }
 
         private void Add()

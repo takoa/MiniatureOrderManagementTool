@@ -1,6 +1,10 @@
 ﻿using MiniatureOrderManagementTool.ViewModels;
 using ReactiveUI;
+using System;
+using System.Reactive;
 using System.Reactive.Disposables;
+using System.Reactive.Linq;
+using System.Windows.Controls;
 
 namespace MiniatureOrderManagementTool.Views
 {
@@ -8,7 +12,7 @@ namespace MiniatureOrderManagementTool.Views
     {
         public OrderCommentReaderView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
             this.WhenActivated(d =>
             {
@@ -20,6 +24,11 @@ namespace MiniatureOrderManagementTool.Views
 
                 this.BindCommand(this.ViewModel, vm => vm.AddCommand, v => v.addButton).DisposeWith(d);
                 this.BindCommand(this.ViewModel, vm => vm.CancelCommand, v => v.cancelButton).DisposeWith(d);
+
+                Observable.FromEventPattern<TextChangedEventArgs>(this.commentTextBox, nameof(this.commentTextBox.TextChanged))
+                    .Throttle(TimeSpan.FromSeconds(1))
+                    .Subscribe(Observer.Create<EventPattern<TextChangedEventArgs>>(e => this.Dispatcher.Invoke(() => this.ViewModel.ParseComment())))
+                    .DisposeWith(d);
             });
         }
     }
