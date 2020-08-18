@@ -6,11 +6,11 @@ namespace MiniatureOrderManagementTool.Models.OrderLanguage
 {
     class OrderLanguageErrorListener : IAntlrErrorListener<IToken>
     {
-        public IList<ParsingError> ErrorPositions { get; } = new List<ParsingError>();
+        public IList<ParseError> ErrorPositions { get; } = new List<ParseError>();
 
         public void SyntaxError(TextWriter output, IRecognizer recognizer, IToken offendingSymbol, int line, int charPositionInLine, string msg, RecognitionException e)
         {
-            this.ErrorPositions.Add(new ParsingError(line, charPositionInLine, offendingSymbol.Text.Length, offendingSymbol.Text));
+            this.ErrorPositions.Add(new ParseError(line, charPositionInLine, offendingSymbol.Text.Length, offendingSymbol.Text));
         }
     }
 }

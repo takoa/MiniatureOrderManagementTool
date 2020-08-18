@@ -69,7 +69,7 @@ namespace MiniatureOrderManagementTool.Models
             return totalPartValue + "円";
         }
 
-        public static string GetErrorString(IList<ParsingError> errorPositions)
+        public static string GetErrorString(IList<ParseError> errorPositions)
         {
             var sb = new StringBuilder();
 
@@ -114,7 +114,19 @@ namespace MiniatureOrderManagementTool.Models
             }
         }
 
-        public IList<ParsingError> ReadOrderComment(string comment)
+        public IList<ParseError> AddFromOrderComment(string comment)
+        {
+            var parseResult = this.ParseOrderComment(comment);
+
+            if (parseResult.ParseErrors.Count == 0)
+            {
+                this.partsCache.AddOrUpdate(parseResult.Parts);
+            }
+
+            return parseResult.ParseErrors;
+        }
+
+        public ParseResult ParseOrderComment(string comment)
         {
             if (!comment.EndsWith(Environment.NewLine))
             {
@@ -132,14 +144,7 @@ namespace MiniatureOrderManagementTool.Models
             parser.RemoveErrorListeners();
             parser.AddErrorListener(errorListener);
 
-            var parts = (IEnumerable<Part>)visitor.Visit(parser.main());
-
-            if (errorListener.ErrorPositions.Count == 0)
-            {
-                this.partsCache.AddOrUpdate(parts);
-            }
-
-            return errorListener.ErrorPositions;
+            return new ParseResult((IEnumerable<Part>)visitor.Visit(parser.main()), errorListener.ErrorPositions);
         }
     }
 }

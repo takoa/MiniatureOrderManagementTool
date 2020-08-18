@@ -38,7 +38,7 @@ namespace MiniatureOrderManagementTool.Models.OrderLanguage
 
         public override object VisitPart([NotNull] MiniatureOrderLanguageParser.PartContext context)
         {
-            IEnumerable<Part> parts;
+            IEnumerable<Part> parts = null;
             var names = context.Name();
             var name = "";
             var groupContext = context.group();
@@ -65,6 +65,7 @@ namespace MiniatureOrderManagementTool.Models.OrderLanguage
             else
             {
                 var types = context.Types();
+                var singleContext = context.single();
                 (decimal UnitPrice, int Count) single;
 
                 if (types != null)
@@ -72,8 +73,11 @@ namespace MiniatureOrderManagementTool.Models.OrderLanguage
                     name += " " + types.GetText();
                 }
 
-                single = ((decimal, int))this.Visit(context.single());
-                parts = new Part[] { new Part(name, single.UnitPrice, single.Count) };
+                if (singleContext != null)
+                {
+                    single = ((decimal, int))this.Visit(context.single());
+                    parts = new Part[] { new Part(name, single.UnitPrice, single.Count) };
+                }
             }
 
             return parts;
@@ -90,7 +94,10 @@ namespace MiniatureOrderManagementTool.Models.OrderLanguage
                 OrderLanguageVisitor.ConvertToAsciiDigits(context.Price()?.GetText()[0..^1]),
                 out result.UnitPrice);
 
-            result.UnitPrice /= result.Count;
+            if (result.Count != 0)
+            {
+                result.UnitPrice /= result.Count;
+            }
 
             return result;
         }
@@ -139,9 +146,11 @@ namespace MiniatureOrderManagementTool.Models.OrderLanguage
 
         public override object VisitItemLine([NotNull] MiniatureOrderLanguageParser.ItemLineContext context)
         {
-            if (context.item() != null)
+            var itemContext = context.item();
+
+            if (itemContext != null)
             {
-                return this.Visit(context.item());
+                return this.Visit(itemContext);
             }
             else
             {
@@ -169,6 +178,11 @@ namespace MiniatureOrderManagementTool.Models.OrderLanguage
 
         private static string ConvertToAsciiDigits(string str)
         {
+            if (str == null)
+            {
+                return null;
+            }
+
             var sb = new StringBuilder();
 
             for (int i = 0; i < str.Length; i++)
