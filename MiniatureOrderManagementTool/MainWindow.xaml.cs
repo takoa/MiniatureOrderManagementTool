@@ -14,6 +14,8 @@ namespace MiniatureOrderManagementTool.Views
 
             this.WhenActivated(d =>
             {
+                this.orderCommentEditor.ViewModel = new OrderCommentEditorViewModel();
+
                 this.ViewModel.OrderListViewModel = this.orderListView.ViewModel;
                 this.ViewModel.Window = this;
 

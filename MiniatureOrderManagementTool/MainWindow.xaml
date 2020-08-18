@@ -40,6 +40,11 @@
                     <vs:StockView x:Name="stockView" />
                 </Grid>
             </TabItem>
+            <TabItem Header="コメントエディタ">
+                <Grid>
+                    <vs:OrderCommentEditorView x:Name="orderCommentEditor" />
+                </Grid>
+            </TabItem>
         </TabControl>
     </Grid>
 </rxui:ReactiveWindow>
