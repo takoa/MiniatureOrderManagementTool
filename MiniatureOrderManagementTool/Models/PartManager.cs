@@ -114,19 +114,7 @@ namespace MiniatureOrderManagementTool.Models
             }
         }
 
-        public IList<ParseError> AddFromOrderComment(string comment)
-        {
-            var parseResult = this.ParseOrderComment(comment);
-
-            if (parseResult.ParseErrors.Count == 0)
-            {
-                this.partsCache.AddOrUpdate(parseResult.Parts);
-            }
-
-            return parseResult.ParseErrors;
-        }
-
-        public ParseResult ParseOrderComment(string comment)
+        public static ParseResult ParseOrderComment(string comment)
         {
             if (!comment.EndsWith(Environment.NewLine))
             {
@@ -145,6 +133,18 @@ namespace MiniatureOrderManagementTool.Models
             parser.AddErrorListener(errorListener);
 
             return new ParseResult((IEnumerable<Part>)visitor.Visit(parser.main()), errorListener.ErrorPositions);
+        }
+
+        public IList<ParseError> AddFromOrderComment(string comment)
+        {
+            var parseResult = PartManager.ParseOrderComment(comment);
+
+            if (parseResult.ParseErrors.Count == 0)
+            {
+                this.partsCache.AddOrUpdate(parseResult.Parts);
+            }
+
+            return parseResult.ParseErrors;
         }
     }
 }

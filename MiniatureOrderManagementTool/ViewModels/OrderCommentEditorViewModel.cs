@@ -5,8 +5,6 @@ namespace MiniatureOrderManagementTool.ViewModels
 {
     public class OrderCommentEditorViewModel : ViewModelBase
     {
-        public PartManager PartManager { get; }
-
         public string comment;
         public string Comment
         {
@@ -21,14 +19,9 @@ namespace MiniatureOrderManagementTool.ViewModels
             set => this.RaiseAndSetIfChanged(ref this.errorMessages, value);
         }
 
-        public OrderCommentEditorViewModel(PartManager partManager)
-        {
-            this.PartManager = partManager;
-        }
-
         public void ParseComment()
         {
-            var result = this.PartManager.ParseOrderComment(this.Comment);
+            var result = PartManager.ParseOrderComment(this.Comment);
 
             this.ErrorMessages = result.ParseErrors.Count == 0 ? "" : PartManager.GetErrorString(result.ParseErrors);
         }
