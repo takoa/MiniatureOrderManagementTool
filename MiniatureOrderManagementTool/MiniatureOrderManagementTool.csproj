@@ -24,7 +24,6 @@
     <PackageReference Include="Antlr4.Runtime.Standard" Version="4.8.0" />
     <PackageReference Include="LiteDB" Version="5.0.8" />
     <PackageReference Include="NLog" Version="4.7.2" />
-    <PackageReference Include="ReactiveUI.Events.WPF" Version="11.5.17" />
     <PackageReference Include="ReactiveUI.WPF" Version="11.4.1" />
   </ItemGroup>
 
