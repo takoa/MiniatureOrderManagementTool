@@ -30,7 +30,7 @@ namespace MiniatureOrderManagementTool.ViewModels
             set
             {
                 this.RaiseAndSetIfChanged(ref this.top, value);
-                App.Config.OrderCommentReaderWindowDelta = new Point(App.Config.OrderEditorWindowDelta.X,
+                App.Config.OrderCommentReaderWindowDelta = new Point(App.Config.OrderCommentReaderWindowDelta.X,
                                                                value - App.Config.OrderEditorWindowDelta.Y - App.Config.MainWindowPosition.Y);
             }
         }
