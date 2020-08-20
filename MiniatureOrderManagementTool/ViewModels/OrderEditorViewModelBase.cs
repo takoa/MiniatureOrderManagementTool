@@ -8,8 +8,6 @@ namespace MiniatureOrderManagementTool.ViewModels
 {
     public class OrderEditorViewModelBase : CommonOrderEditorViewModel
     {
-        private Config config;
-
         public IConfirmationBox ConfirmationBox { get; set; }
         public IWindow Window { get; set; }
         public bool ShowsConfirmation { get; set; } = true;
@@ -21,7 +19,7 @@ namespace MiniatureOrderManagementTool.ViewModels
             set
             {
                 this.RaiseAndSetIfChanged(ref this.left, value);
-                this.config.OrderEditorWindowDelta = new Point(value - this.config.MainWindowPosition.X, this.config.OrderEditorWindowDelta.Y);
+                App.Config.OrderEditorWindowDelta = new Point(value - App.Config.MainWindowPosition.X, App.Config.OrderEditorWindowDelta.Y);
             }
         }
 
@@ -32,7 +30,7 @@ namespace MiniatureOrderManagementTool.ViewModels
             set
             {
                 this.RaiseAndSetIfChanged(ref this.top, value);
-                this.config.OrderEditorWindowDelta = new Point(this.config.OrderEditorWindowDelta.X, value - this.config.MainWindowPosition.Y);
+                App.Config.OrderEditorWindowDelta = new Point(App.Config.OrderEditorWindowDelta.X, value - App.Config.MainWindowPosition.Y);
             }
         }
 
@@ -43,7 +41,7 @@ namespace MiniatureOrderManagementTool.ViewModels
             set
             {
                 this.RaiseAndSetIfChanged(ref this.width, value);
-                this.config.OrderEditorWindowSize = new Size(value, this.config.OrderEditorWindowSize.Height);
+                App.Config.OrderEditorWindowSize = new Size(value, App.Config.OrderEditorWindowSize.Height);
             }
         }
 
@@ -54,27 +52,25 @@ namespace MiniatureOrderManagementTool.ViewModels
             set
             {
                 this.RaiseAndSetIfChanged(ref this.height, value);
-                this.config.OrderEditorWindowSize = new Size(this.config.OrderEditorWindowSize.Width, value);
+                App.Config.OrderEditorWindowSize = new Size(App.Config.OrderEditorWindowSize.Width, value);
             }
         }
 
         public ReactiveCommand<Unit, Unit> CancelCommand { get; }
         public ReactiveCommand<CancelEventArgs, Unit> ClosingEventCommand { get; }
 
-        public OrderEditorViewModelBase(Config config)
-            : this(config, null)
+        public OrderEditorViewModelBase()
+            : this(null)
         {
         }
 
-        public OrderEditorViewModelBase(Config config, Order order)
+        public OrderEditorViewModelBase(Order order)
             : base(order)
         {
-            this.config = config;
-
-            this.Left = this.config.MainWindowPosition.X + this.config.OrderEditorWindowDelta.X;
-            this.Top = this.config.MainWindowPosition.Y + this.config.OrderEditorWindowDelta.Y;
-            this.Width = this.config.OrderEditorWindowSize.Width;
-            this.Height = this.config.OrderEditorWindowSize.Height;
+            this.Left = App.Config.MainWindowPosition.X + App.Config.OrderEditorWindowDelta.X;
+            this.Top = App.Config.MainWindowPosition.Y + App.Config.OrderEditorWindowDelta.Y;
+            this.Width = App.Config.OrderEditorWindowSize.Width;
+            this.Height = App.Config.OrderEditorWindowSize.Height;
             this.CancelCommand = ReactiveCommand.Create(this.Cancel);
             this.ClosingEventCommand = ReactiveCommand.Create<CancelEventArgs>(this.Cancel);
         }

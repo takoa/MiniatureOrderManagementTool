@@ -33,7 +33,7 @@ namespace MiniatureOrderManagementTool.ViewModels
 
         private void CreateNewOrderWindow()
         {
-            var newOrderViewModel = new NewOrderViewModel(((App)Application.Current).Config, this.orderManager);
+            var newOrderViewModel = new NewOrderViewModel(this.orderManager);
 
             WindowViewHelper.ShowWindow(newOrderViewModel);
         }
@@ -45,7 +45,7 @@ namespace MiniatureOrderManagementTool.ViewModels
                 return;
             }
 
-            var orderEditorViewModel = new OrderEditorViewModel(((App)Application.Current).Config, this.orderManager, this.SelectedOrder);
+            var orderEditorViewModel = new OrderEditorViewModel(this.orderManager, this.SelectedOrder);
 
             WindowViewHelper.ShowWindow(orderEditorViewModel);
         }

@@ -12,8 +12,7 @@ namespace MiniatureOrderManagementTool.ViewModels
 
         public ReactiveCommand<Unit, Unit> AddOrderCommand { get; }
 
-        public NewOrderViewModel(Config config, OrderManager orderManager)
-            : base(config)
+        public NewOrderViewModel(OrderManager orderManager)
         {
             this.OrderManager = orderManager;
             this.AddOrderCommand = ReactiveCommand.Create(this.AddOrder);

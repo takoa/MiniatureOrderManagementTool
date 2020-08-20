@@ -10,7 +10,7 @@ namespace MiniatureOrderManagementTool.Views
         public MainWindow()
         {
             this.InitializeComponent();
-            this.ViewModel = new MainWindowViewModel(((App)Application.Current).Config);
+            this.ViewModel = new MainWindowViewModel();
 
             this.WhenActivated(d =>
             {

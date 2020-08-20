@@ -28,8 +28,8 @@ namespace MiniatureOrderManagementTool.ViewModels
 
         public ReactiveCommand<Unit, Unit> UpdateOrderCommand { get; }
 
-        public OrderEditorViewModel(Config config, OrderManager orderManager, Order selectedOrder)
-            : base(config, selectedOrder)
+        public OrderEditorViewModel(OrderManager orderManager, Order selectedOrder)
+            : base(selectedOrder)
         {
             this.orderManager = orderManager;
             this.selectedOrder = selectedOrder;

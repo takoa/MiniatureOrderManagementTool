@@ -18,7 +18,7 @@ namespace MiniatureOrderManagementTool
 
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        public Config Config { get; private set; }
+        public static Config Config { get; private set; }
 
         public App()
         {
@@ -103,11 +103,11 @@ namespace MiniatureOrderManagementTool
                 using StreamReader reader = new StreamReader(App.configPath, Encoding.UTF8);
                 string json = reader.ReadToEnd();
 
-                this.Config = new Config(JsonSerializer.Deserialize<Models.Dtos.Config>(json));
+                App.Config = new Config(JsonSerializer.Deserialize<Models.Dtos.Config>(json));
             }
             catch (FileNotFoundException)
             {
-                this.Config = new Config()
+                App.Config = new Config()
                 {
                     MainWindowPosition = new Point(200d, 200d),
                     MainWindowSize = new Size(800, 600),
@@ -119,7 +119,7 @@ namespace MiniatureOrderManagementTool
 
         private void WriteConfig()
         {
-            string json = JsonSerializer.Serialize(this.Config);
+            string json = JsonSerializer.Serialize(App.Config);
             using StreamWriter writer = new StreamWriter(App.configPath, false, Encoding.UTF8);
 
             writer.Write(json);

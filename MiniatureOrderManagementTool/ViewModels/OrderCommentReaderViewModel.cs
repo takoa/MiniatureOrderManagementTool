@@ -7,7 +7,6 @@ namespace MiniatureOrderManagementTool.ViewModels
 {
     public class OrderCommentReaderViewModel : CommonOrderCommentEditorViewModel
     {
-        private Config config;
         private PartManager partManager;
 
         public IWindow Window { get; set; }
@@ -19,8 +18,8 @@ namespace MiniatureOrderManagementTool.ViewModels
             set
             {
                 this.RaiseAndSetIfChanged(ref this.left, value);
-                this.config.OrderCommentReaderWindowDelta = new Point(value - this.config.OrderEditorWindowDelta.X - this.config.MainWindowPosition.X,
-                                                               this.config.OrderCommentReaderWindowDelta.Y);
+                App.Config.OrderCommentReaderWindowDelta = new Point(value - App.Config.OrderEditorWindowDelta.X - App.Config.MainWindowPosition.X,
+                                                               App.Config.OrderCommentReaderWindowDelta.Y);
             }
         }
 
@@ -31,8 +30,8 @@ namespace MiniatureOrderManagementTool.ViewModels
             set
             {
                 this.RaiseAndSetIfChanged(ref this.top, value);
-                this.config.OrderCommentReaderWindowDelta = new Point(this.config.OrderEditorWindowDelta.X,
-                                                               value - this.config.OrderEditorWindowDelta.Y - this.config.MainWindowPosition.Y);
+                App.Config.OrderCommentReaderWindowDelta = new Point(App.Config.OrderEditorWindowDelta.X,
+                                                               value - App.Config.OrderEditorWindowDelta.Y - App.Config.MainWindowPosition.Y);
             }
         }
 
@@ -43,7 +42,7 @@ namespace MiniatureOrderManagementTool.ViewModels
             set
             {
                 this.RaiseAndSetIfChanged(ref this.width, value);
-                this.config.OrderCommentReaderWindowSize = new Size(value, this.config.OrderCommentReaderWindowSize.Height);
+                App.Config.OrderCommentReaderWindowSize = new Size(value, App.Config.OrderCommentReaderWindowSize.Height);
             }
         }
 
@@ -54,22 +53,21 @@ namespace MiniatureOrderManagementTool.ViewModels
             set
             {
                 this.RaiseAndSetIfChanged(ref this.height, value);
-                this.config.OrderCommentReaderWindowSize = new Size(this.config.OrderCommentReaderWindowSize.Width, value);
+                App.Config.OrderCommentReaderWindowSize = new Size(App.Config.OrderCommentReaderWindowSize.Width, value);
             }
         }
 
         public ReactiveCommand<Unit, Unit> AddCommand { get; }
         public ReactiveCommand<Unit, Unit> CancelCommand { get; }
 
-        public OrderCommentReaderViewModel(Config config, PartManager partManager)
+        public OrderCommentReaderViewModel(PartManager partManager)
         {
-            this.config = config;
             this.partManager = partManager;
 
-            this.Left = this.config.MainWindowPosition.X + this.config.OrderEditorWindowDelta.X + this.config.OrderCommentReaderWindowDelta.X;
-            this.Top = this.config.MainWindowPosition.Y + this.config.OrderEditorWindowDelta.Y + this.config.OrderCommentReaderWindowDelta.Y;
-            this.Width = this.config.OrderCommentReaderWindowSize.Width;
-            this.Height = this.config.OrderCommentReaderWindowSize.Height;
+            this.Left = App.Config.MainWindowPosition.X + App.Config.OrderEditorWindowDelta.X + App.Config.OrderCommentReaderWindowDelta.X;
+            this.Top = App.Config.MainWindowPosition.Y + App.Config.OrderEditorWindowDelta.Y + App.Config.OrderCommentReaderWindowDelta.Y;
+            this.Width = App.Config.OrderCommentReaderWindowSize.Width;
+            this.Height = App.Config.OrderCommentReaderWindowSize.Height;
             this.CancelCommand = ReactiveCommand.Create(this.Cancel);
 
             this.AddCommand = ReactiveCommand.Create(this.Add);

@@ -8,8 +8,6 @@ namespace MiniatureOrderManagementTool.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        private readonly Config config;
-
         public IWindow Window { get; set; }
         public OrderListViewModel OrderListViewModel { get; set; }
 
@@ -20,7 +18,7 @@ namespace MiniatureOrderManagementTool.ViewModels
             set
             {
                 this.RaiseAndSetIfChanged(ref this.left, value);
-                this.config.MainWindowPosition = new Point(value, this.config.MainWindowPosition.Y);
+                App.Config.MainWindowPosition = new Point(value, App.Config.MainWindowPosition.Y);
             }
         }
 
@@ -31,7 +29,7 @@ namespace MiniatureOrderManagementTool.ViewModels
             set
             {
                 this.RaiseAndSetIfChanged(ref this.top, value);
-                this.config.MainWindowPosition = new Point(this.config.MainWindowPosition.X, value);
+                App.Config.MainWindowPosition = new Point(App.Config.MainWindowPosition.X, value);
             }
         }
 
@@ -42,7 +40,7 @@ namespace MiniatureOrderManagementTool.ViewModels
             set
             {
                 this.RaiseAndSetIfChanged(ref this.width, value);
-                this.config.MainWindowSize = new Size(value, this.config.MainWindowSize.Height);
+                App.Config.MainWindowSize = new Size(value, App.Config.MainWindowSize.Height);
             }
         }
 
@@ -53,21 +51,19 @@ namespace MiniatureOrderManagementTool.ViewModels
             set
             {
                 this.RaiseAndSetIfChanged(ref this.height, value);
-                this.config.MainWindowSize = new Size(this.config.MainWindowSize.Width, value);
+                App.Config.MainWindowSize = new Size(App.Config.MainWindowSize.Width, value);
             }
         }
 
         public ReactiveCommand<Unit, Unit> QuitCommand { get; }
         public ReactiveCommand<Unit, Unit> ShowAboutCommand { get; }
 
-        public MainWindowViewModel(Config config)
+        public MainWindowViewModel()
         {
-            this.config = config;
-
-            this.Left = this.config.MainWindowPosition.X;
-            this.Top = this.config.MainWindowPosition.Y;
-            this.Width = this.config.MainWindowSize.Width;
-            this.Height = this.config.MainWindowSize.Height;
+            this.Left = App.Config.MainWindowPosition.X;
+            this.Top = App.Config.MainWindowPosition.Y;
+            this.Width = App.Config.MainWindowSize.Width;
+            this.Height = App.Config.MainWindowSize.Height;
 
             this.QuitCommand = ReactiveCommand.Create(this.Quit);
             this.ShowAboutCommand = ReactiveCommand.Create(this.ShowAbout);
