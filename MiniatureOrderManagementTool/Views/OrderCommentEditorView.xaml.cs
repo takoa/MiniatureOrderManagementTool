@@ -13,18 +13,8 @@ namespace MiniatureOrderManagementTool.Views
         public OrderCommentEditorView()
         {
             this.InitializeComponent();
-
-            this.WhenActivated(d =>
-            {
-                this.OneWayBind(this.ViewModel, vm => vm.ErrorMessages, v => v.errorTextBox.Text).DisposeWith(d);
-
-                this.Bind(this.ViewModel, vm => vm.Comment, v => v.commentTextBox.Text).DisposeWith(d);
-
-                Observable.FromEventPattern<TextChangedEventArgs>(this.commentTextBox, nameof(this.commentTextBox.TextChanged))
-                    .Throttle(TimeSpan.FromSeconds(1))
-                    .Subscribe(Observer.Create<EventPattern<TextChangedEventArgs>>(e => this.Dispatcher.Invoke(() => this.ViewModel.ParseComment())))
-                    .DisposeWith(d);
-            });
+            this.ViewModel = new OrderCommentEditorViewModel();
+            this.orderCommentEditor.ViewModel = this.ViewModel;
         }
     }
 }

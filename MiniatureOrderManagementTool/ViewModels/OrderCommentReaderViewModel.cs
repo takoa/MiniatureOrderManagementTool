@@ -4,7 +4,7 @@ using System.Reactive;
 
 namespace MiniatureOrderManagementTool.ViewModels
 {
-    public class OrderCommentReaderViewModel : OrderCommentEditorViewModel
+    public class OrderCommentReaderViewModel : CommonOrderCommentEditorViewModel
     {
         private PartManager partManager;
 

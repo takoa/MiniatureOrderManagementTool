@@ -6,15 +6,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:rxui="http://reactiveui.net"
+        xmlns:vs="clr-namespace:MiniatureOrderManagementTool.Views"
         xmlns:vms="clr-namespace:MiniatureOrderManagementTool.ViewModels"
         mc:Ignorable="d"
         d:DesignHeight="500" d:DesignWidth="300">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="75" />
-        </Grid.RowDefinitions>
-        <TextBox x:Name="commentTextBox" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" />
-        <TextBox x:Name="errorTextBox" Grid.Row="1" Margin="0,5,0,0" IsReadOnly="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" />
+        <vs:CommonOrderCommentEditorView x:Name="orderCommentEditor" />
     </Grid>
 </rxui:ReactiveUserControl>

@@ -1,29 +1,13 @@
 ﻿using MiniatureOrderManagementTool.Models;
 using ReactiveUI;
+using System;
+using System.Collections.Generic;
+using System.Reactive;
+using System.Text;
 
 namespace MiniatureOrderManagementTool.ViewModels
 {
-    public class OrderCommentEditorViewModel : ViewModelBase
+    public class OrderCommentEditorViewModel : CommonOrderCommentEditorViewModel
     {
-        public string comment;
-        public string Comment
-        {
-            get => this.comment;
-            set => this.RaiseAndSetIfChanged(ref this.comment, value);
-        }
-
-        public string errorMessages;
-        public string ErrorMessages
-        {
-            get => this.errorMessages;
-            set => this.RaiseAndSetIfChanged(ref this.errorMessages, value);
-        }
-
-        public void ParseComment()
-        {
-            var result = PartManager.ParseOrderComment(this.Comment);
-
-            this.ErrorMessages = result.ParseErrors.Count == 0 ? "" : PartManager.GetErrorString(result.ParseErrors);
-        }
     }
 }

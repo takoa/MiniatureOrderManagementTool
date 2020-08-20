@@ -15,7 +15,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <vs:OrderCommentEditorView x:Name="orderCommentEditor" />
+        <vs:CommonOrderCommentEditorView x:Name="orderCommentEditor" />
         <Grid Grid.Row="1" Margin="0,15,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
