@@ -9,53 +9,8 @@ namespace MiniatureOrderManagementTool.ViewModels
 {
     public class OrderEditorViewModel : OrderEditorViewModelBase
     {
-        private Config config;
         private OrderManager orderManager;
         private Order selectedOrder;
-
-        private double left;
-        public double Left
-        {
-            get => this.left;
-            set
-            {
-                this.RaiseAndSetIfChanged(ref this.left, value);
-                this.config.OrderEditorWindowDelta = new Point(value - this.config.MainWindowPosition.X, this.config.OrderEditorWindowDelta.Y);
-            }
-        }
-
-        private double top;
-        public double Top
-        {
-            get => this.top;
-            set
-            {
-                this.RaiseAndSetIfChanged(ref this.top, value);
-                this.config.OrderEditorWindowDelta = new Point(this.config.OrderEditorWindowDelta.X, value - this.config.MainWindowPosition.Y);
-            }
-        }
-
-        private double width;
-        public double Width
-        {
-            get => this.width;
-            set
-            {
-                this.RaiseAndSetIfChanged(ref this.width, value);
-                this.config.OrderEditorWindowSize = new Size(value, this.config.OrderEditorWindowSize.Height);
-            }
-        }
-
-        private double height;
-        public double Height
-        {
-            get => this.height;
-            set
-            {
-                this.RaiseAndSetIfChanged(ref this.height, value);
-                this.config.OrderEditorWindowSize = new Size(this.config.OrderEditorWindowSize.Width, value);
-            }
-        }
 
         private bool? isOrderFinished;
         public bool? IsOrderFinished
@@ -74,16 +29,11 @@ namespace MiniatureOrderManagementTool.ViewModels
         public ReactiveCommand<Unit, Unit> UpdateOrderCommand { get; }
 
         public OrderEditorViewModel(Config config, OrderManager orderManager, Order selectedOrder)
-            : base(selectedOrder)
+            : base(config, selectedOrder)
         {
-            this.config = config;
             this.orderManager = orderManager;
             this.selectedOrder = selectedOrder;
 
-            this.Left = this.config.MainWindowPosition.X + this.config.OrderEditorWindowDelta.X;
-            this.Top = this.config.MainWindowPosition.Y + this.config.OrderEditorWindowDelta.Y;
-            this.Width = this.config.OrderEditorWindowSize.Width;
-            this.Height = this.config.OrderEditorWindowSize.Height;
             this.IsOrderFinished = this.selectedOrder.IsFinished;
             this.OrderTimeSpent = this.selectedOrder.TimeSpent;
 
