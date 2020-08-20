@@ -107,13 +107,7 @@ namespace MiniatureOrderManagementTool
             }
             catch (FileNotFoundException)
             {
-                App.Config = new Config()
-                {
-                    MainWindowPosition = new Point(200d, 200d),
-                    MainWindowSize = new Size(800, 600),
-                    OrderEditorWindowDelta = new Point(100d, 100d),
-                    OrderEditorWindowSize = new Size(400, 600)
-                };
+                App.Config = new Config(new Models.Dtos.Config());
             }
         }
 
