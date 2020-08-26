@@ -127,7 +127,22 @@ namespace MiniatureOrderManagementTool.ViewModels
 
         public CommonOrderEditorViewModel(Order order)
         {
-            this.PartManager = new PartManager(order?.Parts.Copy());
+            if (order.Parts != null)
+            {
+                var parts = new Part[order.Parts.Length];
+
+                for (int i = 0; i < parts.Length; i++)
+                {
+                    parts[i] = order.Parts[i].ShallowCopy();
+                }
+
+                this.PartManager = new PartManager(parts);
+            }
+            else
+            {
+                this.PartManager = new PartManager(null);
+            }
+
             this.Deadline = DateTime.Now;
 
             if (order != null)

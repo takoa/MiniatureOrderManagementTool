@@ -42,5 +42,10 @@ namespace MiniatureOrderManagementTool.Models
             this.UnitPrice = unitPrice;
             this.Count = count;
         }
+
+        public Part ShallowCopy()
+        {
+            return (Part)this.MemberwiseClone();
+        }
     }
 }
